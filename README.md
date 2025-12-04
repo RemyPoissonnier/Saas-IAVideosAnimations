@@ -1,5 +1,22 @@
 # React + TypeScript + Vite
 
+![cat image](public/tlogo.png) 
+
+## Purpose
+
+IA Banana est une démo front qui permet de générer des idées et scripts vidéo (2D/3D) pour des chats ou des chiens, avec des prompts rapides type TikTok. Elle propose :
+- Un landing neutre (/home), puis des pages spécialisées chats (/cat) et chiens (/dog).
+- Un outil de prompt simplifié 2D/3D avec mode avancé (styles, caméra, audio, formats).
+- Une navigation pour se connecter, acheter des jetons ou s’abonner, et un header avec sélection de page.
+- Une API mock côté front (fetch) pour préparer les appels IA et auth (stockage local).
+
+## How it works
+
+- Front React + Vite, Tailwind pour le style, i18n FR/EN.
+- Pages : landing (/home), cats (/cat), dogs (/dog), tokens (/tokens), login (/login).
+- PromptTool : saisissez une idée, choisissez 2D/3D, (optionnel) ouvrez les réglages avancés.
+- Header : accès Home, tokens, switch chat/chien, login/logout, choix langue/thème.
+- Auth et IA : les fichiers `src/api/auth.ts` et `src/api/ia.ts` montrent les endpoints à appeler (mock fetch). Auth est mémorisée en localStorage.
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
@@ -21,64 +38,3 @@ npm run preview       # serve the built assets locally
 ## React Compiler
 
 The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
