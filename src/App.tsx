@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import Header from './components/Header'
 import Landing from './pages/Landing'
-import Home from './pages/Home'
+import CatHome from './pages/CatHome'
 import Login from './pages/Login'
 import DogHome from './pages/DogHome'
 import Tokens from './pages/Tokens'
@@ -74,7 +74,7 @@ function App() {
         ) : page === 'tokens' ? (
           <Tokens />
         ) : (
-          animal === 'dog' ? <DogHome onOpenAuth={goToAuth} /> : <Home onOpenAuth={goToAuth} />
+          animal === 'dog' ? <DogHome onOpenAuth={goToAuth} /> : <CatHome onOpenAuth={goToAuth} />
         )}
       </main>
     </div>

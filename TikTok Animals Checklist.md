@@ -2,8 +2,8 @@
 
 ## Phase 1 --- Fondations (Semaines 1--3)
 
--   [ ] Définir l'architecture technique
--   [ ] Choisir la stack IA vidéo
+-   [x] Définir l'architecture technique
+-   [x] Choisir la stack IA vidéo
 -   [ ] Mettre en place le pipeline Script → Vidéo
 -   [ ] Créer un MVP simple (UI + génération)
 -   [ ] Export MP4 9:16

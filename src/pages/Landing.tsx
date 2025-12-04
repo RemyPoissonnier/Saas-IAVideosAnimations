@@ -1,5 +1,12 @@
 import { useI18n } from '../i18n'
+import Carousel from '../components/Carousel'
 import { ghostButton, primaryButton } from '../theme/styles'
+import img1 from '../assets/exemples/image1.png'
+import img2 from '../assets/exemples/image2.png'
+import img3 from '../assets/exemples/image3.png'
+import img4 from '../assets/exemples/image4.png'
+import img5 from '../assets/exemples/image5.png'
+import img6 from '../assets/exemples/image6.png'
 
 type LandingProps = {
   onGoCat: () => void
@@ -19,6 +26,14 @@ export function Landing({ onGoCat, onGoDog }: LandingProps) {
         <h1 className="text-4xl font-semibold leading-tight tracking-tight text-slate-900 md:text-5xl">
           {t('landing.title')}
         </h1>
+
+
+      <Carousel
+        title={t('home.carousel.title')}
+        caption={t('home.carousel.caption')}
+        images={[img1, img2, img3, img4, img5, img6]}
+      />
+      
         <p className="mx-auto max-w-2xl text-base text-slate-700">{t('landing.desc')}</p>
         <div className="flex flex-wrap items-center justify-center gap-3">
           <button className={primaryButton} type="button" onClick={onGoCat}>
@@ -49,6 +64,7 @@ export function Landing({ onGoCat, onGoDog }: LandingProps) {
           </button>
         </div>
       </section>
+
     </div>
   )
 }

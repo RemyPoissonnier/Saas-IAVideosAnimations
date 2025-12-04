@@ -3,11 +3,11 @@ import { useI18n } from '../i18n'
 import PromptTool from '../components/PromptTool'
 import { ghostButton, primaryButton } from '../theme/styles'
 
-type HomeProps = {
+type CatHomeProps = {
   onOpenAuth: () => void
 }
 
-export function Home({ onOpenAuth }: HomeProps) {
+export function CatHome({ onOpenAuth }: CatHomeProps) {
   const { t } = useI18n()
   const stats = useMemo(
     () => [
@@ -129,7 +129,9 @@ export function Home({ onOpenAuth }: HomeProps) {
           {t('home.policy.eyebrow')}
         </div>
         <h3 className="text-3xl font-semibold text-slate-900">{t('home.policy.title')}</h3>
-        <p className="text-sm text-slate-600">{t('home.policy.desc')}</p>
+        <p className="text-sm text-slate-600">
+          {t('home.policy.desc')}
+        </p>
         <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
           <button className={ghostButton} type="button">
             {t('home.policy.explore')}
@@ -151,4 +153,4 @@ export function Home({ onOpenAuth }: HomeProps) {
   )
 }
 
-export default Home
+export default CatHome
