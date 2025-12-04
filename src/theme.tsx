@@ -24,7 +24,7 @@ const applyTheme = (theme: Theme) => {
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('system')
+  const [theme, setTheme] = useState<Theme>('light')
   const [applied, setApplied] = useState<Exclude<Theme, 'system'>>(getSystemTheme())
 
   useEffect(() => {
