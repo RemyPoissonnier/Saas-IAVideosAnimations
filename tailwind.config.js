@@ -22,6 +22,12 @@ export default {
       fontFamily: {
         sans: ['Space Grotesk', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
       },
+
+      // gentle floating animation
+      animation: {
+        float: 'float 4s ease-in-out infinite',
+      },
+
     },
   },
   plugins: [],

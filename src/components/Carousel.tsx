@@ -45,13 +45,20 @@ export function Carousel({ title, caption, images }: CarouselProps) {
         {slides.length > 1 ? (
           <>
            <div
-              className="pointer-events-none absolute inset-6 overflow-hidden rounded-3xl opacity-40"
-              style={{ WebkitMaskImage: 'linear-gradient(to bottom, transparent 20%, black)' }}
+              className="pointer-events-none absolute inset-6 overflow-hidden rounded-3xl opacity-50"
+              style={{
+                WebkitMaskImage:
+                  'linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%), linear-gradient(to bottom, transparent 20%, black)',
+                maskImage:
+                  'linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%), linear-gradient(to bottom, transparent 20%, black)',
+                WebkitMaskComposite: 'multiply',
+                maskComposite: 'intersect',
+              }}
             >
               <img
                 src={slides[(index + 1) % slides.length].image}
                 alt=""
-                className="h-full w-full object-cover blur-lg m-4"
+                className="h-full w-full object-cover blur-lg m-4  "
                 style={{ aspectRatio: '9 / 16' }}
                 loading="lazy"
               />
@@ -59,7 +66,7 @@ export function Carousel({ title, caption, images }: CarouselProps) {
 
           </>
         ) : null}
-        <div className="relative mx-auto flex h-full w-full max-w-[320px] items-center justify-center px-4 py-6">
+        <div className="relative mx-auto flex h-full w-full max-w-[320px] items-center justify-center px-4 py-6 animate-float">
           <div className="relative w-full overflow-hidden rounded-[28px] border border-slate-200 bg-slate-100 shadow-lg shadow-black/10">
             <div
               className="absolute inset-0"
