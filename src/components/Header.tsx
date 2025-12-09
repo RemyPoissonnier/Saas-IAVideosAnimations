@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { useAuth } from '../auth'
+import { useAuth } from '../context/AuthContext'
 import { useI18n } from '../i18n'
 import { useTheme } from '../theme'
 import { pill, primaryButton } from '../theme/styles'
@@ -30,7 +30,7 @@ export function Header({
 }: HeaderProps) {
   const { locale, setLocale, t } = useI18n()
   const { theme, applied, setTheme } = useTheme()
-  const { user, signOut } = useAuth()
+  const { currentUser, logout } = useAuth()
   const [isAnimalMenuOpen, setIsAnimalMenuOpen] = useState(false)
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
   const animalMenuRef = useRef<HTMLDivElement | null>(null)
@@ -159,13 +159,13 @@ export function Header({
             {t('nav.backHome')}
           </button>
         ) : null}
-        {user ? (
+        {currentUser ? (
           <div className="flex items-center gap-2">
             <span className={pill}>
               <span className="text-accent">●</span>
-              {`${t('auth.signedIn')}: ${user.name}`}
+              {`${t('auth.signedIn')}: ${currentUser.email}`}
             </span>
-            <button className={`${pill} px-4`} type="button" onClick={signOut}>
+            <button className={`${pill} px-4`} type="button" onClick={logout}>
               {t('auth.signout')}
             </button>
           </div>

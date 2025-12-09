@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
-import { useAuth } from '../auth'
 import { useI18n } from '../i18n'
 import { card, ghostButton, inputBase, label, primaryButton, subText } from '../theme/styles'
+import { useAuth } from '../context/AuthContext'
 
 type SocialProvider = 'google'
 
@@ -16,9 +16,9 @@ type AuthPanelProps = {
 }
 
 export function AuthPanel({ onAuthComplete, compact = false }: AuthPanelProps) {
-  const { user, signIn, signOut } = useAuth()
+  const { currentUser, login, logout, register, getToken } = useAuth()
   const { t } = useI18n()
-  const [email, setEmail] = useState(user?.email ?? '')
+  const [email, setEmail] = useState(currentUser?.email ?? '')
   const [password, setPassword] = useState('')
 
   const finishAuthFlow = () => {
@@ -27,20 +27,19 @@ export function AuthPanel({ onAuthComplete, compact = false }: AuthPanelProps) {
 
   const handleSocialSignIn = (provider: SocialProvider) => {
     const profile = providerProfiles[provider]
-    signIn(profile)
+    // login(profile)
     finishAuthFlow()
   }
 
   const handleContinueAsGuest = () => {
-    signOut()
+    logout()
     finishAuthFlow()
   }
 
-  const handleManualSignIn = (event: FormEvent<HTMLFormElement>) => {
+  const handleManualLogin = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     if (!email || !password) return
-    const safeName = email.split('@')[0] || 'User'
-    signIn({ name: safeName, email })
+    register( email, password, "TEST" ) //TODO to change 
     finishAuthFlow()
   }
 
@@ -95,7 +94,7 @@ export function AuthPanel({ onAuthComplete, compact = false }: AuthPanelProps) {
 
       <div className="h-px w-full bg-border/60" />
       <div className={label}>{t('auth.manualTitle')}</div>
-      <form className="grid grid-cols-1 gap-3" onSubmit={handleManualSignIn}>
+      <form className="grid grid-cols-1 gap-3" onSubmit={handleManualLogin}>
         <div className="space-y-2">
           <label className="text-sm font-semibold text-text" htmlFor="email">
             {t('auth.email')}
@@ -119,7 +118,6 @@ export function AuthPanel({ onAuthComplete, compact = false }: AuthPanelProps) {
             id="password"
             name="password"
             type="password"
-            placeholder="••••••••"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -132,9 +130,9 @@ export function AuthPanel({ onAuthComplete, compact = false }: AuthPanelProps) {
           </button>
         </div>
       </form>
-      {!compact && user ? (
+      {!compact && currentUser ? (
         <div className="flex flex-wrap gap-2">
-          <button className={ghostButton} type="button" onClick={signOut}>
+          <button className={ghostButton} type="button" onClick={logout}>
             {t('auth.signout')}
           </button>
         </div>

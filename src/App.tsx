@@ -63,7 +63,7 @@ function App() {
             onSelectAnimal={handleSelectAnimal}
             onBackHome={page !== 'landing' ? goLanding : undefined}
             tokensHref="/tokens"
-          />
+            />
         </div>
       ) : null}
       <main className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 pb-12 pt-8 md:px-8">
