@@ -1,85 +1,55 @@
-type UserPayload = {
-  name: string
-  email: string
-  password?: string
-}
+import { initializeApp } from "firebase/app";
+import { 
+  getAuth, 
+  signInWithEmailAndPassword, 
+  signOut,
+  type Auth,
+  type User,
+} from "firebase/auth";
 
-export type AuthResponse = {
-  token: string
-  user: {
-    name: string
-    email: string
-    id?: string
-  }
-  subscription?: SubscriptionInfo
-  usage?: UsageInfo
-}
+// 1. Configuration (Idéalement, utilise des variables d'environnement)
+const firebaseConfig = {
+  apiKey: import.meta.env.REACT_APP_FIREBASE_API_KEY || "TA_CLE_API",
+  authDomain: import.meta.env.REACT_APP_FIREBASE_AUTH_DOMAIN || "ton-projet.firebaseapp.com",
+  projectId: import.meta.env.REACT_APP_FIREBASE_PROJECT_ID || "ton-projet",
+  storageBucket: import.meta.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.REACT_APP_FIREBASE_SENDER_ID,
+  appId: import.meta.env.REACT_APP_FIREBASE_APP_ID
+};
 
-export type SubscriptionInfo = {
-  plan: string
-  renewsAt?: string
-  status: 'active' | 'past_due' | 'canceled' | 'trial'
-  paymentHistory?: PaymentRecord[]
-}
+// 2. Initialisation de l'instance Firebase
+const app = initializeApp(firebaseConfig);
+export const auth: Auth = getAuth(app);
 
-export type PaymentRecord = {
-  id: string
-  amount: number
-  currency: string
-  createdAt: string
-  status: 'succeeded' | 'pending' | 'failed'
-  description?: string
-}
+// --- FONCTIONS UTILITAIRES ---
 
-export type UsageInfo = {
-  tokensLeft: number
-  tokensUsed?: number
-  periodStart?: string
-  periodEnd?: string
-}
+/**
+ * Récupère le token d'accès actuel de l'utilisateur (le "bracelet").
+ * À utiliser avant chaque requête vers ton API Docker.
+ */
+export const getAuthToken = async (): Promise<string | null> => {
+  const user = auth.currentUser;
+  if (!user) return null;
+  // forceRefresh: true permet de s'assurer que le token n'est pas expiré
+  return await user.getIdToken(true);
+};
 
-const AUTH_BASE = import.meta.env.VITE_AUTH_API_BASE ?? '/api/auth'
-
-const saveAuthToLocal = (data: AuthResponse) => {
-  localStorage.setItem('auth-session', JSON.stringify(data))
-}
-
-export const loadAuthFromLocal = (): AuthResponse | null => {
-  const raw = localStorage.getItem('auth-session')
-  if (!raw) return null
+/**
+ * Connecte un utilisateur et renvoie l'objet User complet.
+ */
+export const loginUser = async (email: string, pass: string): Promise<User> => {
   try {
-    return JSON.parse(raw) as AuthResponse
-  } catch {
-    return null
+    const userCredential = await signInWithEmailAndPassword(auth, email, pass);
+    return userCredential.user;
+  } catch (error: any) {
+    // Tu peux gérer ici des erreurs spécifiques (ex: compte bloqué)
+    throw new Error(error.message);
   }
-}
+};
 
-export async function signin(payload: UserPayload): Promise<AuthResponse> {
-  const res = await fetch(`${AUTH_BASE}/signin`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
-  })
-  if (!res.ok) {
-    const text = await res.text().catch(() => 'Unknown error')
-    throw new Error(`Signin failed (${res.status}): ${text}`)
-  }
-  const data = (await res.json()) as AuthResponse
-  saveAuthToLocal(data)
-  return data
-}
-
-export async function signup(payload: UserPayload): Promise<AuthResponse> {
-  const res = await fetch(`${AUTH_BASE}/signup`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
-  })
-  if (!res.ok) {
-    const text = await res.text().catch(() => 'Unknown error')
-    throw new Error(`Signup failed (${res.status}): ${text}`)
-  }
-  const data = (await res.json()) as AuthResponse
-  saveAuthToLocal(data)
-  return data
-}
+/**
+ * Déconnecte l'utilisateur.
+ */
+export const logoutUser = async (): Promise<void> => {
+  await signOut(auth);
+};

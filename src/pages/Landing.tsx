@@ -44,7 +44,7 @@ export function Landing({ onGoCat, onGoDog }: LandingProps) {
           <p className="text-sm text-slate-600">{t('home.carousel.caption')}</p>
         </div>
 
-        <div className="relative mx-auto w-full max-w-[360px] overflow-hidden rounded-[28px] border border-slate-200 bg-slate-100 shadow-lg shadow-black/10">
+        <div className="relative mx-auto w-full max-w-[760px] overflow-hidden rounded-[28px] border border-slate-200 bg-slate-100 shadow-lg shadow-black/10">
           <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,196,112,0.6),rgba(255,222,160,0.4))]" />
           <div className="relative">
             <video
