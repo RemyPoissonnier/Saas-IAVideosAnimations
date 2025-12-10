@@ -49,13 +49,13 @@ const fr = {
       cta: 'Lancer un rendu chat'
     },
     stats: {
-      1: {
+      "1": {
         label: 'Brouillons de storyboard plus rapides'
       },
-      2: {
+      "2": {
         label: 'Temps gagné sur les plans'
       },
-      3: {
+      "3": {
         label: 'Exports supplémentaires par créateur'
       }
     },
@@ -65,15 +65,15 @@ const fr = {
       desc: 'Mouvements de caméra préconfigurés, animations riggées et modèles de légendes optimisés pour les chaînes félines.'
     },
     features: {
-      1: {
+      "1": {
         title: '2D et 3D simplifiées',
         desc: 'Générez des chats stylisés en 2D ou 3D avec éclairage, rigs et mouvements de caméra inclus.'
       },
-      2: {
+      "2": {
         title: 'Scripts prêts au tournage',
         desc: 'Accroches, beats et légendes auto-générés pour les glisser dans votre éditeur.'
       },
-      3: {
+      "3": {
         title: 'Assets qui scalent',
         desc: 'Bibliothèque de races, moods et accessoires à remixer pour chaque canal.'
       }
@@ -129,13 +129,13 @@ const fr = {
       cta: 'Lancer un rendu chien'
     },
     stats: {
-      1: {
+      "1": {
         label: 'Storyboards accélérés'
       },
-      2: {
+      "2": {
         label: 'Temps gagné sur les plans'
       },
-      3: {
+      "3": {
         label: 'Exports supplémentaires'
       }
     },
@@ -145,15 +145,15 @@ const fr = {
       desc: 'Caméras pré-réglées, rigs réalistes et légendes optimisées pour chaque format social.'
     },
     features: {
-      1: {
+      "1": {
         title: '2D/3D simplifiées',
         desc: 'Rendus stylisés avec lumière, rigs et mouvements de caméra intégrés.'
       },
-      2: {
+      "2": {
         title: 'Scripts prêts au montage',
         desc: 'Hooks, beats et légendes générés automatiquement pour votre timeline.'
       },
-      3: {
+      "3": {
         title: 'Bibliothèque qui s’adapte',
         desc: 'Races, humeurs et accessoires réutilisables pour chaque campagne.'
       }
@@ -310,10 +310,10 @@ const fr = {
     },
     socialNote: 'Les connexions sociales sont simulées localement pour la démo.',
     signInTitle: 'Bon retour parmis nous',
-    signInSubtitle: 'Entrez vos identifiants pour acceder a votre compte',
+    signInSubtitle: 'Bonjour',
     forgotPassword: 'Mot de passe oublié ?',
     noAccount: 'Pas de compte ?',
-    signupLink: 'Créez-en un ?'
+    signupLink: 'Créez-en un.'
   },
   hero: {
     badge: 'Prototype minimal — IA vidéo chat',

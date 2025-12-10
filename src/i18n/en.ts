@@ -49,13 +49,13 @@ const en = {
       cta: 'Start a cat render'
     },
     stats: {
-      1: {
+      "1": {
         label: 'Faster storyboard drafts'
       },
-      2: {
+      "2": {
         label: 'Time saved on shot lists'
       },
-      3: {
+      "3": {
         label: 'More exports per creator'
       }
     },
@@ -65,15 +65,15 @@ const en = {
       desc: 'Prebuilt camera moves, rigged animations, and caption templates tuned for feline-focused channels.'
     },
     features: {
-      1: {
+      "1": {
         title: '2D & 3D made simple',
         desc: 'Generate stylized cats in 2D or 3D with lighting, rigs, and camera moves pre-baked.'
       },
-      2: {
+      "2": {
         title: 'Shot-ready scripts',
         desc: 'Auto-build hooks, beats, and captions so you can drag-drop into your editor.'
       },
-      3: {
+      "3": {
         title: 'Assets that scale',
         desc: 'Keep a library of breeds, moods, and props to remix for every channel.'
       }
@@ -129,13 +129,13 @@ const en = {
       cta: 'Start a dog render'
     },
     stats: {
-      1: {
+      "1": {
         label: 'Storyboard speed-up'
       },
-      2: {
+      "2": {
         label: 'Time saved on shot lists'
       },
-      3: {
+      "3": {
         label: 'Extra exports per creator'
       }
     },
@@ -145,15 +145,15 @@ const en = {
       desc: 'Preset cameras, realistic rigs, and caption templates tuned for socials.'
     },
     features: {
-      1: {
+      "1": {
         title: '2D/3D made simple',
         desc: 'Stylized renders with lighting, rigs, and camera motion baked in.'
       },
-      2: {
+      "2": {
         title: 'Edit-ready scripts',
         desc: 'Auto-generated hooks, beats, and captions for your timeline.'
       },
-      3: {
+      "3": {
         title: 'A library that adapts',
         desc: 'Breeds, moods, and props ready to reuse for every campaign.'
       }
@@ -310,7 +310,7 @@ const en = {
     },
     socialNote: 'Social logins are simulated locally for now.',
     signInTitle: 'Welcome Back',
-    signInSubtitle: 'Enter your credentials to access your account',
+    signInSubtitle: 'Welcome back',
     forgotPassword: 'Forgot password ?',
     noAccount: 'Don\'t have an account?',
     signupLink: 'Create one ?'

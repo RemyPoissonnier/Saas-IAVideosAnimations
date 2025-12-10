@@ -38,3 +38,48 @@ npm run preview       # serve the built assets locally
 ## React Compiler
 
 The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+
+## Tools on the project
+
+### addI18n
+
+```bash
+❯ node ./addI18n.js
+
+🌐 TS I18n Manager (Safe Mode)
+
+Key path (e.g. auth.user.name): auth.forgotPassword
+🇺🇸 English value: Forgot   password ?
+🇫🇷 French value:    Mot de passe oublié ?
+
+Reading TS files...
+✅ Saved en.ts
+✅ Saved fr.ts
+
+🎉 Key "auth.forgotPassword" added/updated!
+
+❯ node ./addI18n.js
+```
+### process i18n
+Or used in `./tools` the file process-i18n.js with node
+
+
+#### Comment l'utiliser
+
+1. Remplis ton fichier add.json avec tes nouvelles clés.
+
+2. Exécute la commande :
+
+```bash
+node process-i18n.js
+```
+
+3. Le script va :
+
+    Lire fr.ts et en.ts.
+
+    Ajouter ou modifier les clés (il gère les profondeurs comme auth.user.name automatiquement).
+
+    Sauvegarder les fichiers en respectant la syntaxe (garder les quotes pour "2d", les retirer pour nav).
+
+    Remplacer le contenu de add.json par {} pour que tu sois prêt pour la prochaine fois.
