@@ -83,3 +83,6 @@ node process-i18n.js
     Sauvegarder les fichiers en respectant la syntaxe (garder les quotes pour "2d", les retirer pour nav).
 
     Remplacer le contenu de add.json par {} pour que tu sois prêt pour la prochaine fois.
+
+### acp
+acp stand for add commit and push, used this for running git faster

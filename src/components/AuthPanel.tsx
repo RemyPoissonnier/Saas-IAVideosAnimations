@@ -3,6 +3,7 @@ import type { FormEvent } from 'react'
 import { useI18n } from '../i18n'
 import { card, inputBase, label, primaryButton, subText } from '../theme/styles'
 import { useAuth } from '../context/AuthContext'
+import { RegisterModal } from './registerModal'
 
 type SocialProvider = 'google'
 
@@ -21,6 +22,7 @@ export function AuthPanel({ onAuthComplete, onNavigateToRegister }: AuthPanelPro
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const [isRegisterOpen, setIsRegisterOpen] = useState(false);
 
   const finishAuthFlow = () => {
     if (onAuthComplete) onAuthComplete()
@@ -45,7 +47,11 @@ export function AuthPanel({ onAuthComplete, onNavigateToRegister }: AuthPanelPro
     }
   }
 
+
+
   return (
+    <div className='flex object-center justify-center'>
+
     <div className={`${card} space-y-4`}>
       <div className="space-y-1">
         {/* Changed translation keys to specific Login titles */}
@@ -61,25 +67,25 @@ export function AuthPanel({ onAuthComplete, onNavigateToRegister }: AuthPanelPro
             className="flex items-center justify-center gap-3 rounded-xl border border-border/60 bg-white px-4 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:shadow"
             type="button"
             onClick={() => handleSocialSignIn('google')}
-          >
+            >
             <span className="h-5 w-5" aria-hidden="true">
               <svg viewBox="0 0 48 48" role="presentation" focusable="false">
                 <path
                   fill="#EA4335"
                   d="M24 9.5c3.15 0 5.8 1.08 7.97 3.2l5.94-5.94C33.84 3.06 29.46 1 24 1 14.62 1 6.4 6.54 2.64 14.26l6.94 5.39C11.84 13.58 17.38 9.5 24 9.5z"
-                />
+                  />
                 <path
                   fill="#4285F4"
                   d="M46.5 24c0-1.39-.12-2.42-.38-3.48H24v6.96h12.78c-.26 1.75-1.67 4.38-4.81 6.15l7.42 5.77C43.78 35.4 46.5 30.37 46.5 24z"
-                />
+                  />
                 <path
                   fill="#FBBC05"
                   d="M9.58 28.35c-.47-1.41-.73-2.92-.73-4.45 0-1.53.26-3.04.73-4.45L2.64 14.06C1.09 17.14.25 20.48.25 23.9c0 3.42.84 6.76 2.39 9.84l6.94-5.39z"
-                />
+                  />
                 <path
                   fill="#34A853"
                   d="M24 46.5c6.21 0 11.44-2.04 15.25-5.56l-7.42-5.77c-1.98 1.33-4.65 2.27-7.83 2.27-6.62 0-12.16-4.08-14.42-9.98l-6.94 5.39C6.4 41.46 14.62 46.5 24 46.5z"
-                />
+                  />
                 <path fill="none" d="M0 0h48v48H0z" />
               </svg>
             </span>
@@ -107,7 +113,7 @@ export function AuthPanel({ onAuthComplete, onNavigateToRegister }: AuthPanelPro
             onChange={(e) => setEmail(e.target.value)}
             required
             className={inputBase}
-          />
+            />
         </div>
         <div className="space-y-2">
           <div className="flex justify-between">
@@ -127,7 +133,7 @@ export function AuthPanel({ onAuthComplete, onNavigateToRegister }: AuthPanelPro
             onChange={(e) => setPassword(e.target.value)}
             required
             className={inputBase}
-          />
+            />
         </div>
         <div className="flex justify-end pt-2">
           <button className={primaryButton} type="submit">
@@ -137,17 +143,30 @@ export function AuthPanel({ onAuthComplete, onNavigateToRegister }: AuthPanelPro
       </form>
 
       {/* The Link to Create an Account */}
-      <div className="pt-2 text-center text-xs text-muted">
-        {t('auth.noAccount') || "Don't have an account?"}{' '}
-        <button 
-          type="button" 
-          onClick={onNavigateToRegister}
-          className="font-semibold text-slate-900 underline decoration-slate-300 underline-offset-2 hover:decoration-slate-800"
-        >
-          {t('auth.signupLink') || 'Create one'}
-        </button>
-      </div>
+     <div className="pt-2 text-center text-xs text-muted">
+          {t('auth.noAccount') || "Don't have an account?"}{' '}
+          <button 
+            type="button" 
+            // MODIFICATION ICI : Ouvre la modale au lieu de naviguer
+            onClick={() => setIsRegisterOpen(true)} 
+            className="font-semibold text-slate-900 underline decoration-slate-300 underline-offset-2 hover:decoration-slate-800 dark:text-white dark:decoration-slate-600"
+            >
+            {t('auth.signupLink') || 'Create one'}
+          </button>
+        </div>
+
+        {/* Intégration de la Modale ICI */}
+     
     </div>
+    
+      <RegisterModal 
+        isOpen={isRegisterOpen} 
+        onClose={() => setIsRegisterOpen(false)}
+        onSuccess={() => {
+           console.log("Compte créé et connecté !");
+           // Optionnel : onAuthComplete() si tu veux rediriger tout de suite
+        }}/>
+        </div>
   )
 }
 
