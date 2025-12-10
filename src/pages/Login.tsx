@@ -48,7 +48,7 @@ export function Login({ onBackHome }: LoginProps) {
       </div>
       <div className="flex items-stretch justify-center">
         <div className="flex w-full max-w-lg items-center justify-center rounded-2xl border border-border/60 bg-surface p-4 shadow-card">
-          <AuthPanel compact onAuthComplete={onBackHome} />
+          <AuthPanel onAuthComplete={onBackHome} />
         </div>
       </div>
     </div>

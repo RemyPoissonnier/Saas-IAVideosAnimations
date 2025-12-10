@@ -164,7 +164,7 @@ export function AuthPanel({ onAuthComplete, onNavigateToRegister }: AuthPanelPro
         onClose={() => setIsRegisterOpen(false)}
         onSuccess={() => {
            console.log("Compte créé et connecté !");
-           // Optionnel : onAuthComplete() si tu veux rediriger tout de suite
+           finishAuthFlow()
         }}/>
         </div>
   )

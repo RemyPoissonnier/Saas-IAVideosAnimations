@@ -350,6 +350,19 @@ const fr = {
     topic: 'Un chat explore un loft minimaliste',
     tone: 'Énergique, fun, un brin espiègle',
     cta: 'Abonne-toi pour d’autres hacks félins'
+  },
+  register: {
+    email: 'Email',
+    pw: 'Mot de passe',
+    indication: 'Créez votre compte afin d\'accéder aux fonctionnalités',
+    pseudo: 'Pseudo',
+    loading: 'Chargement...',
+    register: 'S\'inscrire',
+    error: {
+      pseudoAlUsed: 'Pseudo déjà utilisé',
+      weakpw: 'Mot de passe trop faible',
+      pw: 'Minimum 8 carateres, et au moins 1 lettre et 1 nombre'
+    }
   }
 };
 

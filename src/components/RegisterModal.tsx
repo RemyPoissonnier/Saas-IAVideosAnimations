@@ -4,6 +4,7 @@ import { collection, query, where, getDocs } from 'firebase/firestore';
 import { FirebaseError } from 'firebase/app';
 import { useAuth, db } from '../context/AuthContext';
 import { PASSWORD_REGEX } from '../utils/authUtils';
+import { useI18n } from '../i18n';
 
 // TODO I18N
 interface RegisterModalProps {
@@ -15,7 +16,7 @@ interface RegisterModalProps {
 
 export function RegisterModal({ isOpen, onClose, onSuccess }: RegisterModalProps) {
   const { register } = useAuth(); // On récupère la fonction register de ton contexte
-  
+  const { t } = useI18n()
   const [pseudo, setPseudo] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -39,7 +40,7 @@ export function RegisterModal({ isOpen, onClose, onSuccess }: RegisterModalProps
 
     // 1. Validation Locale (Mot de passe)
     if (!PASSWORD_REGEX.test(password)) {
-      setError("Le mot de passe doit contenir 8 caractères, majuscule, minuscule, chiffre et caractère spécial.");
+      setError(t("register.error.pw"));
       setIsLoading(false);
       return;
     }
@@ -48,7 +49,7 @@ export function RegisterModal({ isOpen, onClose, onSuccess }: RegisterModalProps
       // 2. Vérification Pseudo (Firestore)
       const isPseudoTaken = await checkPseudoAvailability(pseudo);
       if (isPseudoTaken) {
-        setError("Ce pseudo est déjà utilisé par un autre membre.");
+        setError(t("register.error.pseudoAlUsed"));
         setIsLoading(false);
         return;
       }
@@ -66,9 +67,9 @@ export function RegisterModal({ isOpen, onClose, onSuccess }: RegisterModalProps
       if (err instanceof FirebaseError) {
         // Gestion des erreurs spécifiques Firebase
         if (err.code === 'auth/email-already-in-use') {
-          setError("Cet email possède déjà un compte.");
+          setError(t("register.error.pseudoAlUsed"));
         } else if (err.code === 'auth/weak-password') {
-          setError("Mot de passe trop faible.");
+          setError(t("register.error.weakpw"));
         } else {
           setError("Une erreur est survenue lors de l'inscription : " + err.message +" code :" + err.code);
         }
@@ -91,8 +92,7 @@ export function RegisterModal({ isOpen, onClose, onSuccess }: RegisterModalProps
           ✕
         </button>
 
-        <h3 className="text-xl font-bold text-white mb-1">Rejoindre RPIT</h3>
-        <p className="text-sm text-slate-400 mb-6">Créez votre compte pour accéder aux outils.</p>
+        <p className="text-sm text-slate-400 mb-6">{t("register.indication")}</p>
 
         <form onSubmit={handleRegister} className="space-y-4">
           {error && (
@@ -102,7 +102,7 @@ export function RegisterModal({ isOpen, onClose, onSuccess }: RegisterModalProps
           )}
 
           <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-300 uppercase">Pseudo</label>
+            <label className="text-xs font-semibold text-slate-300 uppercase">{t("register.pseudo")}</label>
             <input 
               type="text" 
               value={pseudo}
@@ -114,7 +114,7 @@ export function RegisterModal({ isOpen, onClose, onSuccess }: RegisterModalProps
           </div>
 
           <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-300 uppercase">Email</label>
+            <label className="text-xs font-semibold text-slate-300 uppercase">{t("register.email")}</label>
             <input 
               type="email" 
               value={email}
@@ -126,7 +126,7 @@ export function RegisterModal({ isOpen, onClose, onSuccess }: RegisterModalProps
           </div>
 
           <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-300 uppercase">Mot de passe</label>
+            <label className="text-xs font-semibold text-slate-300 uppercase">{t("register.pw")}</label>
             <input 
               type="password" 
               value={password}
@@ -142,7 +142,7 @@ export function RegisterModal({ isOpen, onClose, onSuccess }: RegisterModalProps
             disabled={isLoading}
             className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3 rounded-lg transition shadow-lg shadow-indigo-500/20 disabled:opacity-50 mt-2"
           >
-            {isLoading ? 'Création en cours...' : "S'inscrire"}
+            {isLoading ? t("register.loading") : t("register.register")}
           </button>
         </form>
       </div>

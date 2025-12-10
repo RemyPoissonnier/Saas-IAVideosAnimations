@@ -84,5 +84,23 @@ node process-i18n.js
 
     Remplacer le contenu de add.json par {} pour que tu sois prêt pour la prochaine fois.
 
+    exemple json 
+    ```json
+    {
+        "auth.login.title": { 
+            "en": "Welcome back", 
+            "fr": "Bon retour parmi nous" 
+        },
+        "nav.profile": { 
+            "en": "My Profile", 
+            "fr": "Mon Profil" 
+        },
+        "pricing.2d": {
+            "en": "2D Plans",
+            "fr": "Plans 2D"
+        }
+    }
+```
+
 ### acp
 acp stand for add commit and push, used this for running git faster

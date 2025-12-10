@@ -350,6 +350,19 @@ const en = {
     topic: 'A cat explores a minimal loft',
     tone: 'Energetic, playful, slightly mischievous',
     cta: 'Follow for more feline hacks'
+  },
+  register: {
+    email: 'Email',
+    pw: 'Password',
+    indication: 'Create your account to access features',
+    pseudo: 'Username',
+    loading: 'Loading...',
+    register: 'Sign up',
+    error: {
+      pseudoAlUsed: 'Username already taken',
+      weakpw: 'Password too weak',
+      pw: 'Minimum eight characters, at least one letter and one number'
+    }
   }
 };
 
