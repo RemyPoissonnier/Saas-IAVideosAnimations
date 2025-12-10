@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { useI18n } from '../i18n'
-import { card, ghostButton, inputBase, label, primaryButton, subText } from '../theme/styles'
+import { card, inputBase, label, primaryButton, subText } from '../theme/styles'
 import { useAuth } from '../context/AuthContext'
 
 type SocialProvider = 'google'
@@ -12,52 +12,49 @@ const providerProfiles: Record<SocialProvider, { name: string; email: string }> 
 
 type AuthPanelProps = {
   onAuthComplete?: () => void
-  compact?: boolean
+  onNavigateToRegister?: () => void // Callback to switch to the registration page
 }
 
-export function AuthPanel({ onAuthComplete, compact = false }: AuthPanelProps) {
-  const { currentUser, login, logout, register, getToken } = useAuth()
+export function AuthPanel({ onAuthComplete, onNavigateToRegister }: AuthPanelProps) {
+  const { login } = useAuth() // using login instead of register
   const { t } = useI18n()
-  const [email, setEmail] = useState(currentUser?.email ?? '')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
 
   const finishAuthFlow = () => {
     if (onAuthComplete) onAuthComplete()
   }
 
   const handleSocialSignIn = (provider: SocialProvider) => {
-    const profile = providerProfiles[provider]
-    // login(profile)
+    // const profile = providerProfiles[provider]
+    // login(profile) // Assuming your auth context handles social login similarly
     finishAuthFlow()
   }
 
-  const handleContinueAsGuest = () => {
-    logout()
-    finishAuthFlow()
-  }
-
-  const handleManualLogin = (event: FormEvent<HTMLFormElement>) => {
+  const handleManualLogin = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    setError('')
     if (!email || !password) return
-    register( email, password, "TEST" ) //TODO to change 
-    finishAuthFlow()
+
+    try {
+      await login(email, password)
+      finishAuthFlow()
+    } catch (err) {
+      setError('Invalid email or password') // You might want to add a translation key here
+    }
   }
 
   return (
     <div className={`${card} space-y-4`}>
       <div className="space-y-1">
-        <h3 className="text-xl font-semibold text-text">{t('auth.title')}</h3>
-        <p className={subText}>{t('auth.subtitle')}</p>
+        {/* Changed translation keys to specific Login titles */}
+        <h3 className="text-xl font-semibold text-text">{t('auth.signInTitle') || 'Welcome Back'}</h3>
+        <p className={subText}>{t('auth.signInSubtitle') || 'Enter your credentials to access your account'}</p>
       </div>
+
       <div className="space-y-3">
-        <button
-          className={`${ghostButton} w-full justify-center`}
-          type="button"
-          onClick={handleContinueAsGuest}
-        >
-          {t('auth.guest')}
-        </button>
-        <p className="text-xs text-muted">{t('auth.guestRedirect')}</p>
+        {/* Social Login Section */}
         <div className={label}>{t('auth.socialTitle')}</div>
         <div className="grid grid-cols-1 gap-2">
           <button
@@ -89,12 +86,14 @@ export function AuthPanel({ onAuthComplete, compact = false }: AuthPanelProps) {
             {t('auth.social.google')}
           </button>
         </div>
-        <p className="text-xs text-muted">{t('auth.socialNote')}</p>
       </div>
 
       <div className="h-px w-full bg-border/60" />
       <div className={label}>{t('auth.manualTitle')}</div>
+
       <form className="grid grid-cols-1 gap-3" onSubmit={handleManualLogin}>
+        {error && <p className="text-xs text-red-500">{error}</p>}
+        
         <div className="space-y-2">
           <label className="text-sm font-semibold text-text" htmlFor="email">
             {t('auth.email')}
@@ -111,9 +110,15 @@ export function AuthPanel({ onAuthComplete, compact = false }: AuthPanelProps) {
           />
         </div>
         <div className="space-y-2">
-          <label className="text-sm font-semibold text-text" htmlFor="password">
-            {t('auth.password')}
-          </label>
+          <div className="flex justify-between">
+            <label className="text-sm font-semibold text-text" htmlFor="password">
+              {t('auth.password')}
+            </label>
+            {/* Optional: Forgot Password Link */}
+            <button type="button" className="text-xs text-slate-500 hover:text-slate-800">
+               {t('auth.forgotPassword') || 'Forgot?'}
+            </button>
+          </div>
           <input
             id="password"
             name="password"
@@ -124,20 +129,24 @@ export function AuthPanel({ onAuthComplete, compact = false }: AuthPanelProps) {
             className={inputBase}
           />
         </div>
-        <div className="flex justify-end">
+        <div className="flex justify-end pt-2">
           <button className={primaryButton} type="submit">
-            {t('auth.signin')}
+            {t('auth.signin') || 'Sign In'}
           </button>
         </div>
       </form>
-      {!compact && currentUser ? (
-        <div className="flex flex-wrap gap-2">
-          <button className={ghostButton} type="button" onClick={logout}>
-            {t('auth.signout')}
-          </button>
-        </div>
-      ) : null}
-      {!compact && <p className="text-xs text-muted">{t('auth.hint')}</p>}
+
+      {/* The Link to Create an Account */}
+      <div className="pt-2 text-center text-xs text-muted">
+        {t('auth.noAccount') || "Don't have an account?"}{' '}
+        <button 
+          type="button" 
+          onClick={onNavigateToRegister}
+          className="font-semibold text-slate-900 underline decoration-slate-300 underline-offset-2 hover:decoration-slate-800"
+        >
+          {t('auth.signupLink') || 'Create one'}
+        </button>
+      </div>
     </div>
   )
 }

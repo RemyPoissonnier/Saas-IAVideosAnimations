@@ -91,7 +91,7 @@ export function PromptTool({ kind }: PromptToolProps) {
               mode === '2d' ? 'bg-accent text-bg shadow-sm shadow-accent/40' : 'text-slate-600'
             }`}
           >
-            {t('prompt.mode.2d')}
+            {t('prompt.mode._2d')}
           </button>
           <button
             type="button"
@@ -100,7 +100,7 @@ export function PromptTool({ kind }: PromptToolProps) {
               mode === '3d' ? 'bg-accent text-bg shadow-sm shadow-accent/40' : 'text-slate-600'
             }`}
           >
-            {t('prompt.mode.3d')}
+            {t('prompt.mode._3d')}
           </button>
         </div>
       </div>
