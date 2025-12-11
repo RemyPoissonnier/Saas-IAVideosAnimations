@@ -48,9 +48,11 @@ export function Header({
   }, []);
 
   return (
-    <div className="flex gap-x-3">
-      <header className="relative flex items-center justify-between gap-4 overflow-visible rounded-full border border-border/60 bg-surface/70 px-6 py-3 shadow-card backdrop-blur">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(124,240,193,0.08),transparent_40%),radial-gradient(circle_at_80%_30%,rgba(59,161,255,0.08),transparent_42%)]" />
+    <div className="mb-20">
+      <header className="fixed top-4 left-1/2 z-50 flex -translate-x-1/2 items-center
+      justify-between shadow-md gap-4 rounded-full border border-border/60 bg-surface/70 px-2 py-1 
+      backdrop-blur-md">        
+      <div className="" />
         <div className="flex items-center gap-3">
           <a href="/home" className="relative z-10">
             <img

@@ -11,7 +11,9 @@ export function Login({ onBackHome }: LoginProps) {
 
   return (
     <div className="grid min-h-[70vh] grid-cols-1 gap-6 lg:grid-cols-[1.1fr,1fr]">
-      <div className="relative flex flex-col gap-4 overflow-hidden rounded-3xl border border-border/60 bg-gradient-to-br from-accent/20 via-surface to-surface p-6 shadow-card">
+      <div className="relative flex-col gap-4 overflow-hidden rounded-3xl border 
+      border-border/60 bg-gradient-to-br from-accent/20 
+      via-surface to-surface p-6 shadow-md hidden lg:flex ">
         <div className="absolute inset-0 opacity-40" />
         <div className="flex items-center gap-3">
           <div className={`${badge} w-fit bg-surface/80 text-accent-strong`}>
@@ -46,10 +48,9 @@ export function Login({ onBackHome }: LoginProps) {
           </button>
         </div>
       </div>
+
       <div className="flex items-stretch justify-center">
-        <div className="flex w-full max-w-lg items-center justify-center rounded-2xl border border-border/60 bg-surface p-4 shadow-card">
           <AuthPanel onAuthComplete={onBackHome} />
-        </div>
       </div>
     </div>
   )

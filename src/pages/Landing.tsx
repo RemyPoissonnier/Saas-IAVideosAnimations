@@ -3,6 +3,7 @@ import { useI18n } from '../i18n'
 import { ghostButton, primaryButton } from '../theme/styles'
 import catAndDogVideo from '../assets/videos/CatAndDog.mp4'
 import catWorkVideo from '../assets/videos/catWork.mp4'
+import TextType from '../components/UI/TextType';
 
 const PLAYLIST = [catAndDogVideo, catWorkVideo]
 
@@ -37,6 +38,14 @@ export function Landing({ onGoCat, onGoDog }: LandingProps) {
         <h1 className="text-4xl font-semibold leading-tight tracking-tight text-slate-900 md:text-5xl">
           {t('landing.title')}
         </h1>
+
+        <TextType 
+  text={["Text typing effect", "for your websites", "Happy coding!"]}
+  typingSpeed={75}
+  pauseDuration={1500}
+  showCursor={true}
+  cursorCharacter="|"
+/>
 
 
         <div className="space-y-2 text-center">

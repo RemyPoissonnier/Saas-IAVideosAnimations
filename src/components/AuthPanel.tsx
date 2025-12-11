@@ -3,7 +3,7 @@ import type { FormEvent } from 'react'
 import { useI18n } from '../i18n'
 import { card, inputBase, label, primaryButton, subText } from '../theme/styles'
 import { useAuth } from '../context/AuthContext'
-import { RegisterModal } from './registerModal'
+import { RegisterModal } from './RegisterModal'
 
 type SocialProvider = 'google'
 

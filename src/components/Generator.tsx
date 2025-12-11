@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from 'react'
 import type { FormEvent } from 'react'
-import { useAuth } from '../auth'
 import { useI18n } from '../i18n'
 import { listGenerations, saveGeneration } from '../services/localDb'
 import type { GenerationRecord } from '../services/localDb'
 import { card, inputBase, label, primaryButton, subText } from '../theme/styles'
+import { useAuth } from '../context/AuthContext'
 
 type VideoForm = {
   topic: string
@@ -61,7 +61,7 @@ const buildRecord = (payload: VideoForm, userEmail: string): GenerationRecord =>
 
 export function Generator() {
   const { t } = useI18n()
-  const { user } = useAuth()
+  const { currentUser } = useAuth()
   const [form, setForm] = useState<VideoForm>(() => ({
     ...baseForm,
     topic: t('placeholder.topic'),
@@ -73,17 +73,17 @@ export function Generator() {
   const [message, setMessage] = useState<string>('')
 
   useEffect(() => {
-    setHistory(listGenerations(user?.email))
-  }, [user])
+    setHistory(listGenerations(currentUser?.email))
+  }, [currentUser])
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    const email = user?.email ?? 'invite@local'
+    const email = currentUser?.email ?? 'invite@local'
     const record = buildRecord(form, email)
     saveGeneration(record)
     setPreview(record)
-    setHistory(listGenerations(user?.email))
-    setMessage(user ? t('status.saved') : 'Connectez-vous pour garder un historique associé.')
+    setHistory(listGenerations(currentUser?.email))
+    setMessage(currentUser ? t('status.saved') : 'Connectez-vous pour garder un historique associé.')
   }
 
   const hasPreview = useMemo(() => Boolean(preview || history.length > 0), [preview, history])
