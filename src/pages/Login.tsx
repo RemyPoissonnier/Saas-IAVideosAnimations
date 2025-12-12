@@ -12,18 +12,9 @@ export function Login({ onBackHome }: LoginProps) {
   const navigate = useNavigate();
 
   const handleHomeClick = () => {
-    // 3. Déclenchement de la navigation vers la racine
     navigate("/"); 
-    console.log("click");
-    
   };
 
-  // let navigate = useNavigate(); 
-  // const routeChange = () =>{ 
-  //   let path = `/`; 
-  //   navigate(path);
-  // }
-  
 
   return (
     <div className="grid min-h-[70vh] grid-cols-1 gap-6 lg:grid-cols-[1.1fr,1fr]">
@@ -63,10 +54,11 @@ export function Login({ onBackHome }: LoginProps) {
         <p className="text-xs text-text/80">{t("authPage.videoHint")}</p>
         <button 
             type="button" // Bonne pratique pour éviter les submits involontaires
-            className="mt-auto flex text-left hover:opacity-80 transition-opacity relative z-10 cursor-pointer" 
+            className="mt-auto flex text-left hover:opacity-80 transition-opacity relative z-10 
+            cursor-pointer hover:text-orange-500" 
             onClick={handleHomeClick}
           >
-            {t("nav.backHome")} TEST PROBLEME
+            {t("nav.backHome")}
           </button>
       </div>
 

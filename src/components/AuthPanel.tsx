@@ -59,6 +59,18 @@ export function AuthPanel({
     }
   };
 
+   const handleGuestLogin = async () => {
+    const gEmail = "test3@gmail.com"
+    const gPwd = "JeSuisUnTest34@"
+
+    try {
+      await login(gEmail, gPwd);
+      finishAuthFlow();
+    } catch (err) {
+      setError("Invalid email or password"); // You might want to add a translation key here
+    }
+  };
+
   return (
     <div className="flex object-center justify-center">
       <div className={`${card} space-y-4`}>
@@ -155,10 +167,18 @@ export function AuthPanel({
               className={inputBase}
             />
           </div>
+          <div className="flex gap-1"> {/* TODO to remove */}
+
           <div className="flex justify-end pt-2">
             <button className={primaryButton} type="submit">
               {t("auth.signin") || "Sign In"}
             </button>
+          </div>
+           <div className="flex"> {/* TODO to remove */}
+            <button className={primaryButton} onClick={handleGuestLogin}>
+              GUEST TEST
+            </button>
+          </div>
           </div>
         </form>
 
