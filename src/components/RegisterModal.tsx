@@ -83,7 +83,7 @@ export function RegisterModal({ isOpen, onClose, onSuccess }: RegisterModalProps
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-      <div className="w-full max-w-md bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl p-6 relative animate-in fade-in zoom-in duration-200">
+      <div className="w-full max-w-md bg-gradient-to-br from-accent/20  rounded-2xl shadow-2xl p-6 relative animate-in fade-in zoom-in duration-200">
         
         <button 
           onClick={onClose}
@@ -94,7 +94,7 @@ export function RegisterModal({ isOpen, onClose, onSuccess }: RegisterModalProps
 
         <p className="text-sm text-slate-400 mb-6">{t("register.indication")}</p>
 
-        <form onSubmit={handleRegister} className="space-y-4">
+        <form onSubmit={handleRegister} className="space-y-4 justify-center content-center">
           {error && (
             <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-xs">
               {error}
@@ -140,7 +140,8 @@ export function RegisterModal({ isOpen, onClose, onSuccess }: RegisterModalProps
           <button 
             type="submit" 
             disabled={isLoading}
-            className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3 rounded-lg transition shadow-lg shadow-indigo-500/20 disabled:opacity-50 mt-2"
+            className=" items-center w-1/2 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3 rounded-full 
+            transition shadow-lg shadow-indigo-500/20 disabled:opacity-50 mt-2"
           >
             {isLoading ? t("register.loading") : t("register.register")}
           </button>

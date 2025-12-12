@@ -49,10 +49,12 @@ export function Header({
 
   return (
     <div className="mb-20">
-      <header className="fixed top-4 left-1/2 z-50 flex -translate-x-1/2 items-center
+      <header
+        className="fixed top-4 left-1/2 z-50 flex -translate-x-1/2 items-center
       justify-between shadow-md gap-4 rounded-full border border-border/60 bg-surface/70 px-2 py-1 
-      backdrop-blur-md">        
-      <div className="" />
+      backdrop-blur-md"
+      >
+        <div className="" />
         <div className="flex items-center gap-3">
           <a href="/home" className="relative z-10">
             <img
@@ -153,7 +155,11 @@ export function Header({
       </header>
 
       {currentUser ? ( //TODO to update
-        <button className={`${pill} px-4 bg-red-200 text-black hover:bg-red-700`} type="button" onClick={logout}>
+        <button
+          className={`${pill} px-4 bg-red-200 text-black hover:bg-red-700`}
+          type="button"
+          onClick={logout}
+        >
           {t("auth.signout")}
         </button>
       ) : null}

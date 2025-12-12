@@ -1,7 +1,7 @@
 export const container = 'mx-auto max-w-5xl px-6 py-8 md:px-8'
 
 export const card =
-  'w-full rounded-2xl border border-border/60 bg-surface p-6 shadow-card backdrop-blur-md'
+  'w-full rounded-2xl border border-border/60 bg-surface p-6 shadow-md backdrop-blur-md'
 
 export const badge =
   'inline-flex items-center gap-2 rounded-full border border-border/60 bg-surface-strong px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-muted'

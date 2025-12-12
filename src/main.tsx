@@ -5,9 +5,11 @@ import { AuthProvider } from './context/AuthContext.tsx'
 import './index.css'
 import { I18nProvider } from './i18n.tsx'
 import { ThemeProvider } from './theme.tsx'
+import { BrowserRouter } from 'react-router-dom'; // <--- Import essentiel
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
+    <BrowserRouter>
     <ThemeProvider>
       <I18nProvider>
         <AuthProvider>
@@ -15,5 +17,6 @@ createRoot(document.getElementById('root')!).render(
         </AuthProvider>
       </I18nProvider>
     </ThemeProvider>
+    </BrowserRouter>
   </StrictMode>,
 )
