@@ -1,7 +1,7 @@
 import AuthPanel from "../components/AuthPanel";
 import { useNavigate } from "react-router-dom";
 import { useI18n } from "../i18n";
-import { badge, ghostButton, subText } from "../theme/styles";
+import { badge, subText } from "../theme/styles";
 
 type LoginProps = {
   onBackHome: () => void;

@@ -10,6 +10,7 @@ import {
 } from "../theme/styles";
 import { useAuth } from "../context/AuthContext";
 import { RegisterModal } from "./RegisterModal";
+import { ForgotPasswordModal } from "./forgotPasswordModal";
 
 type SocialProvider = "google";
 
@@ -35,6 +36,7 @@ export function AuthPanel({
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
+  const [isForgotModalOpen, setIsForgotModalOpen] = useState(false);
 
   const finishAuthFlow = () => {
     if (onAuthComplete) onAuthComplete();
@@ -150,8 +152,10 @@ export function AuthPanel({
                 {t("auth.password")}
               </label>
               {/* Optional: Forgot Password Link */}
+
               <button
                 type="button"
+                onClick={() => setIsForgotModalOpen(true)}
                 className="text-xs text-slate-500 hover:text-slate-800"
               >
                 {t("auth.forgotPassword") || "Forgot?"}
@@ -205,6 +209,12 @@ export function AuthPanel({
           console.log("Compte créé et connecté !");
           finishAuthFlow();
         }}
+      />
+
+      {/* Intégration de la Modale en dehors du formulaire */}
+      <ForgotPasswordModal 
+        isOpen={isForgotModalOpen} 
+        onClose={() => setIsForgotModalOpen(false)} 
       />
     </div>
   );
