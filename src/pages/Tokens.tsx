@@ -1,47 +1,74 @@
-import { useI18n } from '../i18n'
-import { ghostButton, primaryButton } from '../theme/styles'
+import Card, { CardBody } from "../components/UI/Card";
+import TextType from "../components/UI/TextType";
+import { useI18n } from "../i18n";
+import { ghostButton, primaryButton } from "../theme/styles";
 
 export function Tokens() {
-  const { t } = useI18n()
+  const { t } = useI18n();
 
   return (
-    <div className="space-y-8 px-4 md:px-6">
-      <section className="space-y-2 text-center">
-        <h1 className="text-3xl font-semibold text-slate-900">{t('pricing.title')}</h1>
-        <p className="text-sm text-slate-600">{t('pricing.subtitle')}</p>
-      </section>
+    <div className="space-y-8 px-4 md:px-6 justify-center">
+      <TextType variant="gradient" className="text-center"> Subscription management</TextType>
 
-      <section className="grid gap-4 md:grid-cols-3">
-        <div className="rounded-2xl bg-white/80 p-5 text-left shadow-sm shadow-black/5">
-          <div className="text-lg font-semibold text-slate-900">{t('pricing.tokens.title')}</div>
-          <p className="mt-1 text-sm text-slate-600">{t('pricing.tokens.desc')}</p>
-          <div className="mt-3 space-y-2 text-sm text-slate-800">
-            <div>{t('pricing.tokens.starter')}</div>
-            <div>{t('pricing.tokens.pro')}</div>
-            <div>{t('pricing.tokens.studio')}</div>
+      <Card variant="default" className="h-full">
+        <CardBody>
+          {/* Icône */}
+          <div className="w-12 h-12 rounded-lg bg-orange-100 dark:bg-orange-900/20 flex items-center justify-center mb-4 text-orange-600">
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M13 10V3L4 14h7v7l9-11h-7z"
+              />
+            </svg>
           </div>
-          <button className={`${primaryButton} mt-3`} type="button">
-            {t('pricing.cta.buy')}
-          </button>
-        </div>
-        <div className="rounded-2xl bg-white/80 p-5 text-left shadow-sm shadow-black/5">
-          <div className="text-lg font-semibold text-slate-900">{t('pricing.sub.title')}</div>
-          <p className="mt-1 text-sm text-slate-600">{t('pricing.sub.desc')}</p>
-          <div className="mt-3 space-y-2 text-sm text-slate-800">
-            <div>{t('pricing.sub.monthly')}</div>
-            <div>{t('pricing.sub.yearly')}</div>
+
+          <TextType variant="h3">Rendu Ultra-Rapide</TextType>
+          <TextType variant="body" className="mt-2">
+            Utilisez notre cluster GPU pour générer vos vidéos en quelques
+            secondes, pas en heures.
+          </TextType>
+        </CardBody>
+      </Card>
+
+      <TextType variant="gradient" className="text-center">
+        Simple and transparent nomapp pricing
+      </TextType>
+
+      <Card variant="default" className="h-full">
+        <CardBody>
+          {/* Icône */}
+          <div className="w-12 h-12 rounded-lg bg-orange-100 dark:bg-orange-900/20 flex items-center justify-center mb-4 text-orange-600">
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M13 10V3L4 14h7v7l9-11h-7z"
+              />
+            </svg>
           </div>
-          <button className={`${ghostButton} mt-3 rounded-full px-4`} type="button">
-            {t('pricing.cta.subscribe')}
-          </button>
-        </div>
-        <div className="rounded-2xl bg-white/80 p-5 text-left shadow-sm shadow-black/5">
-          <div className="text-lg font-semibold text-slate-900">FAQ</div>
-          <p className="mt-1 text-sm text-slate-600">{t('pricing.note')}</p>
-        </div>
-      </section>
+
+          <TextType variant="h3">Rendu Ultra-Rapide</TextType>
+          <TextType variant="body" className="mt-2">
+            Utilisez notre cluster GPU pour générer vos vidéos en quelques
+            secondes, pas en heures.
+          </TextType>
+        </CardBody>
+      </Card>
     </div>
-  )
+  );
 }
 
-export default Tokens
+export default Tokens;

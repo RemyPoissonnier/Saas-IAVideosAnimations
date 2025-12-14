@@ -13,7 +13,7 @@ interface ForgotPasswordModalProps {
 
 export function ForgotPasswordModal({ isOpen, onClose }: ForgotPasswordModalProps) {
   // 1. Hooks
-  const { t } = useI18n();
+  const { t } = useI18n(); //TODO I18N
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState(''); // Pour le succès

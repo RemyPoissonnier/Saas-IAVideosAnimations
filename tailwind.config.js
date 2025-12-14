@@ -22,12 +22,18 @@ export default {
       fontFamily: {
         sans: ['Space Grotesk', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
       },
-
-      // gentle floating animation
+      // --- AJOUTS POUR L'ANIMATION ---
       animation: {
         float: 'float 4s ease-in-out infinite',
+        'text-gradient': 'text-gradient 3s linear infinite', // L'animation manquante
       },
-
+      keyframes: {
+        'text-gradient': {
+         '0%': { backgroundPosition: '0% 50%' },
+          '100%': { backgroundPosition: '200% 50%' },
+        },
+      },
+      // -------------------------------
     },
   },
   plugins: [],
