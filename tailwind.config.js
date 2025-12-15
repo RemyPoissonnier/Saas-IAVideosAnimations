@@ -25,7 +25,7 @@ export default {
       // --- AJOUTS POUR L'ANIMATION ---
       animation: {
         float: 'float 4s ease-in-out infinite',
-        'text-gradient': 'text-gradient 3s linear infinite', // L'animation manquante
+        'text-gradient': 'text-gradient 4s linear infinite', // L'animation manquante
       },
       keyframes: {
         'text-gradient': {
