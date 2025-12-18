@@ -5,6 +5,7 @@ import CatHome from './pages/CatHome'
 import Login from './pages/Login'
 import DogHome from './pages/DogHome'
 import Tokens from './pages/Tokens'
+import Success from './pages/Success'
 
 // On définit les types utiles (optionnel si tu n'utilises plus les props manuelles)
 type Animal = 'cat' | 'dog'
@@ -61,6 +62,8 @@ function App() {
           {/* Routes spécifiques aux animaux */}
           <Route path="/cat" element={<CatHome onOpenAuth={handleOpenAuth} />} />
           <Route path="/dog" element={<DogHome onOpenAuth={handleOpenAuth} />} />
+          
+          <Route path="/success" element={<Success />} />
           
           {/* Route 404 (Optionnel mais recommandé) */}
           <Route path="*" element={<Navigate to="/home" replace />} />
