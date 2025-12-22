@@ -8,7 +8,6 @@ type VideoFormType = {
   topic: string
   catType: string
   tone: string
-  callToAction: string
   duration: number
   language: string
 }
@@ -53,14 +52,6 @@ export function VideoForm({ formData, setFormData, onSubmit }: Props) {
         placeholder={t('placeholder.tone')}
         value={formData.tone}
         onChange={(v:string) => handleChange('tone', v)}
-      />
-
-      <BaseInput
-        id="cta"
-        label={t('form.cta')}
-        placeholder={t('placeholder.cta')}
-        value={formData.callToAction}
-        onChange={(v:string) => handleChange('callToAction', v)}
       />
 
       <BaseInput

@@ -10,7 +10,6 @@ export type GenerationRecord = {
   topic: string
   catType: string
   tone: string
-  callToAction: string
   duration: number
   language: string
   overlay: string
