@@ -1,5 +1,5 @@
-import type { propBuyCard } from "../UI/BuyingCard";
-import type { coinType } from "../UI/Coin";
+import type { propBuyCard } from "../ui/BuyingCard";
+import type { coinType } from "../ui/Coin";
 
 export const POLAR_LINKS = {
   pack100:

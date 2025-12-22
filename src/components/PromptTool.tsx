@@ -11,8 +11,6 @@ export function PromptTool({ kind }: PromptToolProps) {
   const modelOptions = ['nanobanan', 'runway', 'pika', 'luma'] as const
   const generationModes = ['full', 'imageToVideo', 'textToVideo', 'character', 'extend'] as const
   const visualStyles = ['realistic', 'cartoon', 'anime', 'pixel', 'flat', 'stylized'] as const
-  const cameraMoves = ['static', 'pan', 'zoom', 'travel', 'cinematic'] as const
-  const animations = ['walk', 'talk', 'gesture', 'wave', 'type'] as const
   const [mode, setMode] = useState<'2d' | '3d'>('2d')
   const [prompt, setPrompt] = useState('')
   const [result, setResult] = useState('')
@@ -256,18 +254,6 @@ export function PromptTool({ kind }: PromptToolProps) {
             value={form.props}
             onChange={(e) => setForm((prev) => ({ ...prev, props: e.target.value }))}
           />
-          <div className="flex flex-wrap gap-2">
-            {cameraMoves.map((move) => (
-              <label key={move} className="flex items-center gap-1 text-xs text-slate-700">
-                <input
-                  type="checkbox"
-                  checked={form.cameraMoves.includes(move)}
-                  onChange={() => toggleInList('cameraMoves', move)}
-                />
-                {t(`prompt.camera.${move}` as any)}
-              </label>
-            ))}
-          </div>
         </div>
         <div className="space-y-2 md:col-span-2">
           <label className="text-sm font-semibold text-slate-900">{t('prompt.script')}</label>
@@ -277,18 +263,6 @@ export function PromptTool({ kind }: PromptToolProps) {
             value={form.script}
             onChange={(e) => setForm((prev) => ({ ...prev, script: e.target.value }))}
           />
-          <div className="flex flex-wrap gap-2">
-            {animations.map((anim) => (
-              <label key={anim} className="flex items-center gap-1 text-xs text-slate-700">
-                <input
-                  type="checkbox"
-                  checked={form.animations.includes(anim)}
-                  onChange={() => toggleInList('animations', anim)}
-                />
-                {t(`prompt.anim.${anim}` as any)}
-              </label>
-            ))}
-          </div>
           <input
             className={inputBase}
             placeholder={t('prompt.duration')}

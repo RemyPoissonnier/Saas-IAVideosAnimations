@@ -1,11 +1,10 @@
 import { Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import Header from './components/Header'
 import Landing from './pages/Landing'
-import CatHome from './pages/CatHome'
 import Login from './pages/Login'
-import DogHome from './pages/DogHome'
 import Tokens from './pages/Tokens'
 import Success from './pages/Success'
+import Prompt from './pages/Prompt'
 
 // On définit les types utiles (optionnel si tu n'utilises plus les props manuelles)
 type Animal = 'cat' | 'dog'
@@ -41,8 +40,6 @@ function App() {
           <Header
             onOpenAuth={handleOpenAuth}
             isAuthPage={isAuthPage}
-            activeAnimal={activeAnimal}
-            onSelectAnimal={handleSelectAnimal}
             onBackHome={location.pathname !== '/home' && location.pathname !== '/' ? handleBackHome : undefined}
             tokensHref="/tokens"
           />
@@ -59,9 +56,7 @@ function App() {
           <Route path="/login" element={<Login onBackHome={handleBackHome} />} />
           <Route path="/tokens" element={<Tokens />} />
           
-          {/* Routes spécifiques aux animaux */}
-          <Route path="/cat" element={<CatHome onOpenAuth={handleOpenAuth} />} />
-          <Route path="/dog" element={<DogHome onOpenAuth={handleOpenAuth} />} />
+          <Route path="/prompt" element={<Prompt onOpenAuth={handleOpenAuth} />} />
           
           <Route path="/success" element={<Success />} />
           

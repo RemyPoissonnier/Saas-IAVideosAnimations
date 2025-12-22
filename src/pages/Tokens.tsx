@@ -1,7 +1,7 @@
-import Card, { CardBody } from "../components/UI/Card";
-import TextType from "../components/UI/TextType";
+import Card, { CardBody } from "../components/ui/Card";
+import TextType from "../components/ui/TextType";
 import { useI18n } from "../i18n";
-import { BuyingCard } from "../components/UI/BuyingCard";
+import { BuyingCard } from "../components/ui/BuyingCard";
 import { arrCoint, arrProdTest, arrSubs } from "../components/hooks/products";
 import { useAuth } from "../context/AuthContext";
 

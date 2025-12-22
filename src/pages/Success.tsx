@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import Button from '../components/UI/Button';
+import Button from '../components/ui/Button';
 // J'importe tes composants UI s'ils sont disponibles, sinon je mets du Tailwind standard
 // Tu peux décommenter la ligne suivante si tu veux utiliser ton bouton existant :
 // import Button from '../components/Button'; 
