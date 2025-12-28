@@ -1,8 +1,7 @@
-import { useMemo } from 'react'
 import { useI18n } from '../i18n'
-import PromptTool from '../components/PromptTool'
-import { ghostButton, primaryButton } from '../theme/styles'
 import Generator from '../components/Generator'
+import ResultVideo from '../components/generator/ResultVideo'
+import { useState } from 'react'
 
 type PromptProps = {
   onOpenAuth: () => void
@@ -10,11 +9,12 @@ type PromptProps = {
 
 export function Prompt({ onOpenAuth }: PromptProps) {
   const { t } = useI18n()
+  const [isGenerate, setIsGenerate] = useState(true)
 
   return (
-    <div className="space-y-8">
-
-      <Generator />
+    <div className="flex gap-2">
+      <Generator isGenerate={isGenerate} setIsGenerate={setIsGenerate} />
+      <ResultVideo isActive={isGenerate} />
 
 
     </div>

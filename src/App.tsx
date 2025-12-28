@@ -6,9 +6,6 @@ import Tokens from './pages/Tokens'
 import Success from './pages/Success'
 import Prompt from './pages/Prompt'
 
-// On définit les types utiles (optionnel si tu n'utilises plus les props manuelles)
-type Animal = 'cat' | 'dog'
-
 function App() {
   const location = useLocation()
   const navigate = useNavigate()
@@ -18,14 +15,6 @@ function App() {
 
   // 2. Déduction de l'animal actif basé sur l'URL
   // Si on est sur /dog, c'est dog, sinon par défaut c'est cat (ou selon ta logique)
-  const activeAnimal: Animal = location.pathname.includes('/dog') ? 'dog' : 'cat'
-
-  // 3. Gestionnaires de navigation (Wrappers pour garder ton API Header propre)
-  const handleSelectAnimal = (next: Animal) => {
-    // Si on est sur login, on ne fait rien ou on redirige selon ton besoin métier
-    if (isAuthPage) return 
-    navigate(next === 'dog' ? '/dog' : '/cat')
-  }
 
   const handleOpenAuth = () => navigate('/login')
   
