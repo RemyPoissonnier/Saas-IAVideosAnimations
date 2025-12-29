@@ -1,7 +1,6 @@
 import AuthPanel from "../components/AuthPanel";
 import { useNavigate } from "react-router-dom";
 import { useI18n } from "../i18n";
-import { badge, subText } from "../theme/styles";
 
 type LoginProps = {
   onBackHome: () => void;
@@ -24,7 +23,7 @@ export function Login({ onBackHome }: LoginProps) {
       via-surface to-surface p-6 shadow-md hidden lg:flex"
       >
         <div className="flex items-center gap-3">
-          <div className={`${badge} w-fit bg-surface/80 text-accent-strong`}>
+          <div className={` w-fit bg-surface/80 text-accent-strong`}>
             {t("authPage.tagline")}
           </div>
           <span className="rounded-full bg-accent/20 px-3 py-1 text-xs font-semibold text-accent-strong">
@@ -34,7 +33,7 @@ export function Login({ onBackHome }: LoginProps) {
         <h1 className="text-3xl font-semibold leading-tight tracking-tight text-text md:text-4xl">
           {t("authPage.title")}
         </h1>
-        <p className={`${subText} max-w-xl text-text/90`}>
+        <p className={` max-w-xl text-text/90`}>
           {t("authPage.subtitle")}
         </p>
         <div className="overflow-hidden rounded-2xl border border-border/60 bg-surface-strong shadow-lg shadow-black/30">

@@ -1,16 +1,10 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 import { useI18n } from "../i18n";
-import {
-  card,
-  inputBase,
-  label,
-  primaryButton,
-  subText,
-} from "../theme/styles";
 import { useAuth } from "../context/AuthContext";
 import { RegisterModal } from "./RegisterModal";
 import { ForgotPasswordModal } from "./forgotPasswordModal";
+import Button from "./ui/Button";
 
 type SocialProvider = "google";
 
@@ -75,13 +69,13 @@ export function AuthPanel({
 
   return (
     <div className="flex object-center justify-center">
-      <div className={`${card} space-y-4`}>
+      <div className={` space-y-4`}>
         <div className="space-y-1">
           {/* Changed translation keys to specific Login titles */}
           <h3 className="text-xl font-semibold text-text">
             {t("auth.signInTitle") || "Welcome Back"}
           </h3>
-          <p className={subText}>
+          <p >
             {t("auth.signInSubtitle") ||
               "Enter your credentials to access your account"}
           </p>
@@ -89,11 +83,10 @@ export function AuthPanel({
 
         <div className="space-y-3">
           {/* Social Login Section */}
-          <div className={label}>{t("auth.socialTitle")}</div>
+          <div >{t("auth.socialTitle")}</div>
           <div className="grid grid-cols-1 gap-2">
-            <button
+            <Button
               className="flex items-center justify-center gap-3 rounded-xl border border-border/60 bg-white px-4 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:shadow"
-              type="button"
               onClick={() => handleSocialSignIn("google")}
             >
               <span className="h-5 w-5" aria-hidden="true">
@@ -118,12 +111,12 @@ export function AuthPanel({
                 </svg>
               </span>
               {t("auth.social.google")}
-            </button>
+            </Button>
           </div>
         </div>
 
         <div className="h-px w-full bg-border/60" />
-        <div className={label}>{t("auth.manualTitle")}</div>
+        <div >{t("auth.manualTitle")}</div>
 
         <form className="grid grid-cols-1 gap-3" onSubmit={handleManualLogin}>
           {error && <p className="text-xs text-red-500">{error}</p>}
@@ -140,7 +133,6 @@ export function AuthPanel({
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className={inputBase}
             />
           </div>
           <div className="space-y-2">
@@ -153,13 +145,12 @@ export function AuthPanel({
               </label>
               {/* Optional: Forgot Password Link */}
 
-              <button
-                type="button"
+              <Button
                 onClick={() => setIsForgotModalOpen(true)}
                 className="text-xs text-slate-500 hover:text-slate-800"
               >
                 {t("auth.forgotPassword") || "Forgot?"}
-              </button>
+              </Button>
             </div>
             <input
               id="password"
@@ -168,20 +159,20 @@ export function AuthPanel({
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className={inputBase}
+
             />
           </div>
           <div className="flex gap-1"> {/* TODO to remove */}
 
           <div className="flex justify-end pt-2">
-            <button className={primaryButton} type="submit">
+            <Button type="submit">
               {t("auth.signin") || "Sign In"}
-            </button>
+            </Button>
           </div>
            <div className="flex"> {/* TODO to remove */}
-            <button className={primaryButton} onClick={handleGuestLogin}>
+            <Button  onClick={handleGuestLogin}>
               GUEST TEST
-            </button>
+            </Button>
           </div>
           </div>
         </form>
@@ -189,14 +180,13 @@ export function AuthPanel({
         {/* The Link to Create an Account */}
         <div className="pt-2 text-center text-xs text-muted">
           {t("auth.noAccount") || "Don't have an account?"}{" "}
-          <button
-            type="button"
+          <Button
             // MODIFICATION ICI : Ouvre la modale au lieu de naviguer
             onClick={() => setIsRegisterOpen(true)}
             className="font-semibold text-slate-900 underline decoration-slate-300 underline-offset-2 hover:decoration-slate-800 dark:text-white dark:decoration-slate-600"
           >
             {t("auth.signupLink") || "Create one"}
-          </button>
+          </Button>
         </div>
 
         {/* Intégration de la Modale ICI */}

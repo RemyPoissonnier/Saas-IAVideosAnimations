@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { useI18n } from "../i18n";
-import { ghostButton, primaryButton } from "../theme/styles";
 import catAndDogVideo from "../assets/videos/CatAndDog.mp4";
 import catWorkVideo from "../assets/videos/catWork.mp4";
 import TextType from "../components/ui/TextType";
@@ -84,17 +83,6 @@ export function Landing({ onGoCat, onGoDog }: LandingProps) {
         <p className="mx-auto max-w-2xl text-base text-slate-700">
           {t("landing.desc")}
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-3">
-          <button className={primaryButton} type="button" onClick={onGoCat}>
-            {t("landing.ctaCat")}
-          </button>
-          <button className={primaryButton} type="button" onClick={onGoDog}>
-            {t("landing.ctaDog")}
-          </button>
-          <button className={ghostButton} type="button">
-            {t("landing.ctaLearn")}
-          </button>
-        </div>
       </section>
       <CreateVideo />
 
@@ -107,7 +95,7 @@ export function Landing({ onGoCat, onGoDog }: LandingProps) {
             {t("landing.cards.cat.desc")}
           </p>
           <button
-            className={`${ghostButton} mt-3 rounded-full px-4`}
+            className={` mt-3 rounded-full px-4`}
             type="button"
             onClick={onGoCat}
           >
@@ -122,7 +110,7 @@ export function Landing({ onGoCat, onGoDog }: LandingProps) {
             {t("landing.cards.dog.desc")}
           </p>
           <button
-            className={`${ghostButton} mt-3 rounded-full px-4`}
+            className={`mt-3 rounded-full px-4`}
             type="button"
             onClick={onGoDog}
           >

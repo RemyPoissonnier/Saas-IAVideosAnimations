@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useI18n } from "../i18n";
-import { pill, primaryButton } from "../theme/styles";
 import logoZoom from "../assets/logoZoom.png";
 import { Option } from "./Option";
+import Pill from "./ui/Pill";
 
 type HeaderProps = {
   onOpenAuth: () => void;
@@ -58,7 +58,7 @@ export function Header({
         <div className="flex items-center gap-2">
           <a
             href={tokensHref}
-            className={`${pill} px-4 text-sm font-semibold text-text hover:border-accent`}
+            className={` px-4 text-sm font-semibold text-text hover:border-accent`}
           >
             {t("nav.tokens")}
           </a>
@@ -68,7 +68,7 @@ export function Header({
               aria-haspopup="menu"
               aria-expanded={isSettingsOpen}
               onClick={() => setIsSettingsOpen((open) => !open)}
-              className={`${pill} flex items-center gap-2 px-4 text-sm font-semibold text-text`}
+              className={` flex items-center gap-2 px-4 text-sm font-semibold text-text`}
             >
               {t("nav.settings")}
               <span className="text-muted">{isSettingsOpen ? "▲" : "▼"}</span>
@@ -76,13 +76,10 @@ export function Header({
             {isSettingsOpen ? <Option /> : null}
           </div>
           {isAuthPage && onBackHome ? (
-            <button
-              className={`${pill} px-4`}
-              type="button"
+            <Pill
+            label= {t("nav.backHome")}
               onClick={onBackHome}
-            >
-              {t("nav.backHome")}
-            </button>
+            />             
           ) : null}
           {currentUser ? (<>
             <div className="flex items-center gap-2">
@@ -97,7 +94,7 @@ export function Header({
             
           ) : (
             <button
-              className={`${primaryButton} rounded-full px-5`}
+              className={`rounded-full px-5`}
               type="button"
               onClick={onOpenAuth}
             >
@@ -109,7 +106,7 @@ export function Header({
 
       {currentUser ? ( //TODO to update
         <button
-          className={`${pill} px-4 bg-red-200 text-black hover:bg-red-700`}
+          className={`px-4 bg-red-200 text-black hover:bg-red-700`}
           type="button"
           onClick={logout}
         >
