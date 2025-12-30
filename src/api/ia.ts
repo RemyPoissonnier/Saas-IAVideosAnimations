@@ -3,8 +3,9 @@ export type IaModel = 'nanobanan' | 'runway' | 'pika' | 'luma' | 'custom'
 export type IaGenerationMode = 'full' | 'imageToVideo' | 'textToVideo' | 'character' | 'extend'
 
 export type IaRequestPayload = {
-  model: IaModel
-  mode: IaGenerationMode
+  // model: IaModel
+  // mode: IaGenerationMode
+  userId : string
   prompt: string
   options?: Record<string, unknown>
 }
@@ -18,12 +19,12 @@ export type IaResponse = {
   error?: string
 }
 
-const API_BASE = import.meta.env.VITE_IA_API_BASE ?? '/api/ia'
+const API_BASE = import.meta.env.VITE_IA_API_BASE ?? 'http://localhost:3000/api'
 
 /**
  * Send a generation request to the IA backend. The model is selectable via payload.model.
  */
-export async function sendPrompt(payload: string): Promise<IaResponse> {
+export async function sendPrompt(payload: IaRequestPayload): Promise<IaResponse> {
   
   const res = await fetch(`${API_BASE}/generate`, {
     method: 'POST',

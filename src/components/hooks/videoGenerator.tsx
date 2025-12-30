@@ -7,7 +7,7 @@ export const useVideoGeneration = () => {
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const generateVideo = async (prompt: string) => {
+  const generateVideo = async (request: IaRequestPayload) => {
     
     setLoading(true);
     setError(null);
@@ -15,7 +15,7 @@ export const useVideoGeneration = () => {
 
     try {
       // Simulation de l'appel API (remplace par ton appel réel)
-      const result = await sendPrompt(prompt); 
+      const result = await sendPrompt(request); 
       // On suppose que l'API renvoie { url: "..." } ou directement l'URL
       setVideoUrl(result.outputUrl ?? ""); 
     } catch (err) {

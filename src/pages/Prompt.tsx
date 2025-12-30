@@ -3,6 +3,7 @@ import { useI18n } from "../i18n";
 import ResultVideo from "../components/generator/ResultVideo";
 import { useVideoGeneration } from "../components/hooks/videoGenerator";
 import PromptTool from "../components/PromptTool";
+import { useAuth } from "../context/AuthContext";
 
 type PromptProps = {
   onOpenAuth: () => void;
@@ -16,10 +17,11 @@ export function Prompt({ onOpenAuth }: PromptProps) {
 
   // 2. Récupération de la logique via notre Hook
   const { generateVideo, loading, videoUrl, error } = useVideoGeneration();
+  const {currentUser} = useAuth()
 
   // 3. Handler qui fait le lien
   const handleGenerateClick = () => {
-    generateVideo(prompt);
+    generateVideo({prompt , userId: currentUser?.uid ?? ""});
   };
 
   return (
