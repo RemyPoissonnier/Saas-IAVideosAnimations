@@ -16,6 +16,8 @@ export const useVideoGeneration = () => {
     try {
       // Simulation de l'appel API (remplace par ton appel réel)
       const result = await sendPrompt(request); 
+      console.log("result : ", result);
+      
       // On suppose que l'API renvoie { url: "..." } ou directement l'URL
       setVideoUrl(result.outputUrl ?? ""); 
     } catch (err) {

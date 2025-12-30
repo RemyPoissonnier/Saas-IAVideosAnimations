@@ -45,7 +45,7 @@ export function Prompt({ onOpenAuth }: PromptProps) {
       {/* COLONNE DROITE : LE RÉSULTAT 
          S'affiche uniquement si un chargement ou un résultat est présent
       */}
-      {(loading || videoUrl || error) && (
+      {(loading || videoUrl || error ) && (
         <div className="md:w-1/2 w-full animate-in fade-in slide-in-from-bottom-4 duration-500">
           <ResultVideo
             isActive={true} // Il est actif puisqu'on l'affiche conditionnellement

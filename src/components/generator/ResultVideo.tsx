@@ -4,7 +4,7 @@ import ReturnVideo from "./ReturnVideo";
 
 type propResultVideo = {
   isActive: boolean;
-  isLoading?: boolean;
+  isLoading : boolean;
   videoUrl: string | null;
   error: string | null;
 };
@@ -12,7 +12,7 @@ type propResultVideo = {
 function ResultVideo(props: propResultVideo) {
   return (
     <div className={props.isActive ? "" : "hidden"}>
-      {true ? <LoadingGeneration /> : <ReturnVideo />}
+      {props.isLoading ? <LoadingGeneration /> : <ReturnVideo videoUrl={props.videoUrl} isLoading={props.isLoading} />}
     </div>
   );
 }

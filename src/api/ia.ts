@@ -37,6 +37,9 @@ export async function sendPrompt(payload: IaRequestPayload): Promise<IaResponse>
     throw new Error(`IA request failed (${res.status}): ${errorText}`)
   }
 
+  console.log("res json : " , res.json());
+  
+
   return res.json() as Promise<IaResponse>
 }
 
