@@ -37,10 +37,13 @@ export async function sendPrompt(payload: IaRequestPayload): Promise<IaResponse>
     throw new Error(`IA request failed (${res.status}): ${errorText}`)
   }
 
-  console.log("res json : " , res.json());
-  
+  const json = await res.json() ;
 
-  return res.json() as Promise<IaResponse>
+  // On peut maintenant logger l'objet 'data' (qui est le résultat réel, pas une Promise)
+  console.log("res json : ", json);
+  
+  // Et on retourne cet objet
+  return json.data as IaResponse;
 }
 
 /**

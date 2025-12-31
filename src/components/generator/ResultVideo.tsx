@@ -1,4 +1,3 @@
-import Card from "../ui/Card";
 import LoadingGeneration from "./LoadingGeneration";
 import ReturnVideo from "./ReturnVideo";
 

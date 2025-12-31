@@ -1,5 +1,5 @@
 import Button from "../ui/Button";
-import Card, { CardFooter, CardHeader } from "../ui/Card";
+import Card, { CardBody, CardFooter, CardHeader } from "../ui/Card";
 import TextType from "../ui/TextType";
 
 // 1. Définition claire des attentes du composant
@@ -11,10 +11,10 @@ interface propsReturnVideo {
 
 function ReturnVideo({ videoUrl, isLoading, onReset }: propsReturnVideo) {
   return (
-    <Card className="w-full overflow-hidden transition-all duration-300">
+    <Card className="w-full overflow-hidden gap-2">
       {/* HEADER : Titre + Action */}
-      <CardHeader>
-        <TextType variant="h2" className="text-xl font-bold text-gray-800">
+      <CardHeader className="m-2 flex justify-between content-center">
+        <TextType variant="h2" className="font-bold">
           Résultat
         </TextType>
         <Button
@@ -28,21 +28,21 @@ function ReturnVideo({ videoUrl, isLoading, onReset }: propsReturnVideo) {
       </CardHeader>
 
       {/* ZONE VIDÉO PRINCIPALE */}
-      <div className="relative w-full aspect-video bg-gray-900 rounded-xl overflow-hidden shadow-inner flex items-center justify-center mb-6 group">
+      <CardBody className="relative w-full aspect-video">
         {/* CAS 2 : Vidéo disponible */}
         {videoUrl && (
           <video
             src={videoUrl}
-            controls
+            controls={true}
             autoPlay
-            className="w-full h-full object-contain"
+            className=" object-contain rounded-2xl"
           />
         )}
-      </div>
+      </CardBody>
 
       {/* FOOTER : Historique (Placeholder amélioré) */}
-      <CardFooter className="bg-gray-50 -mx-6 -mb-6 p-4 border-t border-gray-100">
-        <TextType className="text-xs font-semibold uppercase text-gray-500 mb-3 tracking-wider">
+      <CardFooter className="p-4">
+        <TextType className="text-xs font-semibold uppercase mb-3 tracking-wider">
           Others videos generated
         </TextType>
 
