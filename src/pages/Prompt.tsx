@@ -4,6 +4,7 @@ import ResultVideo from "../components/generator/ResultVideo";
 import { useVideoGeneration } from "../components/hooks/videoGenerator";
 import PromptTool from "../components/PromptTool";
 import { useAuth } from "../context/AuthContext";
+import type { OptionsIaRP } from "../api/type";
 
 type PromptProps = {
   onOpenAuth: () => void;
@@ -13,15 +14,23 @@ export function Prompt({ onOpenAuth }: PromptProps) {
   const { t } = useI18n();
 
   // 1. État local pour le texte (input)
-  const [prompt, setPrompt] = useState("");
+  const [prompt, setPrompt] = useState<string>(
+    "Chat faisant la vaisselle, la camera est posé en bas"
+  ); //TODO I18N
+
+  const [options, setOptions] = useState<OptionsIaRP>({
+    resolution: "1080p",
+    aspectRatio: "9:16",
+    durationSeconds: "6",
+  });
 
   // 2. Récupération de la logique via notre Hook
   const { generateVideo, loading, videoUrl, error } = useVideoGeneration();
-  const {currentUser} = useAuth()
+  const { currentUser } = useAuth();
 
   // 3. Handler qui fait le lien
   const handleGenerateClick = () => {
-    generateVideo({prompt , userId: currentUser?.uid ?? ""});
+    generateVideo({ prompt , options, userId: currentUser?.uid ?? "" });
   };
 
   return (
@@ -37,6 +46,8 @@ export function Prompt({ onOpenAuth }: PromptProps) {
         <PromptTool
           prompt={prompt}
           setPrompt={setPrompt}
+          options={options}
+          setOptions={setOptions}
           onGenerate={handleGenerateClick}
           isLoading={loading}
         />
@@ -45,7 +56,7 @@ export function Prompt({ onOpenAuth }: PromptProps) {
       {/* COLONNE DROITE : LE RÉSULTAT 
          S'affiche uniquement si un chargement ou un résultat est présent
       */}
-      {(loading || videoUrl || error ) && (
+      {(loading || videoUrl || error) && (
         <div className="md:w-1/2 w-full animate-in fade-in slide-in-from-bottom-4 duration-500">
           <ResultVideo
             isActive={true} // Il est actif puisqu'on l'affiche conditionnellement

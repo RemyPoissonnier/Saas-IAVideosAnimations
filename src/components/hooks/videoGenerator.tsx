@@ -1,6 +1,7 @@
 // src/hooks/useVideoGeneration.ts
 import { useState } from 'react';
-import { sendPrompt, type IaRequestPayload } from '../../api/ia';
+import { sendPrompt } from '../../api/ia';
+import type { IaRequestPayload } from '../../api/type';
 
 export const useVideoGeneration = () => {
   const [loading, setLoading] = useState(false);

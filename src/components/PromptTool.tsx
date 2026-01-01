@@ -3,11 +3,14 @@ import { useI18n } from "../i18n";
 import Button from "./ui/Button";
 import Card, { CardBody, CardFooter, CardHeader } from "./ui/Card";
 import TextType from "./ui/TextType";
+import type { OptionsIaRP } from "../api/type";
 
 // On définit une prop pour remonter les infos au parent
 interface PromptToolProps {
   prompt: string;
   setPrompt: (value: string) => void;
+  options: OptionsIaRP;
+  setOptions: (value: OptionsIaRP) => void;
   onGenerate: () => void;
   isLoading: boolean;
 }
@@ -15,22 +18,14 @@ interface PromptToolProps {
 export function PromptTool(props: PromptToolProps) {
   const { t } = useI18n();
 
-  const [format, setFormat] = useState({
-    resolution: "1080p",
-    ratio: "9:16",
-    framerate: "30",
-    format: "mp4",
-    duration: "15s",
-  });
-
   return (
     <Card className="h-full p-3">
       {/* HEADER SIMPLE */}
       <CardHeader>
-        <TextType className="text-xs font-semibold uppercase tracking-[0.08em] text-slate-500">
+        <TextType className="text-xs font-semibold uppercase tracking-[0.08em]">
           {t("prompt.title")}
         </TextType>
-        <TextType className="text-sm text-slate-600">
+        <TextType className="text-sm ">
           Décrivez simplement votre idée et choisissez le format.
         </TextType>
       </CardHeader>
@@ -49,73 +44,62 @@ export function PromptTool(props: PromptToolProps) {
       {/* OPTIONS DE FORMAT (Grille compacte) */}
       <CardFooter className="grid grid-cols-2 md:grid-cols-4 gap-3">
         <div className="space-y-1">
-          <label className="text-xs font-medium text-slate-700">
+          <label className="text-xs font-medium">
             Resolution
           </label>
           <select
-            value={format.resolution}
+            value={props.options.resolution}
             onChange={(e) =>
-              setFormat((p) => ({ ...p, resolution: e.target.value }))
+              props.setOptions({
+                ...props.options,
+                resolution: e.target.value as OptionsIaRP["resolution"],
+              })
             }
           >
             <option value="720p">720p</option>
             <option value="1080p">1080p</option>
-            <option value="4k">4K</option>
           </select>
         </div>
 
         <div className="space-y-1">
-          <label className="text-xs font-medium text-slate-700">Ratio</label>
+          <label className="text-xs font-medium">Ratio</label>
           <select
-            value={format.ratio}
+            value={props.options.aspectRatio}
             onChange={(e) =>
-              setFormat((p) => ({ ...p, ratio: e.target.value }))
+              props.setOptions({
+                ...props.options,
+                aspectRatio: e.target.value as OptionsIaRP["aspectRatio"],
+              })
             }
           >
             <option value="16:9">16:9 (Youtube)</option>
             <option value="9:16">9:16 (TikTok/Reel)</option>
-            <option value="1:1">1:1 (Square)</option>
           </select>
         </div>
 
         <div className="space-y-1">
-          <label className="text-xs font-medium text-slate-700">Durée</label>
+          <label className="text-xs font-medium">Durée</label>
           <select
-            value={format.duration}
+            value={props.options.durationSeconds}
             onChange={(e) =>
-              setFormat((p) => ({ ...p, duration: e.target.value }))
+              props.setOptions({
+                ...props.options,
+                durationSeconds: e.target
+                  .value as OptionsIaRP["durationSeconds"],
+              })
             }
           >
-            <option value="5s">5s</option>
-            <option value="10s">10s</option>
-            <option value="15s">15s</option>
-          </select>
-        </div>
-
-        <div className="space-y-1">
-          <label className="text-xs font-medium text-slate-700">Format</label>
-          <select
-            value={format.format}
-            onChange={(e) =>
-              setFormat((p) => ({ ...p, format: e.target.value }))
-            }
-          >
-            <option value="mp4">MP4</option>
-            <option value="mov">MOV</option>
+            <option value={"4"}>4s</option>
+            <option value={"6"}>6s</option>
+            <option value={"8"}>8s</option>
           </select>
         </div>
       </CardFooter>
 
-        {/* ACTION BUTTON */}
-        <Button onClick={props.onGenerate}>
-          {t("prompt.button") || "Générer la vidéo"}
-        </Button>
-
-        {/* RÉCAPITULATIF DISCRET */}
-        <TextType variant="caption" className="static bottom-0">
-          Sortie : {format.resolution} • {format.ratio} •{" "}
-          {format.format.toUpperCase()}
-        </TextType>
+      {/* ACTION BUTTON */}
+      <Button onClick={props.onGenerate} className="flex">
+        {t("prompt.button") || "Générer la vidéo"}
+      </Button>
     </Card>
   );
 }

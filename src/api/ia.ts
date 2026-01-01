@@ -1,23 +1,4 @@
-export type IaModel = 'nanobanan' | 'runway' | 'pika' | 'luma' | 'custom'
-
-export type IaGenerationMode = 'full' | 'imageToVideo' | 'textToVideo' | 'character' | 'extend'
-
-export type IaRequestPayload = {
-  // model: IaModel
-  // mode: IaGenerationMode
-  userId : string
-  prompt: string
-  options?: Record<string, unknown>
-}
-
-export type IaResponse = {
-  requestId: string
-  model: IaModel
-  status: 'queued' | 'running' | 'succeeded' | 'failed'
-  previewUrl?: string
-  outputUrl?: string
-  error?: string
-}
+import type { IaRequestPayload, IaResponse } from "./type";
 
 const API_BASE = import.meta.env.VITE_IA_API_BASE ?? 'http://localhost:3000/api'
 
