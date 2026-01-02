@@ -35,7 +35,7 @@ function ReturnVideo({ videoUrl, isLoading, onReset }: propsReturnVideo) {
             src={videoUrl}
             controls={true}
             autoPlay
-            className=" object-contain rounded-2xl"
+            className=" object-contain rounded-2xl  h-[500px]"
           />
         )}
       </CardBody>

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useI18n } from "../i18n";
 import Button from "./ui/Button";
 import Card, { CardBody, CardFooter, CardHeader } from "./ui/Card";
@@ -36,7 +35,7 @@ export function PromptTool(props: PromptToolProps) {
           value={props.prompt}
           onChange={(e) => props.setPrompt(e.target.value)}
           placeholder="Un chat mignon qui joue avec une pelote de laine..."
-          className={` min-h-[100px] resize-none`}
+          className="min-h-[100px] resize-none rounded-xl p-2"
         />
         {/* {props.error && <div className="text-xs text-red-600">{props.error}</div>} */}
       </CardBody>
