@@ -35,13 +35,13 @@ function App() {
         </div>
       )}
 
-      <main className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 pb-12 pt-8 md:px-8">
+      <main className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 pb-12 pt-20 md:px-8 ">
         {/* Le Cœur du standard : Le Switch de Routes */}
         <Routes>
           {/* Redirection par défaut de / vers /home si nécessaire */}
           <Route path="/" element={<Navigate to="/home" replace />} />
           
-          <Route path="/home" element={<Landing onGoCat={() => navigate('/cat')} onGoDog={() => navigate('/dog')} />} />
+          <Route path="/home" element={<Landing  />} />
           <Route path="/login" element={<Login onBackHome={handleBackHome} />} />
           <Route path="/tokens" element={<Tokens />} />
           

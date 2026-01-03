@@ -12,7 +12,7 @@ const en = {
     selectAnimal: 'Choose page',
     settings: 'Settings',
     language: 'Language',
-    theme: 'Theme',
+    theme: 'Theme'
   },
   landing: {
     tagline: 'IA Banana for video creators',
@@ -169,11 +169,11 @@ const en = {
     }
   },
   prompt: {
-    title: 'Quick prompt',
+    title: 'GENERATOR',
     subtitle: 'Describe the scene and pick 2D or 3D to preview an idea.',
     simpleTitle: 'Quick TikTok mode',
     simpleDesc: 'Got 20s? Drop your idea, pick 2D/3D, hit render.',
-    button: 'Generate idea',
+    button: 'Generate Video',
     resultTitle: 'Preview',
     outputFormat: 'Output format',
     confirmRun: 'I confirm to run the render',
@@ -182,10 +182,7 @@ const en = {
       show: 'More controls',
       hide: 'Hide controls'
     },
-    placeholder: {
-      cat: 'A Bengal cat plays with a laser in a retro 3D room',
-      dog: 'A border collie runs in a pastel 2D park'
-    },
+    placeholder: 'A cute cat playing with a ball of yarn...',
     mode: {
       _2d: '2D',
       _3d: '3D',
@@ -250,7 +247,17 @@ const en = {
     lipsync: 'Lip-sync',
     output: 'Output',
     resolution: 'Resolution',
-    length: 'Final length'
+    length: 'Final length',
+    label: {
+      resolution: 'Resolution',
+      ratio: 'Ratio',
+      duration: 'Duration'
+    },
+    option: {
+      youtube: '16:9 (Youtube)',
+      tiktok: '9:16 (TikTok/Reel)'
+    },
+    description: 'Simply describe your idea and choose the format.'
   },
   pricing: {
     title: 'IA credits & subscriptions',

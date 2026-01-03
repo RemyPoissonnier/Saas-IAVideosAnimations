@@ -1,14 +1,12 @@
-import { inputBase } from '../../theme/styles'
-
-type Option = { label: string; value: string }
+type Option = { label: string; value: string };
 
 type SelectProps = {
-  label: string
-  id: string
-  value: string
-  onChange: (val: string) => void
-  options: Option[]
-}
+  label: string;
+  id: string;
+  value: string;
+  onChange: (val: any) => void;
+  options: Option[];
+};
 
 export function Select({ label, id, value, onChange, options }: SelectProps) {
   return (
@@ -19,8 +17,8 @@ export function Select({ label, id, value, onChange, options }: SelectProps) {
       <select
         id={id}
         value={value}
+        className=" rounded-xl p-2"
         onChange={(e) => onChange(e.target.value)}
-        className={inputBase}
       >
         {options.map((opt) => (
           <option key={opt.value} value={opt.value}>
@@ -29,5 +27,5 @@ export function Select({ label, id, value, onChange, options }: SelectProps) {
         ))}
       </select>
     </div>
-  )
+  );
 }

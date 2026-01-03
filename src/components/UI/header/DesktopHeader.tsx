@@ -19,11 +19,8 @@ type HeaderDProps = {
 export default function DesktopHeader({onOpenAuth, onBackHome, isAuthPage, tokensHref} : HeaderDProps) {
     const { t } = useI18n();
   const { currentUser, userProfile, logout } = useAuth();
-
   // States
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
   // Refs
   const settingsMenuRef = useRef<HTMLDivElement | null>(null);
   

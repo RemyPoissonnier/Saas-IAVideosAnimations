@@ -12,7 +12,7 @@ const fr = {
     selectAnimal: 'Choisir la page',
     settings: 'Paramètres',
     language: 'Langue',
-    theme: 'Thème',
+    theme: 'Thème'
   },
   landing: {
     tagline: 'IA Banana pour créateurs vidéo',
@@ -169,11 +169,11 @@ const fr = {
     }
   },
   prompt: {
-    title: 'Générateur rapide',
+    title: 'GÉNÉRATEUR',
     subtitle: 'Décrivez la scène et choisissez 2D ou 3D pour prévisualiser une idée.',
     simpleTitle: 'Mode rapide TikTok',
     simpleDesc: 'Tu as 20s ? Tape ton idée, choisis 2D ou 3D et lance le rendu.',
-    button: 'Générer une idée',
+    button: 'Générer la vidéo',
     resultTitle: 'Aperçu',
     outputFormat: 'Format de sortie',
     confirmRun: 'Je valide le rendu vidéo',
@@ -182,10 +182,7 @@ const fr = {
       show: 'Plus de réglages',
       hide: 'Masquer les réglages'
     },
-    placeholder: {
-      cat: 'Un chat Bengal joue avec un laser, ambiance rétro 3D',
-      dog: 'Un border collie court dans un parc en 2D pastel'
-    },
+    placeholder: 'Un chat mignon qui joue avec une pelote de laine...',
     mode: {
       _2d: '2D',
       _3d: '3D',
@@ -250,7 +247,17 @@ const fr = {
     lipsync: 'Synchronisation labiale',
     output: 'Format de sortie',
     resolution: 'Résolution',
-    length: 'Longueur finale'
+    length: 'Longueur finale',
+    label: {
+      resolution: 'Résolution',
+      ratio: 'Ratio',
+      duration: 'Durée'
+    },
+    option: {
+      youtube: '16:9 (Youtube)',
+      tiktok: '9:16 (TikTok/Reel)'
+    },
+    description: 'Décrivez simplement votre idée et choisissez le format.'
   },
   pricing: {
     title: 'Crédits et abonnements IA',
