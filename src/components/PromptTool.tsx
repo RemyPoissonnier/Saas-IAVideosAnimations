@@ -93,7 +93,7 @@ export function PromptTool(props: PromptToolProps) {
           value={props.prompt}
           onChange={(e) => props.setPrompt(e.target.value)}
           placeholder= {t("prompt.placeholder")}
-          className="min-h-[100px] resize-none rounded-xl p-2"
+          className="min-h-[100px] resize-none rounded-xl p-2 border-slate-100 border-2"
         />
         {/* {props.error && <div className="text-xs text-red-600">{props.error}</div>} */}
       </CardBody>

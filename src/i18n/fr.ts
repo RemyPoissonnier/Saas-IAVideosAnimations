@@ -12,27 +12,18 @@ const fr = {
     selectAnimal: 'Choisir la page',
     settings: 'Paramètres',
     language: 'Langue',
-    theme: 'Thème'
+    theme: 'Thème',
+    logout: {
+      cancel: 'Annuler',
+      confirm: 'Confirmer',
+      description: 'Êtes-vous sûr de vouloir vous déconnecter ? Vous devrez vous reconnecter pour accéder à vos vidéos et vos tokens.'
+    }
   },
   landing: {
     tagline: 'IA Banana pour créateurs vidéo',
     title: 'Une plateforme unique pour vos rendus 2D et 3D',
     desc: 'Choisissez votre univers (chat ou chien), décrivez la scène, et récupérez des storyboards et rendus optimisés mobile.',
-    ctaCat: 'Voir la page chats',
-    ctaDog: 'Voir la page chiens',
     ctaLearn: 'Découvrir',
-    cards: {
-      cat: {
-        title: 'Chat',
-        desc: 'Rendus stylisés, rigs prêts et prompts guidés pour vos contenus félins.',
-        cta: 'Explorer les chats'
-      },
-      dog: {
-        title: 'Chien',
-        desc: 'Anim aux poils réalistes, plans mobiles et légendes pré-générées.',
-        cta: 'Explorer les chiens'
-      }
-    }
   },
   home: {
     badge: {

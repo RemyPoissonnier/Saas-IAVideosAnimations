@@ -1,9 +1,7 @@
 import DesktopHeader from "./ui/header/DesktopHeader";
 import MobileHeader from "./ui/header/MobileHeader";
 
-
 // --- Types ---
-
 type HeaderProps = {
   onOpenAuth: () => void;
   onBackHome?: () => void;
@@ -12,7 +10,6 @@ type HeaderProps = {
 };
 
 // --- Main Component ---
-
 export function Header({
   onOpenAuth,
   onBackHome,

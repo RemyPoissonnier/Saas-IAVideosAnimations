@@ -12,27 +12,18 @@ const en = {
     selectAnimal: 'Choose page',
     settings: 'Settings',
     language: 'Language',
-    theme: 'Theme'
+    theme: 'Theme',
+    logout: {
+      cancel: 'Cancel',
+      confirm: 'Confirm',
+      description: 'Are you sure you want to log out ? You will need to log in again to access your videos and tokens.'
+    }
   },
   landing: {
     tagline: 'IA Banana for video creators',
     title: 'One platform for 2D & 3D renders',
     desc: 'Pick your universe (cat or dog), describe the scene, and get mobile-optimized storyboards and renders.',
-    ctaCat: 'Go to cats',
-    ctaDog: 'Go to dogs',
     ctaLearn: 'Learn more',
-    cards: {
-      cat: {
-        title: 'Cat',
-        desc: 'Stylized renders, ready rigs, and guided prompts for feline content.',
-        cta: 'Explore cats'
-      },
-      dog: {
-        title: 'Dog',
-        desc: 'Realistic fur, mobile-friendly shots, and prewritten captions.',
-        cta: 'Explore dogs'
-      }
-    }
   },
   home: {
     badge: {

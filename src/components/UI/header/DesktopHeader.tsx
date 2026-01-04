@@ -1,11 +1,14 @@
 import { Link } from "react-router-dom";
-import Pill from "../Pill";
 import { useState, useRef } from "react";
-import  { useAuth } from "../../../context/AuthContext";
-import  { useI18n } from "../../../i18n";
+import { useAuth } from "../../../context/AuthContext";
+import { useI18n } from "../../../i18n";
 import logoZoom from "../../../assets/logoZoom.png";
 import { Option } from "../../Option";
-
+import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useOnClickOutside } from "../../hooks/useOnClickOutside";
+import AuthStateDesk from "./authStateDesk";
+import LogoutModal from "./LogoutModal";
 
 type HeaderDProps = {
   onOpenAuth: () => void;
@@ -14,45 +17,63 @@ type HeaderDProps = {
   tokensHref: string;
 };
 
+export default function DesktopHeader({
+  onOpenAuth,
+  onBackHome,
+  isAuthPage,
+  tokensHref,
+}: HeaderDProps) {
+  const { t } = useI18n();
+  const { logout } = useAuth();
 
-
-export default function DesktopHeader({onOpenAuth, onBackHome, isAuthPage, tokensHref} : HeaderDProps) {
-    const { t } = useI18n();
-  const { currentUser, userProfile, logout } = useAuth();
   // States
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  // Utilise 'boolean' (primitif) et non 'Boolean' (objet wrapper)
+  const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState<boolean>(false);
+
   // Refs
   const settingsMenuRef = useRef<HTMLDivElement | null>(null);
-  
+
+  // Close settings on click outside
+  useOnClickOutside(settingsMenuRef, () => setIsSettingsOpen(false));
+
+  // Handlers
+  const handleLogoutClick = () => {
+    setIsLogoutModalOpen(true);
+  };
+
+  const handleConfirmLogout = () => {
+    logout();
+    setIsLogoutModalOpen(false);
+  };
+
   return (
-       <header
+    <>
+      <header
         className="fixed top-4 left-1/2 z-50 -translate-x-1/2 
-        hidden md:flex items-center justify-between gap-4 
-        rounded-full border border-border/60 bg-surface/70 px-4 py-2 
-        shadow-md backdrop-blur-md transition-all duration-300"
+          hidden md:flex items-center justify-between gap-4 
+          rounded-full border border-border/60 bg-surface/70 px-4 py-2 
+          shadow-md backdrop-blur-md transition-all duration-300"
       >
         {/* Logo & Brand */}
         <div className="flex items-center gap-3">
-          <div className="flex flex-row">
-            <Link
-              to="/home"
-              className=" w-1/2 hover:opacity-80 transition-opacity"
-            >
+          <div className="flex flex-row items-center">
+            <Link to="/home" className="hover:opacity-80 transition-opacity">
               <img
                 src={logoZoom}
                 alt="Logo"
-                className="max-h-10 max-w-10 rounded-full object-cover"
+                className="h-10 w-10 rounded-full object-cover"
               />
             </Link>
             <Link
               to="/home"
-              className="w-1/2 text-base font-bold leading-tight text-text hover:text-accent transition-colors"
+              className="ml-2 text-base font-bold leading-tight text-text hover:text-accent transition-colors"
             >
               {t("brand.name")}
             </Link>
           </div>
           {/* Desktop Links */}
-          <div className="ml-2 h-4 w-[1px] bg-border/40" /> {/* Separator */}
+          <div className="ml-2 h-4 w-[1px] bg-border/40" />
           <Link
             to="/prompt"
             className="px-3 text-sm font-semibold text-text hover:text-accent transition-colors"
@@ -79,7 +100,9 @@ export default function DesktopHeader({onOpenAuth, onBackHome, isAuthPage, token
             >
               {t("nav.settings")}
               <span className="text-[10px] text-muted">
-                {isSettingsOpen ? "▲" : "▼"}
+                <FontAwesomeIcon
+                  icon={isSettingsOpen ? faAngleUp : faAngleDown}
+                />
               </span>
             </button>
             {isSettingsOpen && (
@@ -90,37 +113,21 @@ export default function DesktopHeader({onOpenAuth, onBackHome, isAuthPage, token
           </div>
 
           {/* User Auth State */}
-          {currentUser ? (
-            <div className="flex items-center gap-3 pl-2">
-              <div className="flex items-center gap-1 rounded-full bg-surface-2 px-3 py-1 border border-border/30">
-                <span className="text-xs">🪙</span>
-                <span className="text-xs font-mono font-bold">
-                  {userProfile?.wallet_balance ?? 0}
-                </span>
-              </div>
-              <button
-                onClick={logout}
-                className="text-xs font-semibold text-red-400 hover:text-red-500 transition-colors"
-              >
-                {t("auth.signout")}
-              </button>
-            </div>
-          ) : (
-            <button
-              className="rounded-full bg-text text-surface px-5 py-1.5 text-sm font-bold hover:bg-accent transition-colors"
-              type="button"
-              onClick={onOpenAuth}
-            >
-              {t("nav.login")}
-            </button>
-          )}
-
-          {isAuthPage && onBackHome && (
-            <div className="ml-2">
-              <Pill label={t("nav.backHome")} onClick={onBackHome} />
-            </div>
-          )}
+          <AuthStateDesk
+            onOpenAuth={onOpenAuth}
+            onBackHome={onBackHome}
+            isAuthPage={isAuthPage}
+            handleLogoutClick={handleLogoutClick}
+          />
         </div>
       </header>
-  )
+
+      {/* --- MODALE DE DECONNEXION --- */}
+      <LogoutModal
+        isLogoutModalOpen={isLogoutModalOpen}
+        setIsLogoutModalOpen={setIsLogoutModalOpen}
+        handleConfirmLogout={handleConfirmLogout}
+      />
+    </>
+  );
 }
