@@ -20,10 +20,10 @@ const en = {
     }
   },
   landing: {
-    tagline: 'IA Banana for video creators',
+    tagline: 'Veo3 for video creators',
     title: 'One platform for 2D & 3D renders',
-    desc: 'Pick your universe (cat or dog), describe the scene, and get mobile-optimized storyboards and renders.',
-    ctaLearn: 'Learn more',
+    desc: 'Pick your universe, describe the scene, and get mobile-optimized storyboards and renders.',
+    ctaLearn: 'Learn more'
   },
   home: {
     badge: {
@@ -357,6 +357,11 @@ const en = {
       weakpw: 'Password too weak',
       pw: 'Minimum eight characters, at least one letter and one number'
     }
+  },
+  promo: {
+    text: 'Flash Sale! Get -{{percent}}% on all token packs.',
+    button: 'Get Offer',
+    code: 'CODE'
   }
 };
 

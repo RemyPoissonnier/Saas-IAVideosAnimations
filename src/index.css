@@ -6,7 +6,8 @@
 
 :root {
   color-scheme: dark;
-  --color-bg: 7 9 15;
+  /* Dark Mode : Un fond sombre uni */
+  --color-bg: 7 9 15; 
   --color-surface: 20 16 6;
   --color-surface-strong: 26 20 10;
   --color-text: 244 236 210;
@@ -18,7 +19,8 @@
 
 [data-theme='light'] {
   color-scheme: light;
-  --color-bg: 255 252 245;
+  /* Light Mode : Un fond crème uni */
+  --color-bg: 255 252 245; 
   --color-surface: 255 255 250;
   --color-surface-strong: 252 247 232;
   --color-text: 35 25 10;
@@ -36,12 +38,11 @@
   }
 
   body {
+    /* bg-bg applique la couleur unie définie dans les variables ci-dessus */
     @apply min-h-screen bg-bg text-text antialiased;
-    background-image:
-      radial-gradient(140% 140% at 20% 20%, rgba(255, 214, 138, 0.45), transparent 45%),
-      radial-gradient(140% 140% at 80% 10%, rgba(255, 190, 92, 0.35), transparent 40%),
-      radial-gradient(140% 140% at 50% 70%, rgba(255, 238, 200, 0.55), transparent 40%),
-      linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent 30%);
+    
+    /* J'ai supprimé toute la propriété 'background-image' ici.
+       Le rendu sera maintenant parfaitement lisse et mat. */
     font-family: 'Space Grotesk', 'Inter', system-ui, -apple-system, sans-serif;
   }
 

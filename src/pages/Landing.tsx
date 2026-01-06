@@ -15,11 +15,18 @@ export function Landing() {
   useEffect(() => {
     const videoEl = videoRef.current;
     if (!videoEl) return;
+
+    // SENIOR TIP : On charge explicitement la nouvelle source
+    // Cela permet de garder la même balise <video> sans la détruire
+    videoEl.load();
     videoEl.currentTime = 0;
+    
     const playPromise = videoEl.play();
-    // Autoplay might be blocked if not muted; we keep muted and ignore errors.
+    // Gestion propre de l'autoplay (qui peut être bloqué par le navigateur)
     if (playPromise !== undefined) {
-      playPromise.catch(() => {});
+      playPromise.catch(() => {
+        // Autoplay prevented. User interaction might be needed.
+      });
     }
   }, [videoIdx]);
 
@@ -28,8 +35,13 @@ export function Landing() {
       <section className="text-center space-y-4">
         <TextType variant="h1">{t("landing.title")}</TextType>
 
+        {/* Textes passés en i18n */}
         <TextTypeA
-          text={["Text typing effect", "for your websites", "Happy coding!"]}
+          text={[
+            t("landing.typing.line1") || "Text typing effect",
+            t("landing.typing.line2") || "for your websites",
+            t("landing.typing.line3") || "Happy coding!"
+          ]}
           typingSpeed={75}
           pauseDuration={1500}
           showCursor={true}
@@ -43,11 +55,12 @@ export function Landing() {
           <p className="text-sm text-slate-600">{t("home.carousel.caption")}</p>
         </div>
 
+        {/* Container Video */}
         <div className="relative mx-auto w-full max-w-[760px] overflow-hidden rounded-[28px] border border-slate-200 bg-slate-100 shadow-lg shadow-black/10">
           <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,196,112,0.6),rgba(255,222,160,0.4))]" />
-          <div className="relative">
+          <div className="relative aspect-video"> {/* Ajout aspect-video pour éviter les sauts de layout */}
             <video
-              key={videoIdx}
+              // CORRECTION MAJEURE : On enlève la prop 'key' pour ne pas détruire le composant
               ref={videoRef}
               src={PLAYLIST[videoIdx]}
               autoPlay

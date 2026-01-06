@@ -7,8 +7,8 @@ import { Option } from "../../Option";
 import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useOnClickOutside } from "../../hooks/useOnClickOutside";
-import AuthStateDesk from "./authStateDesk";
 import LogoutModal from "./LogoutModal";
+import AuthStateDesk from "./AuthStateDesk";
 
 type HeaderDProps = {
   onOpenAuth: () => void;
@@ -50,40 +50,40 @@ export default function DesktopHeader({
   return (
     <>
       <header
-        className="fixed top-4 left-1/2 z-50 -translate-x-1/2 
-          hidden md:flex items-center justify-between gap-4 
+        className="md:flex hidden items-center justify-between gap-4 
           rounded-full border border-border/60 bg-surface/70 px-4 py-2 
           shadow-md backdrop-blur-md transition-all duration-300"
       >
         {/* Logo & Brand */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center w-1/5">
           <div className="flex flex-row items-center">
-            <Link to="/home" className="hover:opacity-80 transition-opacity">
+            <Link
+              to="/home"
+              className="w-14 hover:opacity-80 transition-opacity"
+            >
               <img
                 src={logoZoom}
                 alt="Logo"
-                className="h-10 w-10 rounded-full object-cover"
+                className="rounded-full object-cover"
               />
             </Link>
             <Link
               to="/home"
-              className="ml-2 text-base font-bold leading-tight text-text hover:text-accent transition-colors"
+              className=" ml-2 text-base font-bold leading-tight text-text hover:text-accent transition-colors"
             >
               {t("brand.name")}
             </Link>
           </div>
-          {/* Desktop Links */}
-          <div className="ml-2 h-4 w-[1px] bg-border/40" />
+        </div>
+
+        {/* Right Actions */}
+        <div className="flex items-center justify-between gap-2 w-full">
           <Link
             to="/prompt"
             className="px-3 text-sm font-semibold text-text hover:text-accent transition-colors"
           >
             {t("nav.prompt")}
           </Link>
-        </div>
-
-        {/* Right Actions */}
-        <div className="flex items-center gap-2">
           <Link
             to={tokensHref}
             className="px-3 text-sm font-semibold text-text hover:text-accent transition-colors"

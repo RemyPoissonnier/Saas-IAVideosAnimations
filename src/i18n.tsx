@@ -17,10 +17,13 @@ type RecursiveKeyOf<TObj extends object> = {
 
 type TxKeyPath = RecursiveKeyOf<Translations>
 
+type TranslationOptions = Record<string, string | number>;
+
 type I18nContextValue = {
-  locale: Locale
-  setLocale: (locale: Locale) => void
-  t: (key: TxKeyPath) => string
+  locale: Locale;
+  setLocale: (locale: Locale) => void;
+  // Modification ici : on ajoute le paramètre 'options'
+  t: (key: TxKeyPath, options?: TranslationOptions) => string;
 }
 
 const translations: Record<Locale, Translations> = { fr, en }
@@ -57,8 +60,21 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     () => ({
       locale,
       setLocale,
-      t: (key) => {
-        return getNestedValue(translations[locale], key)
+      t: (key, options) => {
+        // 1. On récupère le texte brut (ex: "Bonjour {{name}}")
+        const translation = getNestedValue(translations[locale], key);
+
+        // 2. Si pas d'options, on renvoie le texte tel quel pour gagner en perf
+        if (!options) return translation;
+
+        // 3. Interpolation : On remplace tout ce qui est entre {{ et }}
+        return translation.replace(/{{([^}]+)}}/g, (_, match) => {
+          const variableKey = match.trim(); // nettoie les espaces
+          const value = options[variableKey];
+          
+          // Si la valeur existe, on remplace, sinon on laisse le {{variable}} visible (pour le debug)
+          return value !== undefined ? String(value) : `{{${variableKey}}}`;
+        });
       },
     }),
     [locale],

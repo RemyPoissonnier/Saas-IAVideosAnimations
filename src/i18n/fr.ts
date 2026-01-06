@@ -20,10 +20,10 @@ const fr = {
     }
   },
   landing: {
-    tagline: 'IA Banana pour créateurs vidéo',
+    tagline: 'Veo3 pour créateurs vidéo',
     title: 'Une plateforme unique pour vos rendus 2D et 3D',
-    desc: 'Choisissez votre univers (chat ou chien), décrivez la scène, et récupérez des storyboards et rendus optimisés mobile.',
-    ctaLearn: 'Découvrir',
+    desc: 'Choisissez votre univers, décrivez la scène, et récupérez des storyboards et rendus optimisés mobile.',
+    ctaLearn: 'Découvrir'
   },
   home: {
     badge: {
@@ -357,6 +357,11 @@ const fr = {
       weakpw: 'Mot de passe trop faible',
       pw: 'Minimum 8 carateres, et au moins 1 lettre et 1 nombre'
     }
+  },
+  promo: {
+    text: 'Vente Flash ! Obtenez -{{percent}}% sur tous les packs de tokens.',
+    button: 'J\'en profite',
+    code: 'CODE'
   }
 };
 

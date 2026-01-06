@@ -55,7 +55,7 @@ export default function MobileHeader({ onOpenAuth, tokensHref }: HeaderMProps) {
   return (
     <>
       {/* Trigger Button */}
-      <div className="fixed top-4 right-4 z-[60] md:hidden">
+      <div className="md:hidden">
         <button
           onClick={() => setIsMobileMenuOpen(true)}
           className="grid h-10 w-10 place-items-center rounded-full bg-surface/80 border border-border/60 backdrop-blur-md shadow-lg text-text"
