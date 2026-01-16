@@ -362,6 +362,89 @@ const fr = {
     text: 'Vente Flash ! Obtenez -{{percent}}% sur tous les packs de tokens.',
     button: 'J\'en profite',
     code: 'CODE'
+  },
+  legal: {
+    title: 'Mentions Légales & Confidentialité IA',
+    aiSection: {
+      title: '4. Utilisation de l\'IA & Confidentialité',
+      nature: {
+        title: 'Nature du traitement',
+        text: 'La Plateforme utilise des technologies d\'intelligence artificielle générative tierces (Modèles IA) telles que Vio ou Sora pour la création vidéo.'
+      },
+      data: {
+        title: 'Transmission des données',
+        text: 'En soumettant un prompt, vous acceptez qu\'il soit transmis via API aux fournisseurs de modèles. Ce transfert est strictement nécessaire à la génération.'
+      },
+      privacy: {
+        title: 'Confidentialité',
+        text: 'Nous ne vendons pas vos prompts. Nous activons les options de \'Non-entrainement\' (Zero Retention) chez nos fournisseurs lorsque c\'est techniquement possible.'
+      },
+      responsibility: {
+        title: 'Responsabilité',
+        text: 'L\'utilisateur reconnaît que les contenus IA peuvent présenter des similarités avec d\'autres contenus. L\'utilisateur est responsable de la vérification du contenu avant diffusion.'
+      },
+      disclaimer: 'Ce service utilise des modèles d\'IA générative. Les vidéos peuvent contenir des inexactitudes.'
+    },
+    pageTitle: 'Mentions Légales & CGV',
+    pageSubtitle: 'Transparence, règles d\'utilisation et conditions de vente.',
+    mentions: {
+      title: '1. Mentions Légales',
+      editor: 'RPIT, domicilié en France.',
+      host: 'Hébergé par Vercel Inc. (USA) et Google Firebase (USA/EU).',
+      contact: 'Contact support : contact@votre-domaine.com'
+    },
+    cgu: {
+      title: '2. Conditions Générales d\'Utilisation (CGU)',
+      intro: 'L\'accès au générateur implique l\'acceptation sans réserve des règles suivantes :',
+      account: 'Vous êtes responsable de la confidentialité de vos identifiants.',
+      use: 'Tout usage abusif ou illégal entraînera la suppression du compte.',
+      content: 'Le service est fourni \'tel quel\', sans garantie de disponibilité permanente.'
+    },
+    cgv: {
+      title: '3. Conditions Générales de Vente (CGV)',
+      retractationWarning: 'RENONCEMENT AU DROIT DE RÉTRACTATION : En achetant des tokens, vous acceptez que la fourniture du contenu numérique commence immédiatement. Vous renoncez expressément à votre droit de rétractation de 14 jours.',
+      price: 'Les prix sont indiqués en euros. Le paiement est sécurisé via Stripe.',
+      delivery: 'Les tokens sont crédités immédiatement après validation du paiement.',
+      refund: 'Aucun remboursement n\'est effectué une fois les tokens consommés ou après le début de l\'exécution du service.'
+    },
+    privacy: {
+      title: '5. Politique de Confidentialité (RGPD)',
+      intro: 'Nous nous engageons à protéger vos données personnelles conformément au RGPD.',
+      collected: {
+        title: 'Données Collectées',
+        text: 'Nous collectons : adresse email, mot de passe chiffré, logs de connexion et historique de génération. Les données bancaires sont gérées exclusivement par Stripe.'
+      },
+      processors: {
+        title: 'Sous-traitants',
+        text: 'Vos données sont traitées par : Google Firebase (Auth/DB), Vercel (Hébergement), Stripe (Paiement) et nos fournisseurs IA (génération uniquement).'
+      },
+      rights: {
+        title: 'Vos Droits',
+        text: 'Vous disposez d\'un droit d\'accès, de rectification et de suppression de vos données directement depuis votre compte ou via le support.'
+      },
+      cookies: {
+        title: 'Cookies',
+        text: 'Nous utilisons des cookies strictement nécessaires à l\'authentification et des cookies optionnels de performance (si acceptés).'
+      }
+    }
+  },
+  about: {
+    title: 'À Propos',
+    subtitle: 'Quand la passion des animaux rencontre l\'intelligence artificielle.',
+    mission: {
+      title: 'Notre Mission',
+      text: 'Permettre à chaque créateur, même sans compétence technique, de donner vie à des histoires drôles et touchantes avec ses animaux préférés grâce aux dernières technologies d\'IA générative.'
+    },
+    story: {
+      title: 'Notre Histoire',
+      text: 'Né d\'un constat simple : créer une animation 3D de qualité d\'un chat ou d\'un chien prenait des semaines. Aujourd\'hui, avec notre moteur connectant Vio, Sora et nos modèles maison, cela prend quelques secondes.'
+    },
+    values: {
+      title: 'Nos Valeurs',
+      innovation: 'Innovation : Toujours intégrer les derniers modèles (Vio, Sora).',
+      transparency: 'Transparence : Prix clairs, respect des artistes et des données.',
+      fun: 'Fun : La technologie doit rester un jeu et un outil de création.'
+    }
   }
 };
 

@@ -362,6 +362,89 @@ const en = {
     text: 'Flash Sale! Get -{{percent}}% on all token packs.',
     button: 'Get Offer',
     code: 'CODE'
+  },
+  legal: {
+    title: 'Legal Notice & AI Privacy',
+    aiSection: {
+      title: '4. AI Usage & Privacy',
+      nature: {
+        title: 'Nature of processing',
+        text: 'The Platform uses third-party generative artificial intelligence technologies (AI Models) such as Vio or Sora for video creation.'
+      },
+      data: {
+        title: 'Data transmission',
+        text: 'By submitting a prompt, you agree that it will be transmitted via API to model providers. This transfer is strictly necessary for generation.'
+      },
+      privacy: {
+        title: 'Privacy',
+        text: 'We do not sell your prompts. We enable \'Zero Retention\' (no-training) options with our providers whenever technically possible.'
+      },
+      responsibility: {
+        title: 'Responsibility',
+        text: 'The user acknowledges that AI content may show similarities to other generated content. The user is responsible for verifying content before publishing.'
+      },
+      disclaimer: 'This service uses generative AI models. Videos may contain inaccuracies.'
+    },
+    pageTitle: 'Legal Notice & Terms',
+    pageSubtitle: 'Transparency, usage rules, and conditions of sale.',
+    mentions: {
+      title: '1. Legal Notice',
+      editor: 'RPIT, located at [YOUR ADDRESS].',
+      host: 'Hosted by Vercel Inc. (USA) and Google Firebase (USA/EU).',
+      contact: 'Support contact: contact@yourdomain.com'
+    },
+    cgu: {
+      title: '2. General Terms of Use (GTU)',
+      intro: 'Access to the generator implies unreserved acceptance of the following rules:',
+      account: 'You are responsible for the confidentiality of your credentials.',
+      use: 'Any abusive or illegal use will result in account deletion.',
+      content: 'The service is provided \'as is\' without guarantee of permanent availability.'
+    },
+    cgv: {
+      title: '3. General Terms of Sale (GTS)',
+      retractationWarning: 'WAIVER OF RIGHT OF WITHDRAWAL: By purchasing tokens, you agree that the supply of digital content begins immediately. You expressly waive your 14-day right of withdrawal.',
+      price: 'Prices are indicated in euros. Payment is secured via Stripe.',
+      delivery: 'Tokens are credited immediately after payment validation.',
+      refund: 'No refunds are issued once tokens are consumed or after the service execution has started.'
+    },
+    privacy: {
+      title: '5. Privacy Policy (GDPR)',
+      intro: 'We are committed to protecting your personal data in accordance with the GDPR.',
+      collected: {
+        title: 'Data Collected',
+        text: 'We collect: email address, encrypted password, connection logs, and generation history (prompts). Payment data is handled exclusively by Stripe.'
+      },
+      processors: {
+        title: 'Third-Party Processors',
+        text: 'Your data is processed by: Google Firebase (Auth/DB), Vercel (Hosting), Stripe (Payments), and our AI providers (for generation only).'
+      },
+      rights: {
+        title: 'Your Rights',
+        text: 'You have the right to access, rectify, or delete your data directly from your account settings or by contacting support.'
+      },
+      cookies: {
+        title: 'Cookies',
+        text: 'We use strictly necessary cookies for authentication and optional cookies for performance (if accepted).'
+      }
+    }
+  },
+  about: {
+    title: 'About Us',
+    subtitle: 'When passion for pets meets artificial intelligence.',
+    mission: {
+      title: 'Our Mission',
+      text: 'To allow every creator, even without technical skills, to bring funny and touching stories to life with their favorite animals using the latest generative AI technologies.'
+    },
+    story: {
+      title: 'Our Story',
+      text: 'Born from a simple observation: creating a high-quality 3D animation of a cat or dog took weeks. Today, with our engine connecting Vio, Sora, and our custom models, it takes seconds.'
+    },
+    values: {
+      title: 'Our Values',
+      innovation: 'Innovation: Always integrating the latest models (Vio, Sora).',
+      transparency: 'Transparency: Clear pricing, respect for artists and data.',
+      fun: 'Fun: Technology should remain a game and a creative tool.'
+    }
   }
 };
 

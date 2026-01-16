@@ -14,6 +14,9 @@ import Prompt from "./pages/Prompt";
 import PromoBanner from "./components/PromoBanner";
 import { Footer } from "./components/Footer";
 import { AuroraStrip } from "./components/ui/AuroraStrip";
+import ConsentBanner from "./components/ConsentBanner";
+import Legal from "./pages/Legal";
+import About from "./pages/About";
 
 function App() {
   const location = useLocation();
@@ -62,6 +65,8 @@ function App() {
               element={<Login onBackHome={handleBackHome} />}
             />
             <Route path="/tokens" element={<Tokens />} />
+            <Route path="/legal" element={<Legal />} />
+            <Route path="/about" element={<About />} />
             <Route
               path="/prompt"
               element={<Prompt onOpenAuth={handleOpenAuth} />}
@@ -70,6 +75,7 @@ function App() {
             <Route path="*" element={<Navigate to="/home" replace />} />
           </Routes>
         </div>
+        <ConsentBanner />
       </main>
       <AuroraStrip />
       <Footer />

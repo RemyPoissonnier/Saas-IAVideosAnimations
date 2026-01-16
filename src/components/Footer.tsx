@@ -3,8 +3,8 @@ import TextType from "./ui/TextType"; // Assure-toi que le chemin est bon
 import logo from "../assets/tlogo.png"; // Ton logo
 
 // Définition de tes couleurs
-const textBColor = "text-slate-600 dark:text-amber-100";
-const textTColor = "text-slate-600 dark:text-orange-50"; // Note: Identique au body selon ta demande (souvent slate-900 pour les titres, à ajuster si besoin)
+const textBColor = "text-amber-900 dark:text-amber-100";
+const textTColor = "text-black dark:text-orange-50"; // Note: Identique au body selon ta demande (souvent slate-900 pour les titres, à ajuster si besoin)
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -13,7 +13,7 @@ export const Footer = () => {
     // J'ai remplacé les couleurs en dur par ${textBColor}
     <footer className={`w-full bg-amber-100 dark:bg-orange-950 pt-16 pb-8 ${textBColor}`}>
       <div className="mx-auto max-w-7xl px-4 md:px-6">
-        <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
+        <div className="grid gap-6 md:grid-cols-4 justify-center">
           
           {/* COLONNE 1 : LOGO & DESCRIPTION */}
           <div className="flex flex-col gap-4">
@@ -62,8 +62,9 @@ export const Footer = () => {
             <h4 className={`font-semibold ${textTColor}`}>Légal</h4>
             <nav className="flex flex-col gap-3">
               <FooterLink to="/about">À propos</FooterLink>
-              <FooterLink to="/privacy">Confidentialité</FooterLink>
-              <FooterLink to="/terms">CGU / CGV</FooterLink>
+              <FooterLink to="/legal">Confidentialité</FooterLink>
+              <FooterLink to="/legal">CGU / CGV</FooterLink>
+              <FooterLink to="/cookies">Cookies</FooterLink>
             </nav>
           </div>
         </div>

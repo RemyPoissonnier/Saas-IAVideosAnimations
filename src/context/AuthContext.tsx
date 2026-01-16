@@ -1,30 +1,24 @@
-import React, { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-import { initializeApp } from "firebase/app";
-import { 
-  getAuth, 
-  onAuthStateChanged, 
-  signInWithEmailAndPassword, 
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  type ReactNode,
+} from "react";
+import {
+  getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  signOut, 
-  type User, 
-  type Auth 
+  signOut,
+  type User,
+  type Auth,
 } from "firebase/auth";
 // NOUVEAU : On importe onSnapshot pour écouter en temps réel
-import { getFirestore, doc, setDoc, onSnapshot } from "firebase/firestore"; 
-import { updateProfile } from "firebase/auth"; 
+import { getFirestore, doc, setDoc, onSnapshot } from "firebase/firestore";
+import { updateProfile } from "firebase/auth";
+import { app } from "../components/hooks/firebase";
 
-// ... (Ta config Firebase reste identique) ...
-
-const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID
-};
-
-const app = initializeApp(firebaseConfig);
 export const auth: Auth = getAuth(app);
 export const db = getFirestore(app);
 
@@ -34,7 +28,7 @@ interface AuthContextType {
   userProfile: any; // NOUVEAU : Contient les infos de la DB (wallet, role...)
   loading: boolean;
   login: (email: string, pass: string) => Promise<void>;
-  register: (email: string, pass: string, pseudo:string) => Promise<void>;
+  register: (email: string, pass: string, pseudo: string) => Promise<void>;
   logout: () => Promise<void>;
   getToken: () => Promise<string | null>;
 }
@@ -50,7 +44,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
-      
+
       // Si l'utilisateur n'est pas connecté, on arrête de charger
       if (!user) {
         setUserProfile(null);
@@ -61,29 +55,35 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       // NOUVEAU : Écoute en temps réel du document utilisateur dans Firestore
       // Dès que le wallet change via l'API, cette fonction s'active !
       const userDocRef = doc(db, "users", user.uid);
-      
-      const unsubscribeFirestore = onSnapshot(userDocRef, (docSnap) => {
-        if (docSnap.exists()) {
-          const data = docSnap.data();
-          
-          // --- MIGRATION AUTOMATIQUE ---
-          // Si l'utilisateur existe mais n'a pas de wallet_balance (vieux compte)
-          if (data.wallet_balance === undefined) {
-             console.log("Migration : Ajout du wallet pour l'utilisateur existant");
-             setDoc(userDocRef, { wallet_balance: 0 }, { merge: true });
-             // La mise à jour va relancer cet écouteur avec la nouvelle valeur
+
+      const unsubscribeFirestore = onSnapshot(
+        userDocRef,
+        (docSnap) => {
+          if (docSnap.exists()) {
+            const data = docSnap.data();
+
+            // --- MIGRATION AUTOMATIQUE ---
+            // Si l'utilisateur existe mais n'a pas de wallet_balance (vieux compte)
+            if (data.wallet_balance === undefined) {
+              console.log(
+                "Migration : Ajout du wallet pour l'utilisateur existant"
+              );
+              setDoc(userDocRef, { wallet_balance: 0 }, { merge: true });
+              // La mise à jour va relancer cet écouteur avec la nouvelle valeur
+            } else {
+              setUserProfile(data);
+            }
           } else {
-             setUserProfile(data);
+            // Si le document n'existe pas du tout (cas rare), on peut le créer ici si besoin
+            console.log("Pas de profil trouvé pour cet utilisateur");
           }
-        } else {
-          // Si le document n'existe pas du tout (cas rare), on peut le créer ici si besoin
-          console.log("Pas de profil trouvé pour cet utilisateur");
+          setLoading(false);
+        },
+        (error) => {
+          console.error("Erreur Firestore:", error);
+          setLoading(false);
         }
-        setLoading(false);
-      }, (error) => {
-        console.error("Erreur Firestore:", error);
-        setLoading(false);
-      });
+      );
 
       // Nettoyage de l'écouteur Firestore quand l'utilisateur change
       return () => unsubscribeFirestore();
@@ -106,11 +106,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       uid: user.uid,
       pseudo: pseudo,
       email: email,
-      wallet_balance : 0, // Nouveau compte : on met 0 direct
+      wallet_balance: 0, // Nouveau compte : on met 0 direct
       createdAt: new Date().toISOString(),
-      role: "user"
+      role: "user",
     });
-    
+
     // Pas besoin de setCurrentUser manuel ici, le onAuthStateChanged va le faire
   };
 
@@ -130,7 +130,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     login,
     register,
     logout,
-    getToken
+    getToken,
   };
 
   return (

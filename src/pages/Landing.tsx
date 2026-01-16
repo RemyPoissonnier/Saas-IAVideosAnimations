@@ -3,7 +3,6 @@ import { useI18n } from "../i18n";
 import catAndDogVideo from "../assets/videos/CatAndDog.mp4";
 import catWorkVideo from "../assets/videos/catWork.mp4";
 import TextType from "../components/ui/TextType";
-import TextTypeA from "../components/ui/TextTypeA";
 
 const PLAYLIST = [catAndDogVideo, catWorkVideo];
 
@@ -34,19 +33,6 @@ export function Landing() {
     <div className="space-y-10 px-4 md:px-6">
       <section className="text-center space-y-4">
         <TextType variant="h1">{t("landing.title")}</TextType>
-
-        {/* Textes passés en i18n */}
-        <TextTypeA
-          text={[
-            t("landing.typing.line1") || "Text typing effect",
-            t("landing.typing.line2") || "for your websites",
-            t("landing.typing.line3") || "Happy coding!"
-          ]}
-          typingSpeed={75}
-          pauseDuration={1500}
-          showCursor={true}
-          cursorCharacter="|"
-        />
 
         <div className="space-y-2 text-center">
           <h3 className="text-xl font-semibold text-slate-900">

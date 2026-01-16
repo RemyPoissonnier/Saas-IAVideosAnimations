@@ -7,6 +7,7 @@ interface TextTypeProps {
   variant?: Variant;
   children: React.ReactNode;
   className?: string;
+  id?: string;
   as?: React.ElementType;
 }
 
@@ -14,6 +15,7 @@ const TextType: React.FC<TextTypeProps> = ({
   variant = "body",
   children,
   className = "",
+  id = "O",
   as,
 }) => {
   const styles: Record<Variant, string> = {
@@ -48,7 +50,7 @@ const TextType: React.FC<TextTypeProps> = ({
       : variant);
 
   return (
-    <Component className={`${styles[variant]} ${className}`}>
+    <Component className={`${styles[variant]} ${className}`} id={id}>
       {children}
     </Component>
   );
