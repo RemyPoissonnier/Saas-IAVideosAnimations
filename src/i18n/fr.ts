@@ -445,6 +445,39 @@ const fr = {
       transparency: 'Transparence : Prix clairs, respect des artistes et des données.',
       fun: 'Fun : La technologie doit rester un jeu et un outil de création.'
     }
+  },
+  cookie: {
+    title: 'Gestion des données',
+    text: 'Nous respectons votre vie privée. Conformément à la réglementation, nous demandons votre accord pour utiliser des cookies d\'analyse et de performance IA.',
+    accept: 'Tout accepter',
+    decline: 'Refuser',
+    policy: 'Politique de confidentialité'
+  },
+  footer: {
+    manageCookies: 'Gérer les cookies',
+    tagline: 'Créez des vidéos d\'animaux époustouflantes grâce à la puissance de l\'intelligence artificielle générative.',
+    product: {
+      title: 'Produit',
+      generator: 'Générateur',
+      pricing: 'Tarifs & Tokens',
+      showcase: 'Galerie',
+      changelog: 'Nouveautés'
+    },
+    resources: {
+      title: 'Ressources',
+      docs: 'Documentation',
+      api: 'API Docker',
+      community: 'Communauté',
+      support: 'Support'
+    },
+    legal: {
+      title: 'Légal',
+      about: 'À propos',
+      privacy: 'Confidentialité',
+      terms: 'CGU / CGV'
+    },
+    rights: 'Tous droits réservés.',
+    madeWith: 'Fait avec ❤️ en France'
   }
 };
 

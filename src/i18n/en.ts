@@ -445,6 +445,39 @@ const en = {
       transparency: 'Transparency: Clear pricing, respect for artists and data.',
       fun: 'Fun: Technology should remain a game and a creative tool.'
     }
+  },
+  cookie: {
+    title: 'Data & Privacy',
+    text: 'We respect your privacy. In accordance with regulations, we ask for your consent to use cookies for analytics and AI performance.',
+    accept: 'Accept All',
+    decline: 'Refuse',
+    policy: 'Privacy Policy'
+  },
+  footer: {
+    manageCookies: 'Manage Cookies',
+    tagline: 'Create stunning animal videos using the power of generative artificial intelligence.',
+    product: {
+      title: 'Product',
+      generator: 'Generator',
+      pricing: 'Pricing & Tokens',
+      showcase: 'Showcase',
+      changelog: 'Changelog'
+    },
+    resources: {
+      title: 'Resources',
+      docs: 'Documentation',
+      api: 'Docker API',
+      community: 'Community',
+      support: 'Support'
+    },
+    legal: {
+      title: 'Legal',
+      about: 'About',
+      privacy: 'Privacy',
+      terms: 'Terms & Conditions'
+    },
+    rights: 'All rights reserved.',
+    madeWith: 'Made with ❤️ in France'
   }
 };
 

@@ -1,25 +1,39 @@
 import { useState, useEffect } from 'react';
 import { getAnalytics, setAnalyticsCollectionEnabled } from "firebase/analytics";
+import { Link } from 'react-router-dom';
+import { useI18n } from '../i18n';
+import Card from './ui/Card';
+import TextType from './ui/TextType';
+// J'importe tes composants UI génériques
 
 export default function ConsentBanner() {
+  const { t } = useI18n();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Vérifie si l'utilisateur a déjà fait un choix
+    // 1. Vérification initiale
     const consent = localStorage.getItem("cookie_consent");
     if (!consent) {
       setIsVisible(true);
     } else if (consent === "granted") {
       activateTracking();
     }
+
+    // 2. Écouteur pour ré-ouverture via le footer
+    const handleReopen = () => setIsVisible(true);
+    window.addEventListener('open-cookie-banner', handleReopen);
+    return () => window.removeEventListener('open-cookie-banner', handleReopen);
   }, []);
 
   const activateTracking = () => {
     const analytics = getAnalytics();
-    // On réactive Firebase uniquement si consentement
     setAnalyticsCollectionEnabled(analytics, true);
-    console.log("Analytics activés"); // Pour tes tests
   };
+
+  const disableTracking = () => {
+    const analytics = getAnalytics();
+    setAnalyticsCollectionEnabled(analytics, false);
+  }
 
   const handleAccept = () => {
     localStorage.setItem("cookie_consent", "granted");
@@ -29,44 +43,59 @@ export default function ConsentBanner() {
 
   const handleDecline = () => {
     localStorage.setItem("cookie_consent", "denied");
+    disableTracking();
     setIsVisible(false);
   };
 
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-8 md:w-[400px] z-50 animate-fade-in-up">
-      {/* Design inspiré de Mistral AI : Bordure fine, fond sombre/sable, ombre diffuse */}
-      <div className="bg-[#0f172a] border border-orange-500/30 p-6 rounded-lg shadow-2xl text-slate-200 font-sans">
-        <h3 className="text-lg font-semibold text-white mb-2">Gestion des données</h3>
-        <p className="text-sm text-slate-400 mb-6 leading-relaxed">
-          Nous respectons votre vie privée. Conformément aux réglementations européennes, 
-          nous demandons votre accord pour utiliser des cookies à des fins d'analyse 
-          et de performance via nos outils IA.
-        </p>
+    <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-8 md:w-[400px] z-50">
+      {/* Container principal : Card gère le background/blur/border */}
+      <Card className="flex flex-col gap-5 p-6 shadow-2xl">
         
-        <div className="flex flex-col gap-3">
-          {/* Bouton Principal - Style "Mistral Orange" */}
+        {/* Titre via TextType */}
+        <div className="mb-1">
+          <TextType variant="h3">
+            {t("cookie.title")}
+          </TextType>
+        </div>
+        
+        {/* Corps du texte */}
+        <TextType variant="body">
+          {t("cookie.text")}
+        </TextType>
+        
+        {/* Zone d'actions */}
+        <div className="flex flex-col gap-3 mt-2">
+          {/* Bouton Accepter : On utilise une bordure neutre pour laisser ton thème s'exprimer */}
           <button 
             onClick={handleAccept}
-            className="w-full py-2 px-4 bg-orange-600 hover:bg-orange-500 text-white font-medium rounded transition-colors duration-200"
+            className="w-full py-2.5 px-4 rounded-lg font-medium border border-current hover:opacity-80 transition-opacity"
           >
-            Tout accepter
+            {t("cookie.accept")}
           </button>
           
           <div className="flex gap-3">
+            {/* Bouton Refuser */}
             <button 
               onClick={handleDecline}
-              className="flex-1 py-2 px-4 border border-slate-600 hover:border-slate-500 text-slate-300 text-sm rounded transition-colors"
+              className="flex-1 py-2 px-4 rounded-lg border border-current/50 opacity-80 hover:opacity-100 transition-opacity"
             >
-              Refuser
+              {t("cookie.decline")}
             </button>
-            <button className="flex-1 py-2 px-4 text-slate-500 hover:text-slate-300 text-xs underline decoration-slate-700">
-              Politique
-            </button>
+            
+            {/* Lien Politique */}
+            <Link 
+              to="/legal" 
+              onClick={() => setIsVisible(false)}
+              className="flex-1 flex items-center justify-center text-xs opacity-60 hover:opacity-100 underline decoration-current/30"
+            >
+              {t("cookie.policy")}
+            </Link>
           </div>
         </div>
-      </div>
+      </Card>
     </div>
   );
 }
