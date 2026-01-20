@@ -3,7 +3,7 @@ import ReturnVideo from "./ReturnVideo";
 
 type propResultVideo = {
   isLoading: boolean;
-  videoUrl: string | null;
+  videoUrl: string | undefined;
   error: string | null;
 };
 

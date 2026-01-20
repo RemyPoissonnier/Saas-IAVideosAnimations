@@ -13,7 +13,7 @@ export default function About() {
         <TextType variant="body">{t("about.subtitle")}</TextType>
       </div>
 
-      <div className="space-y-8">
+      <div className="space-y-8 ">
         {/* 2. NOTRE MISSION (Grande Carte Mise en avant) */}
         <Card className="p-8 md:p-12 ">
           <CardHeader>

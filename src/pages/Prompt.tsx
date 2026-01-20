@@ -25,7 +25,7 @@ export function Prompt({ onOpenAuth }: PromptProps) {
   });
 
   // 2. Récupération de la logique via notre Hook
-  const { generateVideo, loading, videoUrl, error } = useVideoGeneration();
+  const { generateVideo, loading, data, error } = useVideoGeneration();
   const { currentUser } = useAuth();
 
   // 3. Handler qui fait le lien
@@ -40,7 +40,7 @@ export function Prompt({ onOpenAuth }: PromptProps) {
       */}
       <div
         className={`transition-all duration-500 ${
-          videoUrl || loading ? "md:w-1/2" : "w-full"
+          data?.outputUrl || loading ? "md:w-1/2" : "w-full"
         }`}
       >
         <PromptTool
@@ -56,12 +56,12 @@ export function Prompt({ onOpenAuth }: PromptProps) {
       {/* COLONNE DROITE : LE RÉSULTAT 
          S'affiche uniquement si un chargement ou un résultat est présent
       */}
-      {(loading || videoUrl || error) && (
+      {(loading || data?.outputUrl || error) && (
         <div className="md:w-1/2 w-full animate-in fade-in slide-in-from-bottom-4 duration-500">
           <ResultVideo
             isLoading={loading}
             // videoUrl={videoResult}
-            videoUrl={videoUrl}
+            videoUrl={data?.outputUrl}
             error={error}
           />
         </div>

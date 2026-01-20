@@ -1,11 +1,12 @@
 import type { IaRequestPayload, IaResponse } from "./type";
 
-const API_BASE = import.meta.env.VITE_IA_API_BASE ?? 'http://localhost:3000/api'
+// const API_BASE = import.meta.env.VITE_IA_API_BASE ?? 'http://localhost:3000/api'
+const API_BASE = 'http://localhost:3000/api';
 
 /**
  * Send a generation request to the IA backend. The model is selectable via payload.model.
  */
-export async function sendPrompt(payload: IaRequestPayload): Promise<IaResponse> {
+export async function sendIaRequest(payload: IaRequestPayload): Promise<IaResponse> {
   
   const res = await fetch(`${API_BASE}/generate`, {
     method: 'POST',

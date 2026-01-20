@@ -4,7 +4,7 @@ import TextType from "../ui/TextType";
 
 // 1. Définition claire des attentes du composant
 interface propsReturnVideo {
-  videoUrl: string | null;
+  videoUrl: string | undefined;
   isLoading: boolean;
   onReset?: () => void; // Pour le bouton "New generation"
 }

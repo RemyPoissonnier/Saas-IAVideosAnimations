@@ -1,4 +1,3 @@
-import React from 'react';
 // Make sure to import your images
 import sparkles from '../../assets/images/coins/sparklesS.gif';
 import cb from '../../assets/images/coins/BronzeCoinR.png';

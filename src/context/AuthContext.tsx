@@ -94,7 +94,27 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   // ... (Tes fonctions login, register, logout restent identiques) ...
   const login = async (email: string, pass: string) => {
-    await signInWithEmailAndPassword(auth, email, pass);
+    try {
+      // 1. Connexion Standard Firebase (Client)
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        pass
+      );
+      const user = userCredential.user;
+
+      // 2. Récupération du ID Token (Le fameux sésame qui dure 1h)
+      // "true" force le rafraichissement pour être sûr d'avoir un token frais
+      const idToken = await user.getIdToken(true);
+
+      console.log("🔓 Authentification réussie !");
+      console.log("🎫 ID Token récupéré :", idToken); // <--- C'est lui qu'on enverra à ton API Docker
+
+      // TODO: Plus tard, ici, on fera : await axios.post('http://ton-api/session', { idToken });
+    } catch (error: any) {
+      console.error("Erreur de connexion:", error);
+      throw error; // On renvoie l'erreur pour que l'interface puisse afficher "Mot de passe incorrect"
+    }
   };
 
   const register = async (email: string, pass: string, pseudo: string) => {
