@@ -7,5 +7,5 @@ const colors = [
 ];
 
 export const AuroraStrip = () => {
-  return colors.map((c) => <div className={`w-full h-10 ${c}`}></div>);
+  return colors.map((c, index) => <div key={index} className={`w-full h-10 ${c}`}></div>);
 };

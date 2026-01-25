@@ -45,7 +45,7 @@ export const BuyingCard = (props: propBuyCard) => {
   // Cette fonction rend le bouton visuel
   const renderButton = () => (
     <Button
-      className="justify-center mt-3 w-full"
+      className=" w-full mt-auto "
       onClick={props.onClick}
       variant={props.isActive ? "secondary" : "primary"}
     >
@@ -76,7 +76,7 @@ export const BuyingCard = (props: propBuyCard) => {
         </div>
       )}
 
-      <CardBody className="flex flex-col">
+      <CardBody className="h-full flex flex-col">
         <Coin type={props.coinType ?? "bronze"} />
         
         <TextType variant="h3" className="text-center mt-2">
@@ -84,7 +84,7 @@ export const BuyingCard = (props: propBuyCard) => {
         </TextType>
 
         {/* --- ZONE DE PRIX MODIFIÉE --- */}
-        <div className="flex flex-col items-center justify-center my-1">
+        <div className="flex flex-col items-center my-1">
           {hasDiscount ? (
             <>
               {/* Ancien prix barré */}
@@ -105,7 +105,7 @@ export const BuyingCard = (props: propBuyCard) => {
         </div>
         {/* ----------------------------- */}
 
-        <TextType variant="body" className="mt-2 text-center text-gray-500">
+        <TextType variant="body" className="mt-2 text-center text-gray-500 mb-4">
           {props.text}
         </TextType>
         

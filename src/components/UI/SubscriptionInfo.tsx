@@ -1,8 +1,5 @@
-import { useEffect, useState } from "react";
-import { useAuth } from "../../context/AuthContext";
 import Card, { CardBody } from "./Card";
 import TextType from "./TextType";
-import { apiClient } from "../hooks/apiClient";
 import { useI18n } from "../../i18n";
 import { useSubscription } from "../hooks/useSubcription";
 
