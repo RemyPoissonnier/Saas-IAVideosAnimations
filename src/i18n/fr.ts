@@ -478,6 +478,20 @@ const fr = {
     },
     rights: 'Tous droits réservés.',
     madeWith: 'Fait avec ❤️ en France'
+  },
+  common: {
+    na: 'N/A'
+  },
+  subscription: {
+    title: 'Gestion de l\'abonnement',
+    mySub: 'Mon Abonnement',
+    tier: 'Niveau :',
+    name: 'Nom :',
+    endDate: 'Fin de période :',
+    cancel: 'Annulation prévue :',
+    yes: 'Oui',
+    no: 'Non',
+    empty: 'Aucun abonnement actif'
   }
 };
 

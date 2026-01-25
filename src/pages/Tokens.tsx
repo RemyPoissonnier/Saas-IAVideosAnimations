@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Card, { CardBody } from "../components/ui/Card";
 import TextType from "../components/ui/TextType";
 import { useI18n } from "../i18n";
 import { BuyingCard } from "../components/ui/BuyingCard";
@@ -7,25 +6,7 @@ import { arrCoint, arrSubs, arrProdTest } from "../components/hooks/products";
 import { useAuth } from "../context/AuthContext";
 // On imagine que tu as créé ce fichier comme convenu
 import { PROMO_CONFIG } from "../config/promo"; 
-
-// --- COMPOSANT SÉPARÉ POUR L'INFO ABONNEMENT ---
-// Tu pourras facilement déplacer ce code dans un fichier `SubscriptionInfo.tsx` plus tard
-const SubscriptionInfo = () => {
-  return (
-    <Card variant="outline" className="h-full">
-      <CardBody>
-        <TextType variant="h3" className="mb-2">
-          Mon Abonnement
-        </TextType>
-        <TextType variant="body" className="text-gray-600">
-          Vous n'avez pas d'abonnement actif pour le moment.
-          {/* Ici tu pourras ajouter la logique pour afficher le plan actuel (Free, Pro...) 
-              en utilisant currentUser ou une donnée de ta DB */}
-        </TextType>
-      </CardBody>
-    </Card>
-  );
-};
+import { SubscriptionInfo } from "../components/ui/SubscriptionInfo";
 
 export function Tokens() {
   const { t } = useI18n(); 
@@ -88,9 +69,7 @@ export function Tokens() {
         </div>
       )}
 
-      <TextType variant="gradient" className="text-center text-4xl">
-        Subscription management
-      </TextType>
+
 
       {/* Utilisation du composant extrait */}
       <SubscriptionInfo />

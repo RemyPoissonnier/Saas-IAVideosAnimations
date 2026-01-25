@@ -18,6 +18,7 @@ import {
 import { getFirestore, doc, setDoc, onSnapshot } from "firebase/firestore";
 import { updateProfile } from "firebase/auth";
 import { app } from "../components/hooks/firebase";
+import { apiClient } from "../components/hooks/apiClient";
 
 export const auth: Auth = getAuth(app);
 export const db = getFirestore(app);
@@ -105,10 +106,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
       // 2. Récupération du ID Token (Le fameux sésame qui dure 1h)
       // "true" force le rafraichissement pour être sûr d'avoir un token frais
-      const idToken = await user.getIdToken(true);
+      const token = await user.getIdToken();
+
+      // 👇 INDISPENSABLE : On demande au serveur de créer le cookie
+      await apiClient('/sessionLogin', 'POST', { idToken: token });
 
       console.log("🔓 Authentification réussie !");
-      console.log("🎫 ID Token récupéré :", idToken); // <--- C'est lui qu'on enverra à ton API Docker
+      console.log("🎫 ID Token récupéré :", token); // <--- C'est lui qu'on enverra à ton API Docker
 
       // TODO: Plus tard, ici, on fera : await axios.post('http://ton-api/session', { idToken });
     } catch (error: any) {

@@ -478,6 +478,20 @@ const en = {
     },
     rights: 'All rights reserved.',
     madeWith: 'Made with ❤️ in France'
+  },
+  common: {
+    na: 'N/A'
+  },
+  subscription: {
+    title: 'Subscription management',
+    mySub: 'My Subscription',
+    tier: 'Level:',
+    name: 'Name:',
+    endDate: 'Period end:',
+    cancel: 'Cancellation scheduled:',
+    yes: 'Yes',
+    no: 'No',
+    empty: 'Not subscribed'
   }
 };
 
