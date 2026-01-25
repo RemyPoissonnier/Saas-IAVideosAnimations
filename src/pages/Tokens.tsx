@@ -14,6 +14,7 @@ export function Tokens() {
   
   // État pour le solde calculé
   const [currentSold, setCurrentSold] = useState(0);
+  const [discountId, setDiscountId] = useState<string | null>(null);
 
   // --- LOGIQUE AUTOMATIQUE DE SOLDE ---
   useEffect(() => {
@@ -28,12 +29,13 @@ export function Tokens() {
     if (now < end) {
       // Conversion du pourcentage (ex: 50) en décimal (0.5) pour le composant BuyingCard
       setCurrentSold(PROMO_CONFIG.discountPercent / 100);
+      setDiscountId(PROMO_CONFIG.discountId);
     } else {
       setCurrentSold(0);
     }
   }, []);
 
-  const handleBuy = async (productId: string) => {
+  const handleBuy = async (productId: string, discountId: string | null) => {
     if (!currentUser) {
       alert("Connectez-vous d'abord !"); // Idéalement, ouvrir la modale de login ici
       return;
@@ -45,6 +47,7 @@ export function Tokens() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           productId: productId,
+          discountId: discountId,
           userId: currentUser.uid 
         })
       });
@@ -89,7 +92,7 @@ export function Tokens() {
             {...product} 
             // On injecte le solde calculé automatiquement
             sold={currentSold} 
-            onClick={() => handleBuy(product.polarId)}
+            onClick={() => handleBuy(product.polarId, discountId)}
           />
         ))}
       </div>

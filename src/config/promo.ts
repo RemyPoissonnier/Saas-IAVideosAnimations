@@ -12,6 +12,9 @@ export const PROMO_CONFIG = {
   
   // Le code promo (optionnel, pour affichage)
   code: "VIO50",
+
+  // idDiscount
+  discountId : "fd21a68b-b71c-4fa1-b507-fa19e14d87e0",
   
   // Vers quelle page redirige le clic (ex: la page Tokens)
   linkTo: "/tokens",

@@ -24,24 +24,24 @@ export const SubscriptionInfo = () => {
 
       <Card variant="outline" className="h-full">
         <CardBody>
-          <TextType variant="h2" className="mb-2">
+          <TextType variant="h2" className="mb-2 tracking-widest">
             {t("subscription.mySub")} {/* "Mon Abonnement" */}
           </TextType>
 
           {subscription?.isActive ? (
             <div>
-              <TextType variant="body">
+              <TextType variant="body" className="tracking-widest">
                 {t("subscription.tier")} {/* "Niveau :" */}
-                <span className="font-bold capitalize">
+                <span className="font-bold capitalize tracking-widest">
                   {subscription.tier}
                 </span>
               </TextType>
 
-              <TextType variant="body">
+              <TextType variant="body" className="tracking-widest">
                 {t("subscription.name")} {subscription.planName} {/* "Nom :" */}
               </TextType>
 
-              <TextType variant="body">
+              <TextType variant="body" className="tracking-widest">
                 {t("subscription.endDate")} {/* "Fin de période :" */}
                 {subscription.renewalDate
                   ? new Date(subscription.renewalDate).toLocaleDateString()
@@ -49,7 +49,7 @@ export const SubscriptionInfo = () => {
                 {/* "N/A" */}
               </TextType>
 
-              <TextType variant="body">
+              <TextType variant="body" className="tracking-widest">
                 {t("subscription.cancel")} {/* "Annulation prévue :" */}
                 {subscription.cancelAtPeriodEnd
                   ? t("subscription.yes")
@@ -57,7 +57,7 @@ export const SubscriptionInfo = () => {
               </TextType>
             </div>
           ) : (
-            <TextType variant="body">
+            <TextType variant="body" className="tracking-widest">
               {t("subscription.empty")} {/* "Not subscribed" */}
             </TextType>
           )}
