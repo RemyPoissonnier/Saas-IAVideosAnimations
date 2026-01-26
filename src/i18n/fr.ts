@@ -270,7 +270,8 @@ const fr = {
       buy: 'Acheter',
       subscribe: 'S\'abonner'
     },
-    note: 'Les jetons sont consommés selon la durée, la résolution et le modèle IA.'
+    note: 'Les jetons sont consommés selon la durée, la résolution et le modèle IA.',
+    simpleTitle: 'Une tarification simple et transparente'
   },
   authPage: {
     tagline: 'Accès sécurisé',
@@ -307,7 +308,8 @@ const fr = {
     signInSubtitle: 'Bonjour',
     forgotPassword: 'Mot de passe oublié ?',
     noAccount: 'Pas de compte ?',
-    signupLink: 'Créez-en un.'
+    signupLink: 'Créez-en un.',
+    loginRequired: 'Connectez-vous d\'abord !'
   },
   hero: {
     badge: 'Prototype minimal — IA vidéo chat',
@@ -361,7 +363,8 @@ const fr = {
   promo: {
     text: 'Vente Flash ! Obtenez -{{percent}}% sur tous les packs de tokens.',
     button: 'J\'en profite',
-    code: 'CODE'
+    code: 'CODE',
+    offer: '🔥 OFFRE SPÉCIALE : -{percent}% avec le code {code} !'
   },
   legal: {
     title: 'Mentions Légales & Confidentialité IA',

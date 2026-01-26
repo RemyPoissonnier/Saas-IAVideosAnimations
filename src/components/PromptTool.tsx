@@ -20,7 +20,7 @@ export function PromptTool(props: PromptToolProps) {
 
   // 1. On définit la configuration des Selects ICI, à l'intérieur du composant
   // pour avoir accès à 'props.options' et 'props.setOptions'.
- const selectFields = [
+  const selectFields = [
     {
       id: "resolution",
       label: t("prompt.label.resolution"),
@@ -33,29 +33,29 @@ export function PromptTool(props: PromptToolProps) {
       onChange: (val: any) => {
         // Sécurité : si jamais votre Select renvoie quand même un event
         const valueToUse = val.target ? val.target.value : val;
-        
+
         props.setOptions({
           ...props.options,
           resolution: valueToUse as OptionsIaRP["resolution"],
         });
       },
     },
-    {
-      id: "ratio",
-      label: t("prompt.label.ratio"),
-      value: props.options.aspectRatio,
-      options: [
-        { value: "16:9", label: t("prompt.option.youtube") },
-        { value: "9:16", label: t("prompt.option.tiktok") },
-      ],
-      onChange: (val: any) => {
-        const valueToUse = val.target ? val.target.value : val;
-        props.setOptions({
-          ...props.options,
-          aspectRatio: valueToUse as OptionsIaRP["aspectRatio"],
-        });
-      },
-    },
+    // {
+    //   id: "ratio",
+    //   label: t("prompt.label.ratio"),
+    //   value: props.options.aspectRatio,
+    //   options: [
+    //     { value: "16:9", label: t("prompt.option.youtube") },
+    //     { value: "9:16", label: t("prompt.option.tiktok") },
+    //   ],
+    //   onChange: (val: any) => {
+    //     const valueToUse = val.target ? val.target.value : val;
+    //     props.setOptions({
+    //       ...props.options,
+    //       aspectRatio: valueToUse as OptionsIaRP["aspectRatio"],
+    //     });
+    //   },
+    // },
     {
       id: "duration",
       label: t("prompt.label.duration"),
@@ -82,41 +82,40 @@ export function PromptTool(props: PromptToolProps) {
         <TextType className="text-xs font-semibold uppercase tracking-[0.08em]">
           {t("prompt.title")}
         </TextType>
-        <TextType className="text-sm ">
-          {t("prompt.description")}
-        </TextType>
+        <TextType className="text-sm ">{t("prompt.description")}</TextType>
       </CardHeader>
 
       {/* ZONE DE PROMPT */}
-      <CardBody className="flex flex-col gap-2">
+      <CardBody className="flex flex-col gap-2 h-2/3">
         <textarea
           value={props.prompt}
           onChange={(e) => props.setPrompt(e.target.value)}
-          placeholder= {t("prompt.placeholder")}
-          className="min-h-[100px] resize-none rounded-xl p-2 border-slate-100 border-2"
+          placeholder={t("prompt.placeholder")}
+          className="min-h-[100px] resize-none rounded-xl p-2 h-full"
         />
         {/* {props.error && <div className="text-xs text-red-600">{props.error}</div>} */}
       </CardBody>
 
       {/* OPTIONS DE FORMAT (Grille compacte) */}
-      <CardFooter className="grid grid-cols-2 md:grid-cols-4 gap-3">
-       {selectFields.map((field) => (
-          <div key={field.id} className="space-y-1">
-            <Select
-              id={field.id}
-              label={field.label}
-              value={field.value}
-              onChange={field.onChange}
-              options={field.options}
-            />
-          </div>
-        ))}
+      <CardFooter className=" h-1/3 ">
+        <div className=" grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
+          {selectFields.map((field) => (
+            <div key={field.id} className="space-y-1">
+              <Select
+                id={field.id}
+                label={field.label}
+                value={field.value}
+                onChange={field.onChange}
+                options={field.options}
+              />
+            </div>
+          ))}
+        </div>
+        {/* ACTION BUTTON */}
+        <Button onClick={props.onGenerate} className="w-full">
+          {t("prompt.button")}
+        </Button>
       </CardFooter>
-
-      {/* ACTION BUTTON */}
-      <Button onClick={props.onGenerate} className="flex">
-        {t("prompt.button") || "Générer la vidéo"}
-      </Button>
     </Card>
   );
 }

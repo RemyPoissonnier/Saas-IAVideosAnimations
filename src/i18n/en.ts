@@ -270,7 +270,8 @@ const en = {
       buy: 'Buy',
       subscribe: 'Subscribe'
     },
-    note: 'Tokens burn based on duration, resolution, and selected model.'
+    note: 'Tokens burn based on duration, resolution, and selected model.',
+    simpleTitle: 'Simple and transparent pricing'
   },
   authPage: {
     tagline: 'Secure access',
@@ -307,7 +308,8 @@ const en = {
     signInSubtitle: 'Welcome back',
     forgotPassword: 'Forgot password ?',
     noAccount: 'Don\'t have an account?',
-    signupLink: 'Create one ?'
+    signupLink: 'Create one ?',
+    loginRequired: 'Please log in first!'
   },
   hero: {
     badge: 'Minimal prototype — cat AI video',
@@ -361,7 +363,8 @@ const en = {
   promo: {
     text: 'Flash Sale! Get -{{percent}}% on all token packs.',
     button: 'Get Offer',
-    code: 'CODE'
+    code: 'CODE',
+    offer: '🔥 SPECIAL OFFER: -{percent}% with code {code}!'
   },
   legal: {
     title: 'Legal Notice & AI Privacy',

@@ -5,6 +5,7 @@ import { useVideoGeneration } from "../components/hooks/videoGenerator";
 import PromptTool from "../components/PromptTool";
 import { useAuth } from "../context/AuthContext";
 import type { OptionsIaRP } from "../api/type";
+import { ResultExample } from "../components/ResultExample";
 
 type PromptProps = {
   onOpenAuth: () => void;
@@ -15,7 +16,7 @@ export function Prompt({ onOpenAuth }: PromptProps) {
 
   // 1. État local pour le texte (input)
   const [prompt, setPrompt] = useState<string>(
-    "Chat faisant la vaisselle, la camera est posé en bas"
+    "Chat faisant la vaisselle, la camera est posé en bas",
   ); //TODO I18N
 
   const [options, setOptions] = useState<OptionsIaRP>({
@@ -30,7 +31,7 @@ export function Prompt({ onOpenAuth }: PromptProps) {
 
   // 3. Handler qui fait le lien
   const handleGenerateClick = () => {
-    generateVideo({ prompt , options, userId: currentUser?.uid ?? "" });
+    generateVideo({ prompt, options, userId: currentUser?.uid ?? "" });
   };
 
   return (
@@ -56,7 +57,7 @@ export function Prompt({ onOpenAuth }: PromptProps) {
       {/* COLONNE DROITE : LE RÉSULTAT 
          S'affiche uniquement si un chargement ou un résultat est présent
       */}
-      {(loading || data?.outputUrl || error) && (
+      {loading || data?.outputUrl || error ? (
         <div className="md:w-1/2 w-full animate-in fade-in slide-in-from-bottom-4 duration-500">
           <ResultVideo
             isLoading={loading}
@@ -65,6 +66,8 @@ export function Prompt({ onOpenAuth }: PromptProps) {
             error={error}
           />
         </div>
+      ) : (
+        <ResultExample options={options} setOptions={setOptions} />
       )}
     </div>
   );
