@@ -248,7 +248,25 @@ const fr = {
       youtube: '16:9 (Youtube)',
       tiktok: '9:16 (TikTok/Reel)'
     },
-    description: 'Décrivez simplement votre idée et choisissez le format.'
+    enhance: {
+      text: 'Tu es un ingénieur de prompt expert pour Google Veo. Ta mission est de réécrire les descriptions des utilisateurs pour les transformer en chefs-d\'œuvre cinématographiques, soit créatif. Voici le prompt => ',
+      path: {
+        loading: 'Magie en cours...',
+        success: 'Prompt optimisé avec succès !',
+        error: 'Échec de l\'amélioration du prompt.'
+      },
+      modal: {
+        title: 'Optimiser votre prompt',
+        description: 'Notre IA va réécrire votre texte pour obtenir le meilleur résultat vidéo.',
+        warning: 'Cette action consommera {amount} tokens de votre solde.',
+        confirm: 'Améliorer ({amount} tokens)',
+        cancel: 'Attendre, je vais le faire moi-même'
+      }
+    },
+    description: 'Décrivez simplement votre idée et choisissez le format.',
+    exemple: {
+      description1: 'Un chef-d\'œuvre cinématographique à couper le souffle utilisant un long travelling continu (longue prise). La vidéo commence dans une forêt primitive et brumeuse, avec une perspective dramatique en contre-plongée. De vieux chênes imposants s\'élèvent vers une canopée douce et éthérée où la lumière dorée du soleil filtre à travers des particules de poussière dansantes. La caméra glisse doucement vers l\'avant à un rythme régulier, capturant les textures hyper détaillées de la mousse et des fougères. Puis, grâce à une transition visuelle fluide ou cachée derrière un gros tronc d\'arbre, le décor se transforme en un grand boulevard parisien au crépuscule. La caméra conserve exactement le même mouvement de travelling en contre-plongée et la même vitesse. Les rues pavées de Paris remplacent le sol de la forêt, reflétant la lueur chaleureuse des lampadaires vintage et l\'architecture haussmannienne emblématique. Au loin, la silhouette de la tour Eiffel se détache sur un ciel indigo profond. Photoréaliste, 8k, tourné sur pellicule 35 mm, très détaillé, mouvement fluide, éclairage atmosphérique.'
+    }
   },
   pricing: {
     title: 'Crédits et abonnements IA',
@@ -495,7 +513,8 @@ const fr = {
     yes: 'Oui',
     no: 'Non',
     empty: 'Aucun abonnement actif'
-  }
+  },
+  showcase: 'Demonstration'
 };
 
 export default fr;

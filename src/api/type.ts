@@ -9,9 +9,7 @@ export type IaGenerationMode =
 
 export type OptionsIaRP = {
   aspectRatio: "16:9" | "9:16";
-
   resolution: "720p" | "1080p";
-
   durationSeconds: "4" | "6" | "8";
 };
 

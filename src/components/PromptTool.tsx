@@ -4,6 +4,7 @@ import Card, { CardBody, CardFooter, CardHeader } from "./ui/Card";
 import TextType from "./ui/TextType";
 import type { OptionsIaRP } from "../api/type";
 import { Select } from "./ui/Select";
+import { EnhancingPB } from "./EnhancingPB";
 
 // On définit une prop pour remonter les infos au parent
 interface PromptToolProps {
@@ -76,7 +77,7 @@ export function PromptTool(props: PromptToolProps) {
   ];
 
   return (
-    <Card className="h-full p-3">
+    <Card className="h-full p-3 pb-12">
       {/* HEADER SIMPLE */}
       <CardHeader>
         <TextType className="text-xs font-semibold uppercase tracking-[0.08em]">
@@ -97,19 +98,22 @@ export function PromptTool(props: PromptToolProps) {
       </CardBody>
 
       {/* OPTIONS DE FORMAT (Grille compacte) */}
-      <CardFooter className=" h-1/3 ">
-        <div className=" grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
-          {selectFields.map((field) => (
-            <div key={field.id} className="space-y-1">
-              <Select
-                id={field.id}
-                label={field.label}
-                value={field.value}
-                onChange={field.onChange}
-                options={field.options}
-              />
-            </div>
-          ))}
+      <CardFooter className=" h-1/3 m-3 ">
+        <div className="flex justify-between">
+          <div className=" grid grid-cols-2 md:grid-cols-2 gap-4 mb-3">
+            {selectFields.map((field) => (
+              <div key={field.id} className="space-y-1">
+                <Select
+                  id={field.id}
+                  label={field.label}
+                  value={field.value}
+                  onChange={field.onChange}
+                  options={field.options}
+                />
+              </div>
+            ))}
+          </div>
+          <EnhancingPB setPrompt={props.setPrompt} prompt={props.prompt} />
         </div>
         {/* ACTION BUTTON */}
         <Button onClick={props.onGenerate} className="w-full">
