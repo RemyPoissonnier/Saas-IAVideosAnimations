@@ -28,4 +28,16 @@ export const ExampleVideos: ExampleVideo[] = [
     },
     thumbnail: "/images/Exemple1-169.png",
   },
+  {
+    id: 2,
+    // Utilisation d'une structure plus plate pour faciliter l'accès
+    title: "Forest",
+    prompt: "prompt.exemple.description2",
+    // On stocke les chemins dans un objet pour un accès direct : paths['16:9']
+    paths: {
+      "16:9": "/videos/Exemple2-169.mp4",
+      "9:16": "/videos/Exemple2-916.mp4",
+    },
+    thumbnail: "/images/Exemple1-169.png",
+  },
 ];

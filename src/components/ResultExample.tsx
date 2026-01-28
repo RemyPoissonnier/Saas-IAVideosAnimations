@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Smartphone, Monitor } from "lucide-react";
 import TextType from "./ui/TextType";
 import type { OptionsIaRP } from "../api/type";
 import { VideoCarrousel } from "./VideoCarrousel";
 import { ExampleVideos } from "./hooks/exempleVideo";
+import { useI18n } from "../i18n";
 
 // On définit les ratios possibles comme un type strict
 export type AspectRatio = "16:9" | "9:16";
@@ -27,25 +28,17 @@ export interface ExampleVideo {
 type ResultExampleProp = {
   options: OptionsIaRP;
   setOptions: (arg: OptionsIaRP) => void;
-  examples: ExampleVideo[]; // Ajout de la liste d'exemples
 };
 
 export function ResultExample({ options, setOptions }: ResultExampleProp) {
+  const {t} = useI18n()
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  // Auto-play du carrousel
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % ExampleVideos.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [ExampleVideos.length]);
 
   return (
     <div className="flex flex-col gap-6 w-full lg:max-w-md">
       {/* Header & Sélecteur de Format */}
       <div className="flex items-center justify-between">
-        <TextType variant="h3">Showcase</TextType>
+        <TextType variant="h3">{t('showcase')}</TextType>
 
         <div className="flex p-1 rounded-xl">
           <button

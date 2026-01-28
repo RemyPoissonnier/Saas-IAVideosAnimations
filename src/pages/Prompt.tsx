@@ -21,7 +21,7 @@ export function Prompt({ onOpenAuth }: PromptProps) {
 
   const [options, setOptions] = useState<OptionsIaRP>({
     resolution: "1080p",
-    aspectRatio: "9:16",
+    aspectRatio: "16:9",
     durationSeconds: "6",
   });
 
@@ -68,7 +68,7 @@ export function Prompt({ onOpenAuth }: PromptProps) {
         </div>
       ) : (
         <ResultExample options={options} setOptions={setOptions} />
-      )}
+      )} 
     </div>
   );
 }
