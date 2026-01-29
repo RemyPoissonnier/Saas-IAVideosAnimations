@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;600&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -7,7 +7,7 @@
 :root {
   color-scheme: dark;
   /* Dark Mode : Un fond sombre uni */
-  --color-bg: 7 9 15; 
+  --color-bg: 7 9 15;
   --color-surface: 20 16 6;
   --color-surface-strong: 26 20 10;
   --color-text: 244 236 210;
@@ -17,10 +17,10 @@
   --color-border: 120 100 70;
 }
 
-[data-theme='light'] {
+[data-theme="light"] {
   color-scheme: light;
   /* Light Mode : Un fond crème uni */
-  --color-bg: 255 252 245; 
+  --color-bg: 255 252 245;
   --color-surface: 255 255 250;
   --color-surface-strong: 252 247 232;
   --color-text: 35 25 10;
@@ -37,13 +37,28 @@
     @apply box-border;
   }
 
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  html {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    overflow-x: hidden; /* Prevent horizontal jitter */
+  }
   body {
     /* bg-bg applique la couleur unie définie dans les variables ci-dessus */
     @apply min-h-screen bg-bg text-text antialiased;
-    
+
     /* J'ai supprimé toute la propriété 'background-image' ici.
        Le rendu sera maintenant parfaitement lisse et mat. */
-    font-family: 'Space Grotesk', 'Inter', system-ui, -apple-system, sans-serif;
+    font-family:
+      "Space Grotesk",
+      "Inter",
+      system-ui,
+      -apple-system,
+      sans-serif;
   }
 
   a {
@@ -53,4 +68,25 @@
   button {
     font-family: inherit;
   }
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("./assets/fonts/Space_Grotesk/SpaceGrotesk-VariableFont_wght.ttf")
+    format("ttf");
+  /* font-weight: 300 700; */
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("./assets/fonts/Roboto_Slab/RobotoSlab-VariableFont_wght.ttf")
+    format("ttf");
+}
+
+@font-face {
+  font-family: "EB Garamond";
+  src: url("./assets/fonts/EB_Garamond/EBGaramond-VariableFont_wght.ttf")
+    format("ttf");
+  /* font-weight: 400; */
+  /* font-style: normal; */
 }

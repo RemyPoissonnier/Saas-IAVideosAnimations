@@ -1,7 +1,7 @@
 import React from "react";
 
 // Ajout de 'gradient' à la liste des variants
-type Variant = "h1" | "h2" | "h3" | "body" | "caption" | "gradient";
+type Variant = "h1" | "h2" | "h3" | "body" | "caption" | "gradient" | "custom";
 
 interface TextTypeProps {
   variant?: Variant;
@@ -15,22 +15,22 @@ const TextType: React.FC<TextTypeProps> = ({
   variant = "body",
   children,
   className = "",
-  id = "O",
+  id = "0",
   as,
 }) => {
   const styles: Record<Variant, string> = {
     // Styles existants
-    h1: "text-4xl md:text-6xl font-bold tracking-tighter text-gray-900 dark:text-white mb-6",
-    h2: "text-3xl md:text-4xl font-semibold tracking-tight text-gray-800 dark:text-gray-100 mb-4",
-    h3: "text-xl md:text-2xl font-medium text-gray-800 dark:text-gray-200 mb-3",
-    body: "text-base md:text-lg leading-relaxed text-gray-600 dark:text-gray-400",
+    h1: "text-4xl md:text-6xl font-bold tracking-tighter text-gray-900 dark:text-white mb-6 tracking-tighter font-[Roboto]",
+    h2: "text-3xl md:text-4xl font-semibold tracking-tight text-gray-800 dark:text-gray-100 mb-4  tracking-tight font-[Roboto]",
+    h3: "text-xl md:text-2xl font-medium text-gray-800 dark:text-gray-200 mb-3 font-[Roboto]",
+    body: "text-base md:text-base leading-relaxed text-gray-600 dark:text-gray-400 font-[Space Grotesk]",
     caption:
-      "text-sm text-gray-500 dark:text-gray-500 uppercase tracking-widest font-semibold",
+      "text-xs text-gray-500 dark:text-gray-500 uppercase tracking-widest font-semibold font-[Space Grotesk]",
 
     // --- NOUVEAU STYLE GRADIENT ANIMÉ ---
     // Note : On utilise des couleurs "Mistral/SaaS" (Orange -> Violet -> Bleu)
-    gradient: `
-     text-4xl md:text-6xl font-bold tracking-tighter mb-6
+    gradient: ` 
+     text-4xl md:text-6xl font-bold tracking-tighter mb-6 font-[Space Grotesk]
       bg-clip-text text-transparent 
       /* On définit manuellement le dégradé pour boucler : Jaune -> Orange -> Jaune */
       bg-[linear-gradient(to_right,#f2b33d,#D95d30,#f2B33D)]
@@ -38,6 +38,8 @@ const TextType: React.FC<TextTypeProps> = ({
       bg-[length:200%_auto]
       animate-text-gradient
     `,
+    custom: "text-gray-600 dark:text-gray-400",
+
   };
 
   // Si c'est 'gradient', on utilise par défaut un h1
@@ -47,7 +49,7 @@ const TextType: React.FC<TextTypeProps> = ({
       ? "h1"
       : variant === "body" || variant === "caption"
       ? "p"
-      : variant);
+      : variant) as React.ElementType ;
 
   return (
     <Component className={`${styles[variant]} ${className}`} id={id}>

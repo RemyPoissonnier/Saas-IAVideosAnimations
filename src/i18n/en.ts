@@ -250,7 +250,7 @@ const en = {
     },
     description: 'Simply describe your idea and choose the format.',
     enhance: {
-      text: 'You are a prompt engineer for Google Veo. Your mission is to rewrite user descriptions and turn them into cinematic masterpieces. Be creative. Here is the prompt =>',
+      text: 'You are a prompt engineer for Google Veo. Your mission is to rewrite user descriptions and turn them into cinematic masterpieces. Be creative. Your are a max caratere of 800. Here is the prompt =>',
       path: {
         loading: 'Magic in progress...',
         success: 'Prompt successfully optimized!',
@@ -262,12 +262,13 @@ const en = {
         warning: 'This action will consume {amount} tokens from your balance.',
         confirm: 'Enhance for {amount} tokens',
         cancel: 'Wait, I\'ll do it myself'
-      },
+      }
     },
     exemple: {
       description1: 'A breathtaking cinematic masterpiece using a continuous long tracking shot (long take). The video begins in a primeval, misty forest in a dramatic low-angle perspective (contre-plongée). Towering ancient oaks stretch toward a soft, ethereal canopy where golden sunlight filters through dancing dust motes. The camera glides smoothly forward at a steady pace, capturing hyper-detailed moss textures and ferns. Then, through a seamless visual morph or a hidden transition behind a large tree trunk, the scenery transforms into a grand Parisian boulevard at dusk. The camera maintains the exact same low-angle tracking motion and speed. The cobblestone streets of Paris replace the forest floor, reflecting the warm glow of vintage streetlamps and the iconic Haussmann architecture. In the distance, the silhouette of the Eiffel Tower emerges against a deep indigo sky. Photorealistic, 8k, shot on 35mm film, highly detailed, fluid motion, atmospheric lighting.',
       description2: 'Cinematic walk-and-talk in NYC, golden hour. A sharp, tenacious female journalist with a vintage mic pursues a charismatic, billionaire-style man in a tailored suit through a bustling Manhattan crowd. Camera: Smooth tracking side-shot, medium close-up. She asks with urgency: \'Sir, how do you stay so successful?\' Without stopping, he looks into the lens with a confident smirk and says: \'Simple... I use Whisker Studio.\' Background features blurred yellow cabs, tall buildings, and lens flares. Photorealistic, 8k, high contrast, shallow depth of field. The dialogue is clear, city noise is hushed for his answer. Professional film lighting, sharp textures, fluid motion.'
-    }
+    },
+    init: 'Cinematic close-up of a fluffy brown bear sitting in a sunlit forest, animatedly telling jokes to a small green snake coiled on a branch. The bear has expressive facial expressions and moving lips. Natural lighting, 4k, high detail, whimsical atmosphere.'
   },
   pricing: {
     title: 'IA credits & subscriptions',

@@ -16,7 +16,7 @@ export function Prompt({ onOpenAuth }: PromptProps) {
 
   // 1. État local pour le texte (input)
   const [prompt, setPrompt] = useState<string>(
-    "Chat faisant la vaisselle, la camera est posé en bas",
+   t('prompt.init'),
   ); //TODO I18N
 
   const [options, setOptions] = useState<OptionsIaRP>({
