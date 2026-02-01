@@ -80,7 +80,7 @@ export function PromptTool(props: PromptToolProps) {
     <Card className="h-full p-3 pb-12">
       {/* HEADER SIMPLE */}
       <CardHeader>
-        <TextType className="text-xs font-semibold uppercase tracking-[0.08em]">
+        <TextType variant="h3">
           {t("prompt.title")}
         </TextType>
         <TextType className="text-sm ">{t("prompt.description")}</TextType>

@@ -20,8 +20,8 @@ const TextType: React.FC<TextTypeProps> = ({
 }) => {
   const styles: Record<Variant, string> = {
     // Styles existants
-    h1: "text-4xl md:text-6xl font-bold tracking-tighter text-gray-900 dark:text-white mb-6 tracking-tighter font-[Roboto]",
-    h2: "text-3xl md:text-4xl font-semibold tracking-tight text-gray-800 dark:text-gray-100 mb-4  tracking-tight font-[Roboto]",
+    h1: "text-4xl md:text-6xl font-bold tracking-tighter text-gray-900 dark:text-white mb-6 font-[Roboto]",
+    h2: "text-3xl md:text-4xl font-semibold tracking-tight text-gray-800 dark:text-gray-100 mb-4 font-[Roboto]",
     h3: "text-xl md:text-2xl font-medium text-gray-800 dark:text-gray-200 mb-3 font-[Roboto]",
     body: "text-base md:text-base leading-relaxed text-gray-600 dark:text-gray-400 font-[Space Grotesk]",
     caption:
@@ -39,17 +39,16 @@ const TextType: React.FC<TextTypeProps> = ({
       animate-text-gradient
     `,
     custom: "text-gray-600 dark:text-gray-400",
-
   };
 
   // Si c'est 'gradient', on utilise par défaut un h1
   const Component =
     as ||
-    (variant === "gradient"
+    ((variant === "gradient"
       ? "h1"
       : variant === "body" || variant === "caption"
-      ? "p"
-      : variant) as React.ElementType ;
+        ? "p"
+        : variant) as React.ElementType);
 
   return (
     <Component className={`${styles[variant]} ${className}`} id={id}>

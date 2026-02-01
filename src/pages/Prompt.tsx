@@ -17,7 +17,7 @@ export function Prompt({ onOpenAuth }: PromptProps) {
   // 1. État local pour le texte (input)
   const [prompt, setPrompt] = useState<string>(
    t('prompt.init'),
-  ); //TODO I18N
+  ); 
 
   const [options, setOptions] = useState<OptionsIaRP>({
     resolution: "1080p",
