@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { ScrollSection } from "../components/ui/ScrollSection";
 import SplitText from "../components/ui/SplitText";
 import TextType from "../components/ui/TextType";
@@ -21,44 +22,54 @@ export function Landing() {
         <div className="flex flex-col md:flex-row w-full min-h-[400px] gap-8">
           {/* Left Side: Brand Identity */}
           <div className="w-full md:w-1/2 flex flex-col justify-center items-start">
-            <div className="flex flex-col">
-              <h1 className={brandBase}>Whisker</h1>
-              {/* Shift the second word using margins instead of absolute positioning */}
-              <h1 className={`${brandBase} ml-12 md:ml-24 -mt-7`}>Studio</h1>
-            </div>
+              <motion.div
+                initial={{ opacity: 0, filter: "blur(20px)", x: -50 }}
+                whileInView={{ opacity: 1, filter: "blur(0px)", x: 0 }}
+                viewport={{ margin: "-10% 0px -10% 0px" }} // Triggers when mostly in view
+                transition={{ duration: 1.2, ease: "easeOut" }}
+                className="flex flex-col"
+              >
+                <h1 className={brandBase}>Whisker</h1>
+                {/* Shift the second word using margins instead of absolute positioning */}
+                <h1 className={`${brandBase} ml-12 md:ml-24 -mt-7`}>Studio</h1>
+              </motion.div>
           </div>
 
-          {/* Right Side: Content */}
-          <div className="w-full md:w-1/2 rounded-xl bg-violet-500 flex items-center justify-center text-white">
+          <motion.div
+            initial={{ opacity: 0, filter: "blur(20px)", x: 50 }}
+            whileInView={{ opacity: 1, filter: "blur(0px)", x: 0 }}
+            viewport={{ margin: "-10% 0px -10% 0px" }} // Triggers when mostly in view
+            transition={{ duration: 1.2, ease: "easeOut" }}
+            className="w-full md:w-1/2 rounded-xl bg-violet-500 flex items-center justify-center text-white"
+          >
+            {/* Right Side: Content */}
             TEST CONTENT
-          </div>
+          </motion.div>
         </div>
 
-
         <div className="max-w-7xl mx-auto px-6">
-      {/* Section 1: Text Left, Image Right */}
-      <ScrollSection 
-        title="Modern Aesthetics" 
-        description="Experience a interface designed with precision and clarity. Every pixel serves a purpose."
-        imageColor="bg-violet-500"
-  
-      />
+          {/* Section 1: Text Left, Image Right */}
+          <ScrollSection
+            title="Modern Aesthetics"
+            description="Experience a interface designed with precision and clarity. Every pixel serves a purpose."
+            imageColor="bg-violet-500"
+          />
 
-      {/* Section 2: Text Right, Image Left */}
-      <ScrollSection 
-        title="Fluid Motion" 
-        description="Smooth transitions and reactive elements that respond to your every scroll."
-        imageColor="bg-blue-500"
-        reverse={true} 
-      />
+          {/* Section 2: Text Right, Image Left */}
+          <ScrollSection
+            title="Fluid Motion"
+            description="Smooth transitions and reactive elements that respond to your every scroll."
+            imageColor="bg-blue-500"
+            reverse={true}
+          />
 
-      {/* Section 3: Text Left, Image Right */}
-      <ScrollSection 
-        title="Built for Speed" 
-        description="Optimized performance that ensures your brand stays ahead of the curve."
-        imageColor="bg-emerald-500"
-      />
-    </div>
+          {/* Section 3: Text Left, Image Right */}
+          <ScrollSection
+            title="Built for Speed"
+            description="Optimized performance that ensures your brand stays ahead of the curve."
+            imageColor="bg-emerald-500"
+          />
+        </div>
       </div>
     </>
   );
