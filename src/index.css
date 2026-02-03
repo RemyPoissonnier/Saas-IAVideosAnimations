@@ -90,3 +90,16 @@
   /* font-weight: 400; */
   /* font-style: normal; */
 }
+
+/* ===== Animation ===== */
+.paper-icon {
+  width: 150px;
+  filter: drop-shadow(2px 4px 0px rgba(0,0,0,0.1)); /* Paper shadow */
+  animation: paper-shake 0.4s steps(2) infinite;
+}
+
+@keyframes paper-shake {
+  0% { transform: rotate(-3deg) translateX(-2px); }
+  50% { transform: rotate(3deg) translateX(2px); }
+  100% { transform: rotate(-3deg) translateX(-2px); }
+}
