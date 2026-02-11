@@ -1,7 +1,5 @@
-import { API_BASE } from "../components/hooks/apiClient";
+import { API_BASE } from "./index";
 import type { IaRequestPayload, IaResponse } from "./type";
-
-// const API_BASE = import.meta.env.VITE_IA_API_BASE ?? 'http://localhost:3000/api'
 
 /**
  * Send a generation request to the IA backend. The model is selectable via payload.model.

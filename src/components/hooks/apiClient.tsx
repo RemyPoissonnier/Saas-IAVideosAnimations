@@ -1,4 +1,4 @@
-export const API_BASE = "https://serverapiw-production.up.railway.app";
+import { API_BASE } from "../../api/index";
 
 // types.ts (ou en haut du fichier)
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
