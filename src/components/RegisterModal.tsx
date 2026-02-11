@@ -61,7 +61,7 @@ export function RegisterModal({ isOpen, onClose, onSuccess }: RegisterModalProps
 
     // 1. Validation : Les mots de passe correspondent-ils ?
     if (password !== confirmPassword) {
-      setError("Les mots de passe ne correspondent pas.");
+      setError(t("register.error.dontMatch"));
       setIsLoading(false);
       return;
     }
@@ -89,14 +89,14 @@ export function RegisterModal({ isOpen, onClose, onSuccess }: RegisterModalProps
       console.error(err);
       if (err instanceof FirebaseError) {
         if (err.code === 'auth/email-already-in-use') {
-          setError(t("register.error.pseudoAlUsed"));
+          setError(t("register.error.emailUsed"));
         } else if (err.code === 'auth/weak-password') {
           setError(t("register.error.weakpw"));
         } else {
-          setError("Erreur : " + err.message);
+          setError(t("register.error.prefix") + err.message);
         }
       } else {
-        setError("Une erreur inattendue est survenue.");
+        setError(t("register.error.generic"));
       }
     } finally {
       setIsLoading(false);
@@ -139,7 +139,7 @@ export function RegisterModal({ isOpen, onClose, onSuccess }: RegisterModalProps
               value={pseudo}
               onChange={(e) => setPseudo(e.target.value)}
               className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none transition"
-              placeholder="Votre pseudo"
+              placeholder={t("register.pseudoPlaceholder")}
               required
             />
           </div>
@@ -152,7 +152,7 @@ export function RegisterModal({ isOpen, onClose, onSuccess }: RegisterModalProps
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-indigo-500 outline-none transition"
-              placeholder="email@exemple.com"
+              placeholder={t("register.emailPlaceholder")}
               required
             />
           </div>
@@ -169,17 +169,17 @@ export function RegisterModal({ isOpen, onClose, onSuccess }: RegisterModalProps
             />
             {/* Visual Feedback for Password Rules */}
             <ul className="grid grid-cols-2 gap-1 mt-2 pl-1">
-              <CriteriaItem met={passwordCriteria.length} label="8+ caractères" />{/* TODO I18N*/}
-              <CriteriaItem met={passwordCriteria.upper} label="1 Majuscule" />
-              <CriteriaItem met={passwordCriteria.lower} label="1 Minuscule" />
-              <CriteriaItem met={passwordCriteria.digit} label="1 Chiffre" />
-              <CriteriaItem met={passwordCriteria.special} label="1 Caractère spécial" />
+              <CriteriaItem met={passwordCriteria.length} label={t("register.criteria.length")} />
+              <CriteriaItem met={passwordCriteria.upper} label={t("register.criteria.upper")} />
+              <CriteriaItem met={passwordCriteria.lower} label={t("register.criteria.lower")} />
+              <CriteriaItem met={passwordCriteria.digit} label={t("register.criteria.digit")} />
+              <CriteriaItem met={passwordCriteria.special} label={t("register.criteria.special")} />
             </ul>
           </div>
 
           {/* Confirm Password Input */}
           <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-300 uppercase">Confirmer le mot de passe</label>
+            <label className="text-xs font-semibold text-slate-300 uppercase">{t("register.confirmPw")}</label>
             <input 
               type="password" 
               value={confirmPassword}
@@ -192,7 +192,7 @@ export function RegisterModal({ isOpen, onClose, onSuccess }: RegisterModalProps
               required
             />
              {confirmPassword && password !== confirmPassword && (
-              <p className="text-xs text-red-400 mt-1">Les mots de passe ne correspondent pas.</p>
+              <p className="text-xs text-red-400 mt-1">{t("register.error.dontMatch")}</p>
             )}
           </div>
 

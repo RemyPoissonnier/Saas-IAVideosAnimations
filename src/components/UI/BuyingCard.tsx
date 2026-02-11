@@ -4,112 +4,132 @@ import TextType from "./TextType";
 import Button from "./Button";
 import Pill from "./Pill";
 import Coin, { type coinType } from "./Coin";
-import { PolarEmbedCheckout } from "@polar-sh/checkout/embed";
+import { useI18n } from "../../i18n";
+import { useCurrency } from "../hooks/useCurrency";
 
-export type propBuyCard = {
+/**
+ * 1. Props Definition: Define BuyingCardProps interface with 
+ * productName, price, description, imageUrl, and extra functional props.
+ */
+export interface BuyingCardProps {
+  productName: string;
+  price: number;
+  description: string;
+  imageUrl?: string;
   coinType?: coinType;
   onClick?: () => void;
   isActive?: boolean;
-  sold?: number; // Valeur décimale attendue (ex: 0.20 pour 20%) ou pourcentage (voir note en bas)
+  sold?: number; // Decimal value expected (e.g., 0.30 for 30%)
   isSubcription?: boolean;
-  cost: number;
-  title: string;
-  text: string;
   polarId: string;
-};
+}
 
-// TODO I18N
-export const BuyingCard = (props: propBuyCard) => {
-  useEffect(() => {
-    PolarEmbedCheckout.init();
-  }, []);
-
-  // Logique de calcul du prix remisé
-  const hasDiscount = props.sold !== undefined && props.sold > 0;
+/**
+ * BuyingCard Component
+ * Displays a product or subscription plan with its information and a "Buy Now" button.
+ */
+export const BuyingCard = (props: BuyingCardProps) => {
+  const { t } = useI18n();
+  const { convertPrice, currencySymbol, isLoading } = useCurrency();
   
-  // NOTE: Ta formule "cost - (cost * solde)" implique que solde est un décimal (ex: 0.2).
-  // Si ton solde est un entier (ex: 20 pour 20%), remplace par : (props.cost * (props.sold! / 100))
-  const discountValue = hasDiscount ? props.cost * props.sold! : 0;
-  const finalPrice = props.cost - discountValue;
+  // Convert price based on locale (USD -> EUR if needed)
+  const convertedPrice = convertPrice(props.price);
 
-  // Formatage pour éviter les décimales trop longues (optionnel, retire si tu veux des entiers)
+  // Discount calculation logic using converted price
+  const hasDiscount = props.sold !== undefined && props.sold > 0;
+  const discountValue = hasDiscount ? convertedPrice * props.sold! : 0;
+  const finalPrice = convertedPrice - discountValue;
+  
   const displayPrice = Number.isInteger(finalPrice) ? finalPrice : finalPrice.toFixed(2);
+  const displayOriginalPrice = Number.isInteger(convertedPrice) ? convertedPrice : convertedPrice.toFixed(2);
 
-  // Cette fonction détermine le texte du bouton
+  // Determine button label
   const buttonLabel = props.isSubcription
     ? props.isActive
-      ? "Change subscription"
-      : "Subscribe"
-    : "Purchase";
-
-  // Cette fonction rend le bouton visuel
-  const renderButton = () => (
-    <Button
-      className=" w-full mt-auto "
-      onClick={props.onClick}
-      variant={props.isActive ? "secondary" : "primary"}
-    >
-      {buttonLabel}
-    </Button>
-  );
+      ? t("pricing.changeSub") || "Change subscription"
+      : t("pricing.subscribe") || "Subscribe"
+    : t("pricing.purchase") || "Buy Now";
 
   return (
+    /**
+     * 2. Card Structure: Implement a div with Tailwind CSS classes for layout and styling.
+     * (Wrapped in our Card component for theme consistency)
+     */
     <Card
       variant="default"
-      className={`h-full relative overflow-visible ${
-        props.isActive ? "mt-3" : ""
+      className={`h-full relative overflow-visible transition-all duration-300 hover:scale-[1.02] ${
+        props.isActive ? "mt-3 border-indigo-500 shadow-lg shadow-indigo-500/20" : ""
       }`}
     >
-      {/* Badge "Current Plan" */}
+      {/* 4. Action Button: Badge for current plan */}
       {props.isActive && (
         <Pill
           isActive={false}
-          className="absolute -top-3 left-1/2 -translate-x-1/2"
-          label="current plan"
+          className="absolute -top-3 left-1/2 -translate-x-1/2 z-10"
+          label={t("pricing.currentPlan") || "current plan"}
         />
       )}
 
-      {/* Badge "Promo" (Optionnel mais recommandé pour le marketing) */}
+      {/* Promo Badge */}
       {hasDiscount && !props.isActive && (
-        <div className="absolute top-2 right-2 bg-red-500/10 text-red-500 text-xs font-bold px-2 py-1 rounded-full border border-red-500/20">
-            -{props.sold! * 100}%
+        <div className="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full z-10 shadow-sm">
+            -{Math.round(props.sold! * 100)}%
         </div>
       )}
 
-      <CardBody className="h-full flex flex-col">
-        <Coin type={props.coinType ?? "bronze"} />
+      <CardBody className="h-full flex flex-col p-6">
         
-        <TextType variant="h3" className="text-center mt-2">
-          {props.title}
+        {/* 3. Image Display: Use <img> tag if imageUrl is provided, otherwise fallback to Coin icon */}
+        <div className="flex justify-center mb-4 min-h-[80px] items-center">
+          {props.imageUrl ? (
+            <img 
+              src={props.imageUrl} 
+              alt={props.productName} 
+              className="w-20 h-20 object-contain rounded-lg shadow-sm"
+            />
+          ) : (
+            <Coin type={props.coinType ?? "bronze"} />
+          )}
+        </div>
+        
+        {/* 4. Product Info: Display productName */}
+        <TextType variant="h3" className="text-center mt-2 font-bold line-clamp-1">
+          {props.productName}
         </TextType>
 
-        {/* --- ZONE DE PRIX MODIFIÉE --- */}
-        <div className="flex flex-col items-center my-1">
-          {hasDiscount ? (
+        {/* 4. Product Info: Display price with optional discount styling */}
+        <div className="flex flex-col items-center my-3 min-h-[60px] justify-center">
+          {isLoading ? (
+             <div className="animate-pulse bg-gray-200 h-8 w-24 rounded"></div>
+          ) : hasDiscount ? (
             <>
-              {/* Ancien prix barré */}
               <TextType variant="body" className="line-through text-gray-400 text-sm mb-[-5px]">
-                {props.cost} $
+                {displayOriginalPrice} {currencySymbol}
               </TextType>
-              {/* Nouveau prix calculé */}
               <TextType variant="gradient" className="text-center text-3xl font-bold">
-                {displayPrice} $
+                {displayPrice} {currencySymbol}
               </TextType>
             </>
           ) : (
-            /* Prix standard sans réduction */
-            <TextType variant="gradient" className="text-center">
-              {props.cost} $
+            <TextType variant="gradient" className="text-center text-3xl font-bold">
+              {displayPrice} {currencySymbol}
             </TextType>
           )}
         </div>
-        {/* ----------------------------- */}
 
-        <TextType variant="body" className="mt-2 text-center text-gray-500 mb-4">
-          {props.text}
+        {/* 4. Product Info: Display description */}
+        <TextType variant="body" className="mt-2 text-center text-gray-500 mb-6 flex-grow text-sm leading-relaxed">
+          {props.description}
         </TextType>
         
-        {renderButton()}
+        {/* 5. Action Button: Include a "Buy Now" button with an onClick handler */}
+        <Button
+          className="w-full mt-auto font-bold py-3"
+          onClick={props.onClick}
+          variant={props.isActive ? "secondary" : "primary"}
+        >
+          {buttonLabel}
+        </Button>
       </CardBody>
     </Card>
   );

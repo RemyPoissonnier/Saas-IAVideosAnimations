@@ -1,22 +1,40 @@
 import AuthPanel from "../components/AuthPanel";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useI18n } from "../i18n";
+import SEO from "../components/SEO";
 
 type LoginProps = {
-  onBackHome: () => void;
+  onAuthComplete: () => void;
 };
 
-export function Login({ onBackHome }: LoginProps) {
+export function Login({ onAuthComplete }: LoginProps) {
   const { t } = useI18n();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // On récupère la page d'où vient l'utilisateur (s'il a été redirigé par ProtectedRoute)
+  const from = location.state?.from?.pathname || "/home";
 
   const handleHomeClick = () => {
-    navigate("/"); 
+    navigate("/");
   };
 
+  const handleAuthComplete = () => {
+    // Si on a une redirection prévue, on y va, sinon on utilise le callback par défaut (qui va vers /home)
+    if (from !== "/home") {
+      navigate(from, { replace: true });
+    } else {
+      onAuthComplete();
+    }
+  };
 
   return (
     <div className="grid min-h-[70vh] grid-cols-1 gap-6 lg:grid-cols-[1.1fr,1fr]">
+      <SEO 
+        title={t("authPage.title")} 
+        description={t("authPage.subtitle")} 
+        url="https://whisker.studio/login"
+      />
       <div
         className="relative flex-col gap-4 overflow-hidden rounded-3xl border 
       border-border/60 bg-gradient-to-br from-accent/20 
@@ -51,18 +69,18 @@ export function Login({ onBackHome }: LoginProps) {
           </video>
         </div>
         <p className="text-xs text-text/80">{t("authPage.videoHint")}</p>
-        <button 
-            type="button" // Bonne pratique pour éviter les submits involontaires
-            className="mt-auto flex text-left hover:opacity-80 transition-opacity relative z-10 
-            cursor-pointer hover:text-orange-500" 
-            onClick={handleHomeClick}
-          >
-            {t("nav.backHome")}
-          </button>
+        <button
+          type="button" // Bonne pratique pour éviter les submits involontaires
+          className="mt-auto flex text-left hover:opacity-80 transition-opacity relative z-10 
+            cursor-pointer hover:text-orange-500"
+          onClick={handleHomeClick}
+        >
+          {t("nav.backHome")}
+        </button>
       </div>
 
       <div className="flex items-stretch justify-center">
-        <AuthPanel onAuthComplete={onBackHome} />
+        <AuthPanel onAuthComplete={handleAuthComplete} />
       </div>
     </div>
   );

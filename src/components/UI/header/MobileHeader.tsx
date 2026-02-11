@@ -38,6 +38,7 @@ export default function MobileHeader({ onOpenAuth, tokensHref }: HeaderMProps) {
 
   // States
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isPromptOpen, setIsPromptOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Lock body scroll
@@ -99,9 +100,48 @@ export default function MobileHeader({ onOpenAuth, tokensHref }: HeaderMProps) {
                 <MobileLink href="/home" onClick={() => setIsMobileMenuOpen(false)}>
                   {t("nav.home")}
                 </MobileLink>
-                <MobileLink href="/prompt" onClick={() => setIsMobileMenuOpen(false)}>
-                  {t("nav.prompt")}
-                </MobileLink>
+                
+                {/* Prompt Accordion */}
+                <div className="w-full">
+                  <button
+                    onClick={() => setIsPromptOpen(!isPromptOpen)}
+                    className="flex items-center justify-center gap-2 mx-auto text-3xl font-medium tracking-tight hover:text-accent transition-colors"
+                  >
+                    {t("nav.prompt")}
+                    <motion.div
+                      animate={{ rotate: isPromptOpen ? 180 : 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <FontAwesomeIcon icon={faAngleDown} className="text-xl" />
+                    </motion.div>
+                  </button>
+                  <AnimatePresence>
+                    {isPromptOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden flex flex-col gap-4 mt-4"
+                      >
+                        <Link
+                          to="/prompt"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          className="text-xl opacity-80 hover:opacity-100 hover:text-accent"
+                        >
+                          {t("nav.promptOptions.standard")}
+                        </Link>
+                        <Link
+                          to="/prompt/slop-generator"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          className="text-xl opacity-80 hover:opacity-100 hover:text-accent"
+                        >
+                          {t("nav.promptOptions.slop")}
+                        </Link>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
                 <MobileLink href={tokensHref} onClick={() => setIsMobileMenuOpen(false)}>
                   {t("nav.tokens")}
                 </MobileLink>

@@ -9,6 +9,10 @@ const fr = {
     home: 'Accueil',
     tokens: 'Jetons',
     prompt: 'Prompt',
+    promptOptions: {
+      standard: 'Générateur Standard',
+      slop: 'Générateur Slop'
+    },
     selectAnimal: 'Choisir la page',
     settings: 'Paramètres',
     language: 'Langue',
@@ -21,6 +25,19 @@ const fr = {
   },
   landing: {
     title: 'Une plateforme unique pour vos rendus 2D et 3D',
+    section1: {
+      text: 'Décrivez simplement votre vision. Gemini agit comme votre scénariste personnel, transformant une simple phrase en une consigne riche de détails, de textures et de mouvements pour une précision inégalée.',
+      title: 'Esquissez vos intentions'
+    },
+    section2: {
+      text: 'Voyez vos concepts s\'animer avec la fluidité de Veo 3. Qu\'il s\'agisse d\'un effet papier découpé ou d\'une scène de film complexe, notre moteur de rendu capture chaque nuance pour un résultat vibrant d\'originalité.',
+      title: 'Donnez vie au décor'
+    },
+    section3: {
+      text: 'Gardez le contrôle total sur votre production. Ajustez, affinez et régénérez en un clic. Notre interface intuitive vous permet de sculpter vos vidéos comme si vous manipuliez de la pellicule réelle, la vitesse de l\'IA en plus.',
+      title: 'Maîtrisez chaque image'
+    },
+    description: 'La référence de la création de contenu vidéo : transformez vos idées en chefs-d\'œuvre cinématographiques grâce à la puissance combinée de Veo 3 et de l\'intelligence créative de Gemini.'
   },
   prompt: {
     title: 'GÉNÉRATEUR',
@@ -28,6 +45,40 @@ const fr = {
     simpleTitle: 'Mode rapide TikTok',
     simpleDesc: 'Tu as 20s ? Tape ton idée, choisis 2D ou 3D et lance le rendu.',
     button: 'Générer la vidéo',
+    history: {
+      title: 'Prompts Récents',
+      usageHint: 'Cliquez à nouveau pour copier dans le presse-papier',
+      copied: 'Copié !'
+    },
+    slop: {
+      title: 'Générateur Slop',
+      subtitle: 'Mélangez les catégories pour générer 5 variations virales.',
+      sections: {
+        unique: 'Éléments Centraux (Constants)',
+        lists: 'Variables (Mélange & Match)'
+      },
+      fields: {
+        action: 'Action',
+        context: 'Contexte',
+        cinematography: 'Cinématographie',
+        subject: 'Sujet',
+        style: 'Style & Ambiance',
+        placeholders: {
+          action: 'Mange des spaghettis avec les pattes...',
+          context: 'Dans une cuisine néon futuriste...',
+          cinematography: 'Ajouter angles (ex: Gros plan, Plan large)...',
+          subject: 'Ajouter sujets (ex: Chat soyeux, Chien grincheux)...',
+          style: 'Ajouter styles (ex: Cinématique, Pixar, VHS)...'
+        }
+      },
+      button: 'GÉNÉRER 5 VARIATIONS',
+      loading: 'GÉNÉRATION...',
+      varLoading: 'Génération var #',
+      download: 'Télécharger',
+      downloadAll: 'Tout Télécharger (ZIP)',
+      charLimit: 'caractères',
+      limitReached: 'Limite atteinte (max 15 items par catégorie)'
+    },
     resultTitle: 'Aperçu',
     outputFormat: 'Format de sortie',
     confirmRun: 'Je valide le rendu vidéo',
@@ -112,7 +163,7 @@ const fr = {
       tiktok: '9:16 (TikTok/Reel)'
     },
     enhance: {
-      text: 'Tu es un ingénieur de prompt expert pour Google Veo. Ta mission est de réécrire les descriptions des utilisateurs pour les transformer en chefs-d\'œuvre cinématographiques, soit créatif. Tu as un maximum de 800 caractéres. Voici le prompt => ',
+      text: 'Tu es un ingénieur de prompt expert pour Google Veo. Ta mission est de réécrire les descriptions des utilisateurs pour les transformer en chefs-d\'œuvre cinématographiques, soit créatif. Tu as un maximum de 1500 caractéres. Voici le prompt => ',
       path: {
         loading: 'Magie en cours...',
         success: 'Prompt optimisé avec succès !',
@@ -189,7 +240,21 @@ const fr = {
     socialNote: 'Les connexions sociales sont simulées localement pour la démo.',
     signInTitle: 'Bon retour parmis nous',
     signInSubtitle: 'Bonjour',
-    forgotPassword: 'Mot de passe oublié ?',
+    forgotPassword: {
+      title: 'Mot de passe oublié ?',
+      subtitle: 'Entrez votre email et nous vous enverrons un lien pour réinitialiser votre mot de passe.',
+      emailLabel: 'Email',
+      emailPlaceholder: 'email@exemple.com',
+      buttonSend: 'Envoyer le lien',
+      buttonLoading: 'Envoi en cours...',
+      successMessage: 'Un email de réinitialisation a été envoyé ! Vérifiez vos spams.',
+      error: {
+        userNotFound: 'Aucun compte n\'est associé à cet email.',
+        invalidEmail: 'L\'adresse email est invalide.',
+        generic: 'Une erreur inattendue est survenue.',
+        prefix: 'Erreur : '
+      }
+    },
     noAccount: 'Pas de compte ?',
     signupLink: 'Créez-en un.',
     loginRequired: 'Connectez-vous d\'abord !'
@@ -235,12 +300,26 @@ const fr = {
     pw: 'Mot de passe',
     indication: 'Créez votre compte afin d\'accéder aux fonctionnalités',
     pseudo: 'Pseudo',
+    pseudoPlaceholder: 'Votre pseudo',
+    emailPlaceholder: 'email@exemple.com',
+    confirmPw: 'Confirmer le mot de passe',
     loading: 'Chargement...',
     register: 'S\'inscrire',
+    criteria: {
+      length: '8+ caractères',
+      upper: '1 Majuscule',
+      lower: '1 Minuscule',
+      digit: '1 Chiffre',
+      special: '1 Caractère spécial'
+    },
     error: {
+      dontMatch: 'Les mots de passe ne correspondent pas.',
       pseudoAlUsed: 'Pseudo déjà utilisé',
+      emailUsed: 'Cet email est déjà utilisé.',
       weakpw: 'Mot de passe trop faible',
-      pw: 'Minimum 8 carateres, et au moins 1 lettre et 1 nombre'
+      pw: 'Minimum 8 carateres, et au moins 1 lettre et 1 nombre',
+      generic: 'Une erreur inattendue est survenue.',
+      prefix: 'Erreur : '
     }
   },
   promo: {
@@ -366,7 +445,8 @@ const fr = {
     madeWith: 'Fait avec ❤️ en France'
   },
   common: {
-    na: 'N/A'
+    na: 'N/A',
+    currency: '€'
   },
   subscription: {
     title: 'Gestion de l\'abonnement',
@@ -379,7 +459,8 @@ const fr = {
     no: 'Non',
     empty: 'Aucun abonnement actif'
   },
-  showcase: 'Demonstration'
+  showcase: 'Demonstration',
+  start: 'Commencer'
 };
 
 export default fr;

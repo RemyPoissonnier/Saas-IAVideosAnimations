@@ -1,5 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics, setAnalyticsCollectionEnabled } from "firebase/analytics";
+import { getStorage } from "firebase/storage";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -14,8 +16,10 @@ const app = initializeApp(firebaseConfig);
 
 // 1. On initialise Analytics
 const analytics = getAnalytics(app);
-
 // 2. IMPORTANT : On désactive la collecte par défaut !
-setAnalyticsCollectionEnabled(analytics, false); 
+setAnalyticsCollectionEnabled(analytics, false);
 
-export { app, analytics };
+const storage = getStorage(app);
+const db = getFirestore(app);
+
+export { app, analytics, storage, db };

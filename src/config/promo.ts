@@ -8,10 +8,10 @@ export const PROMO_CONFIG = {
   endDate: "2026-02-20T23:59:59", 
   
   // Le pourcentage (pour l'affichage)
-  discountPercent: 50,
+  discountPercent: 30,
   
   // Le code promo (optionnel, pour affichage)
-  code: "VIO50",
+  code: "VIO30",
 
   // idDiscount
   discountId : "fd21a68b-b71c-4fa1-b507-fa19e14d87e0",

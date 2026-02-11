@@ -1,12 +1,19 @@
 import { useI18n } from "../i18n";
 import { LegalSectionLayout } from "../components/legal/LegalSectionLayout";
 import TextType from "../components/ui/TextType";
+import SEO from "../components/SEO";
 
 export default function Legal() {
   const { t } = useI18n();
 
   return (
     <div className="gap-2">
+      <SEO 
+        title={t("legal.pageTitle")} 
+        description={t("legal.pageSubtitle")} 
+        url="https://whisker.studio/legal"
+        type="article"
+      />
       <TextType variant="gradient" id="legalTitle">
         {t("legal.pageTitle")}
       </TextType>

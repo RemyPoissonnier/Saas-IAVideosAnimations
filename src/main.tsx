@@ -8,6 +8,7 @@ import { ThemeProvider } from "./theme.tsx";
 import { BrowserRouter } from "react-router-dom"; // <--- Import essentiel
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"; // 👈 Import
 import ScrollToTop from "./components/ScrollToTop.tsx";
+import { HelmetProvider } from "react-helmet-async";
 
 // On configure le client
 const queryClient = new QueryClient({
@@ -21,17 +22,19 @@ const queryClient = new QueryClient({
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter>
-      <ThemeProvider>
-        <I18nProvider>
-          <AuthProvider>
-            <ScrollToTop />
-            <QueryClientProvider client={queryClient}>
-              <App />
-            </QueryClientProvider>
-          </AuthProvider>
-        </I18nProvider>
-      </ThemeProvider>
-    </BrowserRouter>
+    <HelmetProvider>
+      <BrowserRouter>
+        <ThemeProvider>
+          <I18nProvider>
+            <AuthProvider>
+              <ScrollToTop />
+              <QueryClientProvider client={queryClient}>
+                <App />
+              </QueryClientProvider>
+            </AuthProvider>
+          </I18nProvider>
+        </ThemeProvider>
+      </BrowserRouter>
+    </HelmetProvider>
   </StrictMode>,
 );

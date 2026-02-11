@@ -18,6 +18,7 @@ interface PromptToolProps {
 
 export function PromptTool(props: PromptToolProps) {
   const { t } = useI18n();
+  const MAX_PROMPT = 1500;
 
   // 1. On définit la configuration des Selects ICI, à l'intérieur du composant
   // pour avoir accès à 'props.options' et 'props.setOptions'.
@@ -77,9 +78,9 @@ export function PromptTool(props: PromptToolProps) {
   ];
 
   return (
-    <Card className="h-full p-3 pb-12">
+    <Card className="flex flex-col h-full p-3">
       {/* HEADER SIMPLE */}
-      <CardHeader>
+      <CardHeader className="mb-2">
         <TextType variant="h3">
           {t("prompt.title")}
         </TextType>
@@ -87,20 +88,31 @@ export function PromptTool(props: PromptToolProps) {
       </CardHeader>
 
       {/* ZONE DE PROMPT */}
-      <CardBody className="flex flex-col gap-2 h-2/3">
+      <CardBody className="flex flex-col gap-2 flex-1 p-0 relative">
         <textarea
           value={props.prompt}
           onChange={(e) => props.setPrompt(e.target.value)}
+          maxLength={MAX_PROMPT}
           placeholder={t("prompt.placeholder")}
-          className="min-h-[100px] resize-none rounded-xl p-2 h-full"
+          className="min-h-[150px] resize-none rounded-xl p-3 w-full flex-1 border border-amber-200 dark:border-amber-800 focus:ring-2 focus:ring-orange-500 outline-none transition-all"
         />
-        {/* {props.error && <div className="text-xs text-red-600">{props.error}</div>} */}
+        
+        {/* CHARACTER COUNTER */}
+        <div className={`absolute bottom-2 right-3 text-[10px] font-mono font-bold px-2 py-0.5 rounded-md backdrop-blur-sm border ${
+          props.prompt.length >= MAX_PROMPT 
+            ? "text-red-600 border-red-200 bg-red-50/80 animate-pulse" 
+            : props.prompt.length >= MAX_PROMPT * (0.90)
+            ? "text-orange-600 border-orange-200 bg-orange-50/80"
+            : "text-amber-500 border-amber-100 bg-amber-50/50"
+        }`}>
+          {props.prompt.length} / {MAX_PROMPT}
+        </div>
       </CardBody>
 
       {/* OPTIONS DE FORMAT (Grille compacte) */}
-      <CardFooter className=" h-1/3 m-3 ">
-        <div className="flex justify-between">
-          <div className=" grid grid-cols-2 md:grid-cols-2 gap-4 mb-3">
+      <CardFooter className="mt-4 p-0">
+        <div className="flex justify-between items-end mb-4">
+          <div className="grid grid-cols-2 gap-4">
             {selectFields.map((field) => (
               <div key={field.id} className="space-y-1">
                 <Select
@@ -116,7 +128,7 @@ export function PromptTool(props: PromptToolProps) {
           <EnhancingPB setPrompt={props.setPrompt} prompt={props.prompt} />
         </div>
         {/* ACTION BUTTON */}
-        <Button onClick={props.onGenerate} className="w-full">
+        <Button onClick={props.onGenerate} className="w-full py-3 shadow-lg">
           {t("prompt.button")}
         </Button>
       </CardFooter>

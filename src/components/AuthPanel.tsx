@@ -1,19 +1,15 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 import { useI18n } from "../i18n";
-import { useAuth } from "../context/AuthContext";
+import { auth, useAuth } from "../context/AuthContext";
 import { RegisterModal } from "./RegisterModal";
 import { ForgotPasswordModal } from "./forgotPasswordModal";
 import Button from "./ui/Button";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 type SocialProvider = "google";
-
-const providerProfiles: Record<
-  SocialProvider,
-  { name: string; email: string }
-> = {
-  google: { name: "Google user", email: "google.user@example.com" },
-};
 
 type AuthPanelProps = {
   onAuthComplete?: () => void;
@@ -36,10 +32,15 @@ export function AuthPanel({
     if (onAuthComplete) onAuthComplete();
   };
 
-  const handleSocialSignIn = (provider: SocialProvider) => {
-    // const profile = providerProfiles[provider]
-    // login(profile) // Assuming your auth context handles social login similarly
-    finishAuthFlow();
+  const loginWithGoogle = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
+      return result.user;
+    } catch (error) {
+      console.error("Error with Google Sign-In", error);
+      throw error;
+    }
   };
 
   const handleManualLogin = async (event: FormEvent<HTMLFormElement>) => {
@@ -55,15 +56,27 @@ export function AuthPanel({
     }
   };
 
-   const handleGuestLogin = async () => {
-    const gEmail = "test3@gmail.com"
-    const gPwd = "JeSuisUnTest34@"
+  const handleGuestLogin = async () => {
+    const gEmail = "test3@gmail.com";
+    const gPwd = "JeSuisUnTest34@";
 
     try {
       await login(gEmail, gPwd);
       finishAuthFlow();
     } catch (err) {
       setError("Invalid email or password"); // You might want to add a translation key here
+    }
+  };
+
+  const handleSocialSignIn = async (provider: SocialProvider) => {
+    setError("");
+    try {
+      if (provider === "google") {
+        await loginWithGoogle(); // 2. Appel de la connexion Firebase
+        finishAuthFlow();
+      }
+    } catch (err: any) {
+      setError(err.message || "Failed to login with Google");
     }
   };
 
@@ -75,7 +88,7 @@ export function AuthPanel({
           <h3 className="text-xl font-semibold text-text">
             {t("auth.signInTitle") || "Welcome Back"}
           </h3>
-          <p >
+          <p>
             {t("auth.signInSubtitle") ||
               "Enter your credentials to access your account"}
           </p>
@@ -83,60 +96,52 @@ export function AuthPanel({
 
         <div className="space-y-3">
           {/* Social Login Section */}
-          <div >{t("auth.socialTitle")}</div>
+          <div>{t("auth.socialTitle")}</div>
           <div className="grid grid-cols-1 gap-2">
             <Button
-              className="flex items-center justify-center gap-3 rounded-xl border border-border/60 bg-white px-4 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:shadow"
+              className="flex items-center justify-center gap-3 rounded-xl border border-border/60
+              px-4 py-3 text-sm shadow-sm transition 
+              hover:-translate-y-0.5 hover:shadow dark:bg-yellow-500 font-bold
+              text-orange-600 dark:text-amber-900"
               onClick={() => handleSocialSignIn("google")}
             >
-              <span className="h-5 w-5" aria-hidden="true">
-                <svg viewBox="0 0 48 48" role="presentation" focusable="false">
-                  <path
-                    fill="#EA4335"
-                    d="M24 9.5c3.15 0 5.8 1.08 7.97 3.2l5.94-5.94C33.84 3.06 29.46 1 24 1 14.62 1 6.4 6.54 2.64 14.26l6.94 5.39C11.84 13.58 17.38 9.5 24 9.5z"
-                  />
-                  <path
-                    fill="#4285F4"
-                    d="M46.5 24c0-1.39-.12-2.42-.38-3.48H24v6.96h12.78c-.26 1.75-1.67 4.38-4.81 6.15l7.42 5.77C43.78 35.4 46.5 30.37 46.5 24z"
-                  />
-                  <path
-                    fill="#FBBC05"
-                    d="M9.58 28.35c-.47-1.41-.73-2.92-.73-4.45 0-1.53.26-3.04.73-4.45L2.64 14.06C1.09 17.14.25 20.48.25 23.9c0 3.42.84 6.76 2.39 9.84l6.94-5.39z"
-                  />
-                  <path
-                    fill="#34A853"
-                    d="M24 46.5c6.21 0 11.44-2.04 15.25-5.56l-7.42-5.77c-1.98 1.33-4.65 2.27-7.83 2.27-6.62 0-12.16-4.08-14.42-9.98l-6.94 5.39C6.4 41.46 14.62 46.5 24 46.5z"
-                  />
-                  <path fill="none" d="M0 0h48v48H0z" />
-                </svg>
-              </span>
+              <FontAwesomeIcon
+                icon={faGoogle}
+                className="h-5 w-5 text-orange-600 dark:text-amber-900"
+              />
               {t("auth.social.google")}
             </Button>
           </div>
         </div>
 
         <div className="h-px w-full bg-border/60" />
-        <div >{t("auth.manualTitle")}</div>
+        <div>{t("auth.manualTitle")}</div>
 
         <form className="grid grid-cols-1 gap-3" onSubmit={handleManualLogin}>
           {error && <p className="text-xs text-red-500">{error}</p>}
 
           <div className="space-y-2">
-            <label className="text-sm font-semibold text-text" htmlFor="email">
-              {t("auth.email")}
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="you@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+            <div className="flex flex-col justify-between">
+              <label
+                className="text-sm font-semibold text-text"
+                htmlFor="email"
+              >
+                {t("auth.email")}
+              </label>
+              <input
+                className="w-full rounded-lg"
+                id="email"
+                name="email"
+                type="email"
+                placeholder="you@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
           </div>
           <div className="space-y-2">
-            <div className="flex justify-between">
+            <div className="flex flex-col justify-between">
               <label
                 className="text-sm font-semibold text-text"
                 htmlFor="password"
@@ -144,36 +149,30 @@ export function AuthPanel({
                 {t("auth.password")}
               </label>
               {/* Optional: Forgot Password Link */}
-
-              <Button
-                onClick={() => setIsForgotModalOpen(true)}
-                className="text-xs text-slate-500 hover:text-slate-800"
-              >
-                {t("auth.forgotPassword") || "Forgot?"}
-              </Button>
             </div>
             <input
               id="password"
               name="password"
               type="password"
+              className="w-full rounded-lg"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-
             />
           </div>
-          <div className="flex gap-1"> {/* TODO to remove */}
-
-          <div className="flex justify-end pt-2">
-            <Button type="submit">
-              {t("auth.signin") || "Sign In"}
-            </Button>
-          </div>
-           <div className="flex"> {/* TODO to remove */}
-            <Button  onClick={handleGuestLogin}>
-              GUEST TEST
-            </Button>
-          </div>
+          <a
+            onClick={() => setIsForgotModalOpen(true)}
+            className="text-xs text-slate-500 hover:text-slate-800"
+          >
+            {t("auth.forgotPassword.title") || "Forgot?"}
+          </a>
+          <div className="flex gap-1">
+            <div className="flex justify-end pt-2">
+              <Button type="submit">{t("auth.signin") || "Sign In"}</Button>
+            </div>
+            <div className="flex">
+              <Button onClick={handleGuestLogin}>GUEST TEST</Button>
+            </div>
           </div>
         </form>
 
@@ -202,9 +201,9 @@ export function AuthPanel({
       />
 
       {/* Intégration de la Modale en dehors du formulaire */}
-      <ForgotPasswordModal 
-        isOpen={isForgotModalOpen} 
-        onClose={() => setIsForgotModalOpen(false)} 
+      <ForgotPasswordModal
+        isOpen={isForgotModalOpen}
+        onClose={() => setIsForgotModalOpen(false)}
       />
     </div>
   );

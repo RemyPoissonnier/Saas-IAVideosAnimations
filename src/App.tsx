@@ -17,10 +17,26 @@ import { AuroraStrip } from "./components/ui/AuroraStrip";
 import ConsentBanner from "./components/ConsentBanner";
 import Legal from "./pages/Legal";
 import About from "./pages/About";
+import SlopGenerator from "./pages/SlopGenerator";
+import { useAuth } from "./context/AuthContext";
+
+function ProtectedRoute({ children }: { children: React.ReactNode }) {
+  const { currentUser, loading } = useAuth();
+  const location = useLocation();
+
+  if (loading) return null;
+
+  if (!currentUser) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  return <>{children}</>;
+}
 
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { currentUser } = useAuth();
 
   const isAuthPage = location.pathname === "/login";
 
@@ -62,16 +78,42 @@ function App() {
             <Route path="/home" element={<Landing />} />
             <Route
               path="/login"
-              element={<Login onBackHome={handleBackHome} />}
+              element={<Login onAuthComplete={handleBackHome} />}
             />
-            <Route path="/tokens" element={<Tokens />} />
+            <Route
+              path="/tokens"
+              element={
+                <ProtectedRoute>
+                  <Tokens />
+                </ProtectedRoute>
+              }
+            />
             <Route path="/legal" element={<Legal />} />
             <Route path="/about" element={<About />} />
             <Route
               path="/prompt"
-              element={<Prompt onOpenAuth={handleOpenAuth} />}
+              element={
+                <ProtectedRoute>
+                  <Prompt onOpenAuth={handleOpenAuth} />
+                </ProtectedRoute>
+              }
             />
-            <Route path="/success" element={<Success />} />
+            <Route
+              path="/prompt/slop-generator"
+              element={
+                <ProtectedRoute>
+                  <SlopGenerator />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/success"
+              element={
+                <ProtectedRoute>
+                  <Success />
+                </ProtectedRoute>
+              }
+            />
             <Route path="*" element={<Navigate to="/home" replace />} />
           </Routes>
         </div>

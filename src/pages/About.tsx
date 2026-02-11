@@ -1,12 +1,18 @@
 import Card, { CardBody, CardHeader } from "../components/ui/Card";
 import TextType from "../components/ui/TextType";
 import { useI18n } from "../i18n";
+import SEO from "../components/SEO";
 
 export default function About() {
   const { t } = useI18n();
 
   return (
     <div>
+      <SEO 
+        title={t("about.title")} 
+        description={t("about.subtitle")} 
+        url="https://whisker.studio/about"
+      />
       {/* 1. HERO SECTION */}
       <div className="mb-12 text-center space-y-4">
         <TextType variant="gradient">{t("about.title")}</TextType>

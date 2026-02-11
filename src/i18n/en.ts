@@ -9,6 +9,10 @@ const en = {
     home: 'Home',
     tokens: 'Tokens',
     prompt: 'Prompt',
+    promptOptions: {
+      standard: 'Standard Generator',
+      slop: 'Slop Generator'
+    },
     selectAnimal: 'Choose page',
     settings: 'Settings',
     language: 'Language',
@@ -21,6 +25,19 @@ const en = {
   },
   landing: {
     title: 'One platform for 2D & 3D renders',
+    section1: {
+      text: 'Simply describe your vision. Gemini acts as your personal screenwriter, transforming a single sentence into a detailed prompt rich in texture and motion for unparalleled precision.',
+      title: 'Sketch Your Intentions'
+    },
+    section2: {
+      text: 'Watch your concepts come to life with the fluidity of Veo 3. Whether it\'s a paper-cutout aesthetic or a complex cinematic scene, our rendering engine captures every nuance for a result vibrant with originality.',
+      title: 'Bring the Set to Life'
+    },
+    section3: {
+      text: 'Maintain total control over your production. Adjust, refine, and regenerate with one click. Our intuitive interface allows you to sculpt your videos as if handling real film, with the added speed of AI.',
+      title: 'Master Every Frame'
+    },
+    description: 'The gold standard for video content creation: transform your ideas into cinematic masterpieces through the combined power of Veo 3 and Gemini\'s creative intelligence.'
   },
   prompt: {
     title: 'GENERATOR',
@@ -28,6 +45,40 @@ const en = {
     simpleTitle: 'Quick TikTok mode',
     simpleDesc: 'Got 20s? Drop your idea, pick 2D/3D, hit render.',
     button: 'Generate Video',
+    history: {
+      title: 'Recent Prompts',
+      usageHint: 'Click again to copy to clipboard',
+      copied: 'Copied!'
+    },
+    slop: {
+      title: 'Slop Generator',
+      subtitle: 'Mix & match categories to generate 5 viral variations.',
+      sections: {
+        unique: 'Core Elements (Constant)',
+        lists: 'Variables (Mix & Match)'
+      },
+      fields: {
+        action: 'Action',
+        context: 'Context',
+        cinematography: 'Cinematography',
+        subject: 'Subject',
+        style: 'Style & Ambiance',
+        placeholders: {
+          action: 'Eating spaghetti with paws...',
+          context: 'In a futuristic neon kitchen...',
+          cinematography: 'Add camera angles (e.g. Close-up, Wide shot)...',
+          subject: 'Add subjects (e.g. Fluffy cat, Grumpy dog)...',
+          style: 'Add styles (e.g. Cinematic, Pixar, VHS)...'
+        }
+      },
+      button: 'GENERATE 5 VARIATIONS',
+      loading: 'GENERATING...',
+      varLoading: 'Generating var #',
+      download: 'Download',
+      downloadAll: 'Download All (ZIP)',
+      charLimit: 'characters',
+      limitReached: 'Limit reached (max 15 items per category)'
+    },
     resultTitle: 'Preview',
     outputFormat: 'Output format',
     confirmRun: 'I confirm to run the render',
@@ -154,7 +205,7 @@ const en = {
       subscribe: 'Subscribe'
     },
     enhance: {
-      text: 'Help me create a prompt to use with veo3. Take my basic concept and enhance it to optimize the AI\'s video rendering. Be imaginative and creative. Basic idea: '
+      text: 'Help me create a prompt to use with veo3. Take my basic concept and enhance it to optimize the AI\'s video rendering. Be imaginative and creative, limited at 1500 carateres. Basic idea: '
     },
     note: 'Tokens burn based on duration, resolution, and selected model.',
     simpleTitle: 'Simple and transparent pricing'
@@ -192,7 +243,21 @@ const en = {
     socialNote: 'Social logins are simulated locally for now.',
     signInTitle: 'Welcome Back',
     signInSubtitle: 'Welcome back',
-    forgotPassword: 'Forgot password ?',
+    forgotPassword: {
+      title: 'Forgot password ?',
+      subtitle: 'Enter your email and we\'ll send you a link to reset your password.',
+      emailLabel: 'Email',
+      emailPlaceholder: 'email@example.com',
+      buttonSend: 'Send link',
+      buttonLoading: 'Sending...',
+      successMessage: 'A reset email has been sent! Check your spam folder.',
+      error: {
+        userNotFound: 'No account is associated with this email.',
+        invalidEmail: 'The email address is invalid.',
+        generic: 'An unexpected error occurred.',
+        prefix: 'Error: '
+      }
+    },
     noAccount: 'Don\'t have an account?',
     signupLink: 'Create one ?',
     loginRequired: 'Please log in first!'
@@ -238,12 +303,26 @@ const en = {
     pw: 'Password',
     indication: 'Create your account to access features',
     pseudo: 'Username',
+    pseudoPlaceholder: 'Your username',
+    emailPlaceholder: 'email@example.com',
+    confirmPw: 'Confirm Password',
     loading: 'Loading...',
     register: 'Sign up',
+    criteria: {
+      length: '8+ characters',
+      upper: '1 Uppercase',
+      lower: '1 Lowercase',
+      digit: '1 Digit',
+      special: '1 Special character'
+    },
     error: {
+      dontMatch: 'Passwords do not match',
       pseudoAlUsed: 'Username already taken',
+      emailUsed: 'Email already in use',
       weakpw: 'Password too weak',
-      pw: 'Minimum eight characters, at least one letter and one number'
+      pw: 'Minimum eight characters, at least one letter and one number',
+      generic: 'An unexpected error occurred.',
+      prefix: 'Error: '
     }
   },
   promo: {
@@ -369,7 +448,8 @@ const en = {
     madeWith: 'Made with ❤️ in France'
   },
   common: {
-    na: 'N/A'
+    na: 'N/A',
+    currency: '$'
   },
   subscription: {
     title: 'Subscription management',
@@ -382,7 +462,8 @@ const en = {
     no: 'No',
     empty: 'Not subscribed'
   },
-  showcase: 'Showcase'
+  showcase: 'Showcase',
+  start: 'Start'
 };
 
 export default en;

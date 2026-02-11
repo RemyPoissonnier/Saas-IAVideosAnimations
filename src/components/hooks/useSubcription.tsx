@@ -11,7 +11,7 @@ export type SubscriptionData = {
 };
 
 export const useSubscription = () => {
-  const { currentUser } = useAuth();
+  const { currentUser, getToken } = useAuth();
 
   const query = useQuery({
     // 🔑 La clé unique du cache. Si l'email change, on refetch.
@@ -22,9 +22,9 @@ export const useSubscription = () => {
 
     // ⚡ La fonction de fetch
     queryFn: async () => {
-      const payload = { withCredentials: true, user: currentUser };
+      const token = await getToken();
       // Ton apiClient gère déjà les erreurs, c'est parfait
-      return await apiClient<SubscriptionData>("/subscription/me", "GET", payload);
+      return await apiClient<SubscriptionData>("/subscription/me", "GET", undefined, token);
     },
     
     // 🧠 Optimisation : Si l'API échoue (401/500), on renvoie une valeur par défaut "Safe"

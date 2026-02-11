@@ -1,4 +1,4 @@
-export const API_BASE = "http://localhost:3000/api";
+export const API_BASE = "https://serverapiw-production.up.railway.app";
 
 // types.ts (ou en haut du fichier)
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
@@ -12,19 +12,25 @@ export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 export async function apiClient<T>(
   endpoint: string, 
   method: HttpMethod = 'GET', 
-  payload?: unknown // 'unknown' est plus sûr que 'any'
+  payload?: unknown,
+  token?: string | null
 ): Promise<T> {
   
   // Gestion propre de l'URL (évite les doubles // si API_BASE finit par /)
   const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
   const url = `${API_BASE}${cleanEndpoint}`;
 
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+  };
+
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
   const options: RequestInit = {
     method,
-    headers: {
-      "Content-Type": "application/json",
-      // Tu pourras ajouter d'autres headers ici (ex: langue)
-    },
+    headers,
     credentials: "include", // 👈 INDISPENSABLE pour envoyer ton cookie 'session'
   };
 

@@ -29,13 +29,16 @@ export default function DesktopHeader({
   // States
   // Utilise 'boolean' (primitif) et non 'Boolean' (objet wrapper)
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
+  const [isPromptOpen, setIsPromptOpen] = useState<boolean>(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState<boolean>(false);
 
   // Refs
   const settingsMenuRef = useRef<HTMLDivElement | null>(null);
+  const promptMenuRef = useRef<HTMLDivElement | null>(null);
 
   // Close settings on click outside
   useOnClickOutside(settingsMenuRef, () => setIsSettingsOpen(false));
+  useOnClickOutside(promptMenuRef, () => setIsPromptOpen(false));
 
   // Handlers
   const handleLogoutClick = () => {
@@ -78,12 +81,40 @@ export default function DesktopHeader({
 
         {/* Right Actions */}
         <div className="flex items-center justify-between gap-2 w-full">
-          <Link
-            to="/prompt"
-            className="px-3 text-sm font-semibold text-text hover:text-accent transition-colors"
-          >
-            {t("nav.prompt")}
-          </Link>
+          {/* Prompt Dropdown */}
+          <div className="relative z-20" ref={promptMenuRef}>
+            <button
+              type="button"
+              onClick={() => setIsPromptOpen(!isPromptOpen)}
+              className="flex items-center gap-1 px-3 text-sm font-semibold text-text hover:text-accent transition-colors"
+            >
+              {t("nav.prompt")}
+              <span className="text-[10px] text-muted">
+                <FontAwesomeIcon
+                  icon={isPromptOpen ? faAngleUp : faAngleDown}
+                />
+              </span>
+            </button>
+            {isPromptOpen && (
+              <div className="absolute top-full left-0 mt-2 min-w-[180px] rounded-xl border border-border/60 bg-surface/90 p-2 shadow-xl backdrop-blur-md animate-in fade-in zoom-in-95 duration-200">
+                <Link
+                  to="/prompt"
+                  onClick={() => setIsPromptOpen(false)}
+                  className="block w-full rounded-lg px-4 py-2 text-left text-sm font-medium text-text hover:bg-accent/10 hover:text-accent transition-all"
+                >
+                  {t("nav.promptOptions.standard")}
+                </Link>
+                <Link
+                  to="/prompt/slop-generator"
+                  onClick={() => setIsPromptOpen(false)}
+                  className="block w-full rounded-lg px-4 py-2 text-left text-sm font-medium text-text hover:bg-accent/10 hover:text-accent transition-all"
+                >
+                  {t("nav.promptOptions.slop")}
+                </Link>
+              </div>
+            )}
+          </div>
+
           <Link
             to={tokensHref}
             className="px-3 text-sm font-semibold text-text hover:text-accent transition-colors"
