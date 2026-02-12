@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import Card, { CardBody } from "./Card";
 import TextType from "./TextType";
 import Button from "./Button";
@@ -22,9 +21,9 @@ export interface BuyingCardProps {
   sold?: number; // Decimal value expected (e.g., 0.30 for 30%)
   isSubcription?: boolean;
   polarId: string;
-  metadata?: {
+  metadata: {
     token: number; // number of token, to converte to number
-    coin: string; // name of the coin, if is silver / gold / bronze / diamond
+    coin: coinType; // name of the coin, if is silver / gold / bronze / diamond
     description: string; //the path of i18n
   };
 }
@@ -98,7 +97,7 @@ export const BuyingCard = (props: BuyingCardProps) => {
               className="w-20 h-20 object-contain rounded-lg shadow-sm"
             />
           ) : (
-            <Coin type={(props.metadata?.coin as coinType) ?? "bronze"} />
+            <Coin type={(props.metadata.coin) ?? "bronze"} />
           )}
         </div>
 
@@ -111,7 +110,7 @@ export const BuyingCard = (props: BuyingCardProps) => {
         </TextType>
 
         {/* Display Token Amount if available in metadata */}
-        {props.metadata?.token > 0 && (
+        {props.metadata.token > 0 && (
           <TextType
             variant="body"
             className="text-center text-indigo-500 font-semibold text-sm"
