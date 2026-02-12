@@ -204,6 +204,10 @@ const en = {
       buy: 'Buy',
       subscribe: 'Subscribe'
     },
+    changeSub: 'Change subscription',
+    subscribe: 'Subscribe',
+    purchase: 'Buy Now',
+    currentPlan: 'Current plan',
     enhance: {
       text: 'Help me create a prompt to use with veo3. Take my basic concept and enhance it to optimize the AI\'s video rendering. Be imaginative and creative, limited at 1500 carateres. Basic idea: '
     },

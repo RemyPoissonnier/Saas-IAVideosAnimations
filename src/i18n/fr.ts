@@ -204,6 +204,10 @@ const fr = {
       buy: 'Acheter',
       subscribe: 'S\'abonner'
     },
+    changeSub: 'Changer d\'abonnement',
+    subscribe: 'S\'abonner',
+    purchase: 'Acheter maintenant',
+    currentPlan: 'Plan actuel',
     note: 'Les jetons sont consommés selon la durée, la résolution et le modèle IA.',
     simpleTitle: 'Une tarification simple et transparente'
   },
